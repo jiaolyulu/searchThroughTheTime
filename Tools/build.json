@@ -1,0 +1,22 @@
+{
+	"ES5": true,
+	"ENV": "dev",
+	"EXCLUDE": [
+		"firebase",
+		"uil/lib/graph",
+		"uil/lib/util",
+		"uil/db/UILRemote",
+		"uil/db/UILSocket",
+		"engine3d/utils/controls",
+		"uiltools",
+		"figmafont",
+		"services"
+	],
+	"SPLIT_MODULES": [],
+	"CUSTOM": [
+		"postbuild"
+	],
+	"COPY": [
+		"AE/static/timeline"
+	]
+}
