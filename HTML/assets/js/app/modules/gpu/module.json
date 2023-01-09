@@ -1,0 +1,4 @@
+{
+  "modules": ["gpublacklist"],
+  "build": ["iOSGPUTest", "MacOSPerformanceTest", "FirefoxGPUFixer"]
+}

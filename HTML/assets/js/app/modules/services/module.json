@@ -1,0 +1,9 @@
+{
+  "build": [],
+  "modules": [
+    "services-config",
+    "firebase-db",
+    "firebase-auth",
+    "firebase-storage"
+  ]
+}

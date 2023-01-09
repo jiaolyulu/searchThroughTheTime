@@ -1,0 +1,7 @@
+steps:
+- name: 'activetheory/build-v5'
+  entrypoint: 'bash'
+  args: ['-c', 'gcloud config set app/cloud_build_timeout 800 && npm ci &> /dev/null && cd Tools && node build ${_BUILD_VERSION} && cd ../AE && gcloud app deploy --quiet --verbosity=error --promote . && curl -X POST --data-urlencode "payload={\"text\":\"Deployed *<${_BUILD_URL}|BLINK ${_BUILD_VERSION}>*\",\"repo\":\"activetheory/google-search-innovation\"}" https://us-central1-at-services.cloudfunctions.net/bots/deployment']
+timeout: '800s'
+options:
+  logging: CLOUD_LOGGING_ONLY

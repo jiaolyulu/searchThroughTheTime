@@ -1,0 +1,13 @@
+{
+  "modules": [
+    "gltext"
+  ],
+
+  "gl": [
+    "glui-gl"
+  ],
+
+  "build": [
+    "glui"
+  ]
+}

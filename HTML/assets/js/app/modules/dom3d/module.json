@@ -1,0 +1,4 @@
+{
+  "modules": ["engine3d"],
+  "build": ["DOM3D"]
+}

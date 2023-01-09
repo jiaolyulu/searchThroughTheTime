@@ -1,0 +1,9 @@
+{
+  "gl": [
+    "fxaa-gl",
+    "conditionals"
+  ],
+  "build": [
+  	"FXAA"
+  ]
+}

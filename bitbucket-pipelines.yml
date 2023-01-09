@@ -1,0 +1,29 @@
+image: activetheory/build-v5
+
+clone:
+  depth: 5
+
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - cd ${BITBUCKET_CLONE_DIR}
+            - npm ci &> /dev/null
+            - cd Tools
+            - node build dev
+            - cd ../AE
+            - echo ${GOOGLE_SERVICE_ACCOUNT} > service-account.json
+            - gcloud auth activate-service-account --key-file ./service-account.json
+            - gcloud app deploy --quiet --verbosity=error --version=dev --no-promote  --project=search-innovation-goog
+            - curl -X POST --data-urlencode "payload={\"text\":\"Deployed *<https://dev-dot-search-innovation-goog.uc.r.appspot.com/timeline|(NEW) DEV>*\",\"repo\":\"activetheory/google-search-innovation\"}" https://us-central1-at-services.cloudfunctions.net/bots/deployment
+    
+    # Looking for the stage and production builds?
+    # These actually happen within via google cloud build instead of bitbucket pipelines.
+    # This is because we're not able to deploy to the google projects in the same way we do normally because we can't add or create any service account keys within their GCP projects.
+    # To have a look at how we've setup cloudbuild for their project, see here: 
+    # stage: https://console.cloud.google.com/cloud-build/triggers;region=global/edit/bed8aa5c-26b7-4834-9f89-67912d908a6d?project=gweb-searchon-dev
+    # prod: 
+

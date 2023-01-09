@@ -1,0 +1,22 @@
+Class(function {$IDCMS}Custom(_data) {
+    Inherit(this, MilestoneCustom, _data);
+    const _this = this;
+    // Playground is ?p={$IDCMS}Custom
+
+    let _screen;
+    //*** Constructor
+    (async function () {
+        _screen = await _this.layout.getLayer('screen');
+
+        if (_data.metadata.image) {
+            const tex = Utils3D.getTexture(ImagePath.get(_data.metadata));
+            _screen.shader.set('tMap', tex);
+        }
+    })();
+
+    //*** Event handlers
+
+    //*** Public methods
+    this.customOpacity = function(v) {
+    };
+});

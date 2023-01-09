@@ -1,0 +1,10 @@
+{
+  "build": [
+  	"Line",
+  	"LineGeometry"
+  ],
+  "modules": [
+    "curve3d",
+    "shape2d"
+  ]
+}

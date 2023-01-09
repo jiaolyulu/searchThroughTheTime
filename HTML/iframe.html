@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iframe test</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+
+    .header{background:#fff;position:fixed;width:100%;top:0;z-index:1000;transition:.3s all ease;transform:translateY(0%)}@media(max-width: calc(1024px - 1px)){.header{border-bottom:1px solid #dadce0}}.header--inline{transition-duration:0s;transform:translateY(0%) !important;position:absolute;top:0}.header.scrolled{border-bottom:1px solid #dadce0}.header.hide{transform:translateY(-105%)}@media(min-width: 1024px){.header--no-subnav{border-bottom:0}.header--no-subnav .header__navbar,.header--no-subnav .header__logo,.header--no-subnav .header__title{border:none}.header--no-subnav .header__nav-item--active:before{display:none}.header--no-subnav .header__nav-item--active:after{content:"";position:absolute;bottom:0;width:100%;height:3px;border-bottom:3px solid #4285f4}}.header a{text-decoration:none}.header__backdrop{background:rgba(0,0,0,.4);position:fixed;top:0;left:0;height:100%;width:100%;pointer-events:none;z-index:1001;opacity:0;transition:.3s ease all}.header__backdrop--open{pointer-events:all;opacity:1}.header__container{padding:0 !important}.header__content{margin-bottom:-1px}@media(min-width: 1024px){.header__content{display:grid;grid-template-columns:auto auto 1fr auto;grid-template-rows:1fr;grid-column:2/3}}@media(max-width: calc(1024px - 1px)){.header__content{display:flex}}.header__logo{align-items:center;border-bottom:1px solid #dadce0;display:flex;height:64px;line-height:1;padding:0 8px 0 0px}@media(min-width: 1024px){.header__logo{padding:0 8px 0 20px}}.header__logo img{transform:translateY(3px)}.header__nav-items{display:none;list-style:none;margin:0;padding:0}@media(min-width: 1024px){.header__nav-items{display:flex;height:100%}}@media(min-width: 1024px){.header__nav-item{align-items:center;display:flex;margin-right:40px;position:relative}.header__nav-item--active::before{background:#fff;border-left:1px solid #dadce0;border-top:1px solid #dadce0;bottom:0;content:"";height:10px;left:50%;position:absolute;transform:translate(-50%, 50%) rotate(45deg);width:10px;z-index:2}.header__nav-item--active a{color:#202124 !important}.header__nav-item--active:hover a{background-color:#fff !important}.header__nav-item a{font-family:"Google Sans","Google Sans Text",Arial,sans-serif;font-size:16px;font-weight:500;letter-spacing:.1px;line-height:24px;padding:10px 8px;color:#5f6368;transition:.15s background-color linear;border-radius:4px}.header__nav-item:hover a{background-color:#f1f3f4}}.header__page-nav{display:none}@media(min-width: 1024px){.header__page-nav{display:flex;grid-column:3/5;grid-row:2/3;height:64px;margin:0;overflow:auto;padding:0 16px 0 80px}}.header__page-nav-item{border-bottom:2px solid transparent;display:flex;margin-right:30px;padding:0;position:relative}@media(min-width: 1024px){.header__page-nav-item{white-space:nowrap}}.header__page-nav-item a{font-family:"Google Sans","Google Sans Text",Arial,sans-serif;font-size:16px;font-weight:500;letter-spacing:.1px;line-height:24px;align-items:center;color:#5f6368;display:flex;padding:5px 8px;margin-top:10px;max-height:44px;transition:.15s background-color linear;border-radius:4px}.header__page-nav-item:hover a{background-color:#f1f3f4}.header__page-nav-item--active a{color:#202124}.header__page-nav-item--active:hover a{background-color:#fff !important}.header__page-nav-item:last-child::after{background:transparent;content:"";display:block;height:100%;position:absolute;right:-16px;top:0;width:16px}.header__title{font-family:"Google Sans","Google Sans Text",Arial,sans-serif;font-size:22px;line-height:28px;align-items:center;display:flex;padding:0 12px 0 0}@media(min-width: 1024px){.header__title{border-bottom:1px solid #dadce0;padding:0 0px}}.header__title a{color:#5f6368;font-size:22px;font-weight:400;letter-spacing:-0.3px}.header__navbar{border-bottom:1px solid #dadce0;grid-column:3/4;grid-row:1/2;padding:15px 30px 15px 16px}@media(max-width: calc(1440px - 1px)){.header__navbar{display:none}}@media(min-width: 1024px){.header__navbar{align-items:center;display:flex;padding:3px 0 0 80px}}.header__navbar nav{height:100%}.header__aside{display:none}@media(min-width: 1024px){.header__aside{border-bottom:1px solid #dadce0;display:flex;flex-direction:row}}.header__language .language-selector{display:flex;height:100%;justify-content:center}.header__share{align-items:center;display:flex;height:100%}.header__menu-button{background:transparent;border:0;cursor:pointer;height:63px;padding:0;width:63px}@media(min-width: 1024px){.header__menu-button{display:none}}.header__nav-menu{background-color:transparent;height:100vh;left:0;position:fixed;top:0;transform:translateX(-100vw);transition:background-color .3s ease,transform 0s linear .3s;width:100vw;max-width:300px;z-index:1002}@media(min-width: 1024px){.header__nav-menu{display:none}}.header__nav-menu--open{transform:translateX(0);transition:background-color .3s ease,transform 0s linear 0s}.header__nav-menu .header__logo{padding-left:20px}.header__nav-menu .header__logo div{flex:1}.header__nav-menu .header__title{border-bottom:1px solid #dadce0;height:64px;padding:15px 0px;margin-left:-38px}.header__nav-menu .header__title a{color:#5f6368;font-size:22px;font-weight:400;letter-spacing:-0.3px}.header__nav-menu nav{flex-grow:1;overflow-x:hidden;overflow-y:auto}.header__nav-menu .header__nav-items{display:block;margin-top:20px}.header__nav-menu .header__nav-item{background-color:#fff;display:flex;flex-direction:column;justify-content:center;transition:background-color .5s ease}.header__nav-menu .header__nav-item--active>a{background-color:#f8f9fa;color:#202124 !important}.header__nav-menu .header__nav-item>a{font-family:"Google Sans","Google Sans Text",Arial,sans-serif;font-size:16px;font-weight:500;letter-spacing:.1px;line-height:24px;align-items:center;color:#5f6368;display:flex;height:100%;padding:12px 20px;width:100%}@media(max-width: calc(1440px - 1px)){.header__nav-menu .header__page-nav{display:block;padding:0}}.header__nav-menu .header__page-nav-item{border-bottom:0 !important;margin:0}.header__nav-menu .header__page-nav-item a{align-items:center;display:flex;height:100%;padding:12px 20px 12px 55px;width:100%}.header__nav-menu-drawer{background:#fff;display:flex;flex-direction:column;height:100%;max-width:300px;transform:translateX(-300px);transition:transform .3s ease;width:90vw}.header__nav-menu--open .header__nav-menu-drawer{transform:translateX(0)}.header__nav-menu-close{background:transparent;border:0;cursor:pointer;height:64px;transform:translateY(-3px);width:64px}.header__nav-menu-share{border-top:1px solid #dadce0;padding:20px}@media print{.header{border:0;box-shadow:none}.header__content{display:flex;flex-direction:row}.header__logo,.header__title{border:0}.header__menu-button,.header__share,.header__navbar,.header__page-nav{border:0;display:none}}
+  </style>
+</head>
+<body>
+  <header class="header header--no-subnav scrolled show" mobile-nav-component="" header-scroll-component="">
+    <div class="header__container">
+        <div class="header__content">
+            <button class="header__menu-button" menu-button="" aria-label="Open the navigation drawer">
+              <img src="./../static/images/icons/menu.svg?fingerprint=70797f2a4c042932241ad2f34e1c63e7" width="18" height="12" alt="">
+            </button>
+            <div class="header__logo">
+                <a href="/search/howsearchworks/">
+                    <img class="header__logo__image" src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Google">
+                </a>
+            </div>
+            <div class="header__title">
+                <a href="/search/howsearchworks/">
+    
+      &nbsp;Search
+    
+  </a>
+            </div>
+            <div class="header__navbar">
+                <nav role="navigation">
+                    <ul class="header__nav-items">
+                        
+                            <li class="header__nav-item
+                              ">
+                                <a href="/search/howsearchworks/">
+                                    
+    
+      &nbsp;Overview
+    
+  
+                                </a>
+                            </li>
+                        
+                            <li class="header__nav-item
+                              ">
+                                <a href="/search/howsearchworks/our-approach/">
+                                    
+    
+       Our&nbsp;approach
+    
+  
+                                </a>
+                            </li>
+                        
+                            <li class="header__nav-item
+                              ">
+                                <a href="/search/howsearchworks/how-search-works/">
+                                    
+    
+       How Search&nbsp;works
+    
+  
+                                </a>
+                            </li>
+                        
+                            <li class="header__nav-item
+                              
+                                header__nav-item--active
+                              ">
+                                <a href="/search/howsearchworks/features/">
+                                    
+    
+      &nbsp;Features
+    
+  
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div class="header__aside"></div>
+            
+                
+            
+        </div>
+    </div>
+</header>
+  <iframe src="index.html" style="border:none;" title="Iframe Example" scrolling="no"></iframe>
+</body>
+</html>

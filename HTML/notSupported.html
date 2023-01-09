@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, viewport-fit=cover">
+    <title>google-search-innovation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://gstatic.com">
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400,500,700,400i,500i,700i|Google+Sans:400,500,700&amp;lang=en&amp;display=swap">
+    <style>
+        *,
+        html,
+        body {
+            font-family: "Google Sans", Arial, Helvetica, sans-serif;
+            color: #333333;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .error-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(320px + (679 - 320) * ((100vw - 320px) / (1920 - 320)));
+            height: auto;
+        }
+
+        .error-header {
+            text-align: center;
+            position: relative;
+            font-size: calc(21px + (48 - 21) * ((100vw - 320px) / (1920 - 320)));
+            padding-bottom: 20px;
+        }
+
+        .error-subtitle {
+            text-align: center;
+            position: relative;
+            font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+        }
+
+    </style>
+</head>
+<body>
+<div id="device-not-supported">
+    <div class = "error-container">
+        <div class = "error-header">Your browser or device is unable to view this experience.</div>
+        <div class = "error-subtitle">You may need to upgrade your browser or ensure that hardware acceleration is enabled.</div>
+    </div>
+</div>
+<script>
+    var errorHeader = document.querySelector('.error-header');
+    var errorSubtitle = document.querySelector('.error-subtitle');
+
+    var _queries = {};
+    var _searchParams = window.URLSearchParams ? new URLSearchParams(window.location.search) : null;
+
+    this.query = this.queryParams = function(key, value) {
+        if (value !== undefined) _queries[key] = value;
+
+        if (_queries[key] !== undefined) return _queries[key];
+
+        if (_searchParams) {
+            value = _searchParams.get(key);
+            if (value === '0') value = 0;
+            else if (value === 'false' || value === null) value = false;
+            else if (value === '') value = true;
+        } else {
+            let escapedKey = encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&');
+            value = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*?[&?]" + escapedKey + "(?:\=([^&]*)|[&$]))?.*$", 'i'), '$1'));
+            if (value == '0') {
+                value = 0;
+            } else if (value == 'false') {
+                value = false;
+            } else if (!value.length) {
+                value = new RegExp("[&?]" + escapedKey + "(?:[&=]|$)", 'i').test(window.location.search);
+            }
+        }
+        _queries[key] = value;
+        return value;
+    };
+
+    function onLoad(e) {
+        const data = JSON.parse(request.responseText)
+        // const generic = data.filter(arr => arr.value === "errorMessage");
+        const errorCopy = []
+        for(var key in data.generic) {
+            if(data.generic[key]._title === "Error Screen") {
+                errorCopy.push(data.generic[key]);
+            }
+        }
+
+        errorHeaderCopy = errorCopy.filter(function(error) {return error.key === "errorHeader";})[0].value;
+        errorSubTitleCopy = errorCopy.filter(function(error) {return error.key === "errorSubtitle";})[0].value;
+
+        errorHeader.innerHTML = errorHeaderCopy;
+        errorSubtitle.innerHTML = errorSubTitleCopy;
+
+    }
+
+    var language = this.query('hl') || 'en';
+    var cmsUrl = 'assets/data/i18n/';
+    var cms = cmsUrl + language +".json";
+
+    var request = new XMLHttpRequest();
+    request.addEventListener("load", onLoad);
+    request.open("GET",cms , true);
+    request.send();
+
+</script>
+</body>
+</html>

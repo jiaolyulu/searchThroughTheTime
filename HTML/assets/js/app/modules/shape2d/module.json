@@ -1,0 +1,20 @@
+{
+  "modules": [
+    "curve3d"
+  ],
+  "build": [
+    "ExtrudeUtils",
+    "CubicBezierCurve",
+    "EllipseCurve",
+    "LineCurve",
+    "QuadraticBezierCurve",
+    "Shape2DInterpolations",
+    "SplineCurve",
+    "CurvePath",
+    "Path",
+    "Shape",
+    "ShapeGeometry",
+    "GLUIShape",
+    "Earcut"
+  ]
+}

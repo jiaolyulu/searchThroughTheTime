@@ -1,0 +1,37 @@
+{
+    "modules": [
+        "engine3d",
+        "shaders",
+        "rendermanager",
+        "uil",
+        "fxaa",
+        "gpu",
+        "glui",
+        "scenelayout",
+        "performance",
+        "uiltools",
+        "gla11y",
+        "dom3d",
+        "scroll",
+        "velocitytracker",
+        "line3d",
+        "shape2d",
+        "fluid",
+        "mousefluid",
+        "noisecpu",
+        "proton"
+    ],
+
+    "gl": [
+        "range",
+        "conditionals",
+        "transformUV",
+        "simplenoise",
+        "aastep",
+        "roundedBorder",
+        "glscreenprojection-gl",
+        "levelmask",
+        "fresnel",
+        "matcap"
+    ]
+}

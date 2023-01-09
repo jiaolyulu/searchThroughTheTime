@@ -1,0 +1,13 @@
+{
+    "modules": [],
+
+    "gl": [
+        "antimatter-gl"
+    ],
+    "build": [
+        "AntimatterFBO",
+        "AntimatterAttribute",
+        "AntimatterUtil",
+        "AntimatterSpawn"
+    ]
+}

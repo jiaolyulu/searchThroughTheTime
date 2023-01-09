@@ -1,0 +1,9 @@
+{
+  "build": [
+    "Curve",
+    "Curve3D",
+    "CubicPoly",
+    "CubicPoly",
+    "CatmullRomCurve"
+  ]
+}
