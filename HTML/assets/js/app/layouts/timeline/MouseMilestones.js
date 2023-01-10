@@ -32,6 +32,7 @@ Class(function MouseMilestones(_milestones) {
         _mouse.copy(ScreenProjection.unproject(Mouse, 7));
 
         _milestones.forEach(m => {
+            //console.log(`### IAN loop ${m.id}`);
             // m.container.position.x = Math.sin(Render.TIME * 0.0003);
             loopMilestone(m);
         });
@@ -44,6 +45,19 @@ Class(function MouseMilestones(_milestones) {
         if (m.cta) {
             return;
         }
+
+        // IF IT'S MADE IT HERE, MILESTONE M IS ONSCREEN AND DRAWING.
+        // console.log(`### IAN m details ${m.id}`);
+        // IF should be visible, we know it should be showing and ois ok to attempt to open.
+
+        if (m.shouldBeVisible() === true) {
+            //  m.onToolTipTrig();
+            m.tooltip.show();
+            console.log(`###!!! IAN attempting to open ${m.id}`);
+        }
+
+        //m.onTooltipClick();
+        //end ian
 
         const diff = _v3.copy(m.layoutPosition).sub(_mouse);
         const distance = diff.length();

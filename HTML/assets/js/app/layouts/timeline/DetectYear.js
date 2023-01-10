@@ -51,6 +51,7 @@ Class(function DetectYear(_milestones) {
         _this.scroll = scroll;
         const year = findCurrentYear();
         _this.commit(MainStore, 'setYear', year);
+        console.log(`### IAN check() scroll: ${scroll} year:${year}`);
     }
 
     //*** Event handlers

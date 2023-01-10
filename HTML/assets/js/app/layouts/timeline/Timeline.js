@@ -198,6 +198,7 @@ Class(function Timeline() {
     }
 
     function updatePosition(isVertical) {
+        console.log(`### IAN updatePosition timeline`);
         _milestones.forEach((milestone, index) => {
             const horizontal = getHorizontal(index);
             const vertical = getVertical(index);

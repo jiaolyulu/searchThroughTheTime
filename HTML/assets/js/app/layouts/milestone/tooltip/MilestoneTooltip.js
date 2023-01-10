@@ -372,7 +372,7 @@ Class(function MilestoneTooltip({
 
 
     this.show = async function() {
-        console.log('### IAN show milestoneToolTip')
+        console.log('### IAN show milestoneToolTip');
         if (_open) return;
 
         if (GlobalStore.get('transitioning')) {
@@ -601,7 +601,7 @@ Class(function MilestoneTooltip({
     };
 
     this.hideMobile = async function() {
-        console.log('### IAN hide mobile MilestoneToolTip')
+        console.log('### IAN hide mobile MilestoneToolTip');
         if ($close) {
             $close.tween({ opacity: 0 }, 200, 'easeOutCubic', 0);
         }

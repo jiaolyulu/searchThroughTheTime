@@ -228,7 +228,7 @@ Class(function Milestone(_data) {
         if (_plus) {
             _plus.group.position.set(-_bbox.x, _bbox.y, 0.0);
 
-            _plus.group.position.x += Config.isRTL ? - _plus.size :_title.sizes.title.width;
+            _plus.group.position.x += Config.isRTL ? -_plus.size : _title.sizes.title.width;
             _plus.group.position.y -= _title.sizes.title.height;
 
             _plus.group.position.x += _plus.size / 2.0;
@@ -254,9 +254,9 @@ Class(function Milestone(_data) {
                 _plus.group.position.set(-_bbox.x, _bbox.y, 0.0);
                 _plus.group.position.y -= offsetY;
 
-                _plus.group.position.x += Config.isRTL ? - _plus.size :_title.sizes.title.width;
+                _plus.group.position.x += Config.isRTL ? -_plus.size : _title.sizes.title.width;
                 _plus.group.position.y += _title.sizes.subtitle.height;
-                _plus.group.position.x += Config.isRTL ? - _plus.size / 2.0 : _plus.size;
+                _plus.group.position.x += Config.isRTL ? -_plus.size / 2.0 : _plus.size;
                 _plus.group.position.y += _plus.size;
                 _plus.group.position.y += 0.028;
                 _plus.group.position.x += 0.06 * multiplier;
@@ -619,6 +619,12 @@ Class(function Milestone(_data) {
             _tooltip.hide(e);
         }
     }
+    function onToolTipTriggered(tooltip) {
+        _tooltip = tooltip;
+        console.log(`### IAN tooltip triggered method called. `);
+        _tooltip.show();
+        // onTooltipClick();
+    }
 
     function onTooltipClick(e) {
         if (!_this.flag('animateIn')) {
@@ -687,7 +693,6 @@ Class(function Milestone(_data) {
     this.get('layoutPosition', _ => _layoutPosition);
     this.get('animOffset', _ => Math.random());
     this.get('projection', _ => _projection);
-
     this.getBoxImage = getBoxImage;
 
     this.setPosition = function (position) {
@@ -743,6 +748,7 @@ Class(function Milestone(_data) {
 
     this.get('appearObj', _ => _appearObj);
     this.get('inView', _ => _shouldBeVisible);
+    this.get('onToolTipTrig', _ => onToolTipTriggered);
 
     this.prepareAnimateIn = prepareAnimateIn;
     this.animateOut = animateOut;
