@@ -25,7 +25,7 @@ Class(function Container() {
 
     async function loadFont() {
         if (document.fonts?.load) {
-            try{
+            try {
                 await Promise.all([
                     document.fonts.load('400 10px Google Sans'),
                     document.fonts.load('500 10px Google Sans'),
@@ -34,7 +34,7 @@ Class(function Container() {
                     document.fonts.load('500 10px Google Sans Text'),
                     document.fonts.load('700 10px Google Sans Text')
                 ]);
-            } catch(e) {
+            } catch (e) {
                 //
             }
         } else {
@@ -66,7 +66,6 @@ Class(function Container() {
 
         // load font
         _loader.add(1);
-        
         await Promise.all([
             Initializer3D.createWorld(),
             loadFont()
