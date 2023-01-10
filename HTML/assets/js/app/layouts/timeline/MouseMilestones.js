@@ -52,8 +52,8 @@ Class(function MouseMilestones(_milestones) {
 
         if (m.shouldBeVisible() === true) {
             //  m.onToolTipTrig();
-            m.tooltip.show();
-            console.log(`###!!! IAN attempting to open ${m.id}`);
+            //  m.tooltip.show();
+            //  console.log(`###!!! IAN attempting to open ${m.id}`);
         }
 
         //m.onTooltipClick();

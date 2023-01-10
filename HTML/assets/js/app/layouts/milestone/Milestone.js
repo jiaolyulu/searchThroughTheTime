@@ -32,7 +32,8 @@ Class(function Milestone(_data) {
     let _projection = { x: 0, y: 0 };
 
     let _shouldBeVisible = false;
-
+    let _tooltipAutoOpened = false;
+    let _autoExpandOnScroll = false;
     //*** Constructor
     (function () {
         _container = new Group();
@@ -98,7 +99,9 @@ Class(function Milestone(_data) {
             initHitArea();
         }
 
-        addListeners();
+        if (!_autoExpandOnScroll) {
+            addListeners();
+        }
     })();
 
     function initHitArea() {
@@ -133,8 +136,7 @@ Class(function Milestone(_data) {
                 Interaction3D.find(World.CAMERA).add(_plus.mesh, null, onTooltipClick);
                 // _plus.mesh.hitMesh.shader.neverRender = false;
             } else {
-                Interaction3D.find(World.CAMERA)
-                    .add(_plus.mesh, onPlusHover, null, seo);
+                Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
             }
 
             _tooltip.$copy.parentSeo = seo.root;
@@ -356,7 +358,15 @@ Class(function Milestone(_data) {
         const wireProgress = global.wire.progress;
 
         _shouldBeVisible = wireProgress >= progress;
-
+        if (_shouldBeVisible === true) {
+            //  console.log(`### IAN Milestone ${_this.id} is visible.`);
+            if (_autoExpandOnScroll && _tooltip) {
+                onToolTipAutoTriggered();
+            } else {
+                // console.log(`### Tooltip does not exist for ${_this.id}.`);
+            }
+            //console.log(`### IAN --> Tracking milestone ${_this.id} progress is ${progress} and global is ${global}. WireProgress is ${wireProgress}. should be visible: ${_shouldBeVisible}`);
+        }
         return _shouldBeVisible;
 
         // const isVertical = GlobalStore.get('vertical');
@@ -595,6 +605,9 @@ Class(function Milestone(_data) {
 
     //*** Event handlers
     async function onPlusHover(e) {
+        if (_autoExpandOnScroll) {
+            return;
+        }
         if (!_this.flag('animateIn') && !e.seo) {
             return;
         }
@@ -619,11 +632,12 @@ Class(function Milestone(_data) {
             _tooltip.hide(e);
         }
     }
-    function onToolTipTriggered(tooltip) {
-        _tooltip = tooltip;
-        console.log(`### IAN tooltip triggered method called. `);
-        _tooltip.show();
-        // onTooltipClick();
+    function onToolTipAutoTriggered() {
+        if (!_tooltipAutoOpened && !_tooltip.open) {
+            console.log(`### IAN auto opening ${_this.id}`);
+            _tooltip.show();
+            _tooltipAutoOpened = true;
+        }
     }
 
     function onTooltipClick(e) {
