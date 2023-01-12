@@ -10,7 +10,7 @@ Class(function ScrollMore() {
 
     let _show = false;
 
-    const DEBUG = true;// was false
+    const DEBUG = false;
     const TIMER = 3500;
 
     _this.s = { scale: 0 };
@@ -81,7 +81,7 @@ Class(function ScrollMore() {
     }
 
     async function show() {
-      console.log(`### IAN scrollmore show()`);
+        console.log(`### IAN scrollmore show()`);
 
         if (_show) return;
         if (!meetConditionForShow()) return;

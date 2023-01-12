@@ -594,7 +594,7 @@ Class(function MilestoneTooltip({
         $box.transform({ scale: 0 });
 
         await _this.wait(40);
-        $container.css({ opacity: 1 });
+        $container.css({ opacity: 1 });// was 1
 
         $box.tween({
             scale: 1
@@ -609,6 +609,7 @@ Class(function MilestoneTooltip({
             $close.tween({ opacity: 1 }, 400, 'easeOutCubic', 550);
         }
     };
+
 
     this.hideMobile = async function() {
         console.log('### IAN hide mobile MilestoneToolTip');
@@ -637,6 +638,14 @@ Class(function MilestoneTooltip({
         }, 600);
     };
 
+    this.setPlusBorder = async function () {
+        console.log(`### IAN set plus border`);
+        $layer.tween({
+            borderColor: 'red',
+            borderWidth: '50px'
+            // opacity: 1
+        }, 200, 'easeOutCubic');
+    };
     // this.setPosition = function(pos) {
     //     _idlePosition.copy(pos);
     //     _this.group.position.copy(pos);

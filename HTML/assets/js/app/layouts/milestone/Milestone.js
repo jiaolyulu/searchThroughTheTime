@@ -37,6 +37,12 @@ Class(function Milestone(_data) {
     let _autoExpandOnScroll = true; // if true, the tooltip will automatically open if it is between the right and left threshold listed below.
     let _rightAutoExpandThreshold = 0.0025; // 0 is the far right side
     let _leftAutoExpandThreshold = 0.02; // higher value is further left
+    let _durationBeforeAutoExpand = 1500; // time in millisecondsto wait before auto opening
+    // timer
+    let _autoExpandTimerId = 0;
+
+
+
     //*** Constructor
     (function () {
         _container = new Group();
@@ -129,11 +135,8 @@ Class(function Milestone(_data) {
             _plus.seoText = seo.seo.label;
             _plus.mesh.position.z += 0.002;
             if (MilestoneTooltip.TOUCH) {
-                //if (MilestoneTooltip.TOUCH) {
-                //end IAN
                 _plus.mesh.hitArea = new PlaneGeometry(1.8, 1.8);
                 Interaction3D.find(World.CAMERA).add(_plus.mesh, null, onTooltipClick);
-                // _plus.mesh.hitMesh.shader.neverRender = false;
             } else {
                 Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
             }
@@ -371,21 +374,40 @@ Class(function Milestone(_data) {
         console.log(`### IAN milestone screen position for ${_this.id}: ${screenPosition}`);
         if (screenPosition >= _rightAutoExpandThreshold && screenPosition <= _leftAutoExpandThreshold) {
             //show
-            onAutoOpenToolTip();
+            //onAutoOpenToolTip();
+            startAutoExpandTimer();
         } else {
+            cancelAutoExpandTimer();
             onAutoCloseToolTip();
             //hide
         }
     }
 
+    function startAutoExpandTimer() {
+        if (_autoExpandTimerId === 0) {
+            _autoExpandTimerId = setTimeout(
+                () => {
+                    onAutoOpenToolTip();
+                    _autoExpandTimerId = 0;
+                }, _durationBeforeAutoExpand
+            );
+        }
+    }
+
+    function cancelAutoExpandTimer() {
+        clearTimeout(_autoExpandTimerId);
+        _autoExpandTimerId = 0;
+    }
+
     async function onAutoOpenToolTip() {
+        // _tooltip.setPlusBorder();
         console.log(`### IAN Opening tooltip ${_this.id}`);
         if (!_this.flag('animateIn')) {
             return;
         }
 
         if (!_tooltip.open && !_tooltipAutoOpened) {
-            await _this.wait(100);
+            await _this.wait(50); // neccessary so the layer can finish becomeing visible first.
             _tooltip.show();
             _tooltipAutoOpened = true;
             console.log(`### IAN auto opening ${_this.id}`);
@@ -599,7 +621,7 @@ Class(function Milestone(_data) {
     //*** Event handlers
     async function onPlusHover(e) {
         if (_autoExpandOnScroll) {
-            //   return;
+            return;
         }
         if (!_this.flag('animateIn') && !e.seo) {
             return;
@@ -622,7 +644,6 @@ Class(function Milestone(_data) {
         } else if (e.seo) {
             await defer();
             await _this.wait(50);
-            console.log(`### IAN HIDE TOOLTIP`);
             _tooltip.hide(e);
         }
     }
