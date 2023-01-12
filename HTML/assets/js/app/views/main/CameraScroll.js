@@ -53,7 +53,7 @@ Class(function CameraScroll(_input, _group) {
 
         const main = _this.findParent('MainView');
         await main.ready();
-console.log('### Ian camera scroll constructor');
+        //console.log('### Ian camera scroll constructor');
         _this.onResize(onResize);
         _this.startRender(loop, RenderManager.BEFORE_RENDER);
 
@@ -81,7 +81,7 @@ console.log('### Ian camera scroll constructor');
     })();
 
     function initConfig() {
-        console.log('### Ian camera scroll init config');
+        //  console.log('### Ian camera scroll init config');
         const name = `${_input.prefix}_camerascroll`;
         _config = InputUIL.create(name, _group);
         _config.setLabel('Camera Scroll');
@@ -144,7 +144,6 @@ console.log('### Ian camera scroll constructor');
     }
 
     function uilStopScroll() {
-
         if (!Hydra.LOCAL || !UIL.loaded) return;
 
         if (!_this.uilpanels) {
@@ -361,8 +360,7 @@ console.log('### Ian camera scroll constructor');
     _this.forceToMilestone = function(milestone) {
         const { x, y } = milestone.layoutPosition;
         _this.forceTo(x, y);
-        console.log('### Ian force to milestone camerascroll');
-
+        //  console.log('### Ian force to milestone camerascroll');
     };
 
     function addScroll(v) {
@@ -383,7 +381,7 @@ console.log('### Ian camera scroll constructor');
     }
 
     function scrollToObject(object, direct = false) {
-        console.log('### Ian scroll to object camerascroll');
+        // console.log('### Ian scroll to object camerascroll');
 
         if (!object) return;
 
@@ -402,7 +400,7 @@ console.log('### Ian camera scroll constructor');
 
     //tween to object position
     async function tweenToObject(object, duration = 1000, ease = 'easeInOutCubic', dynamic = false) {
-        console.log('### Ian tween to object camerascroll');
+        //   console.log('### Ian tween to object camerascroll');
 
         if (!object) return;
         if (!_this._V3) _this._V3 = new Vector3();
@@ -432,7 +430,7 @@ console.log('### Ian camera scroll constructor');
     }
 
     async function tweenToObjectDiff(object, duration = 1000, ease = 'easeInOutCubic') {
-        console.log('### Ian tween to object dif camerascroll');
+        // console.log('### Ian tween to object dif camerascroll');
 
         if (!object) return;
         const isVertical = GlobalStore.get('vertical');
@@ -450,7 +448,7 @@ console.log('### Ian camera scroll constructor');
     }
 
     function scrollToProgress(progress, accountdiff = false, invoke = true) {
-        console.log('### Ian scroll to progress camerascroll');
+        // console.log('### Ian scroll to progress camerascroll');
 
         const isVertical = GlobalStore.get('vertical');
         let v = 0;
@@ -489,7 +487,7 @@ console.log('### Ian camera scroll constructor');
         // });
 
         if (MilestoneTooltip.TOUCH) {
-            console.log('### IAN milestone tooltop touch camerascroll');
+            //   console.log('### IAN milestone tooltop touch camerascroll');
 
             _this.events.sub(MilestoneTooltip.OPEN, () => {
                 _active = false;
