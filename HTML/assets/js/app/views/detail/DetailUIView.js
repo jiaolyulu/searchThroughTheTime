@@ -20,6 +20,9 @@ Class(function DetailUIView() {
     let _hidden = false;
     let _revealed = false;
 
+    // ### Alex bookeeping for scrolling exit in DD
+    let scrollExitFlag = false;
+
     //*** Constructor
     (async function () {
         await initHTML();
@@ -139,13 +142,25 @@ Class(function DetailUIView() {
         const treshold = 0.4;
         const detailCamera = ViewController.instance().views.detail.camera;
 
+        console.log(`### ALEX SCROLL: ${scroll.toFixed(4)}`);
+        if (scroll > 0 && scroll < 1) scrollExitFlag = true; //### Alex check if we've started to scroll, then check for going back to top and add timer exit
+        // console.log(`### ALEX ${scrollExitFlag}`);
+        if (scrollExitFlag && scroll.toFixed(4) == 0) { // if user has scrolled and we come back to top / truncate huge e numbers
+            console.log('### ALEX exiting after user scrolled up to the top....');
+            scrollExitFlag = false; // reset scroll flag
+            setTimeout(() => {
+                console.log('### in timeout');
+                $exit.forceExit();
+            }, 1.5 * 1000);
+        }
+
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
             console.log(`--> ### IAN START TIMER TO CLOSE DEEPDIVE HERE. `);
             showUp();
-            // ### ALEX close detailed view after 1.5s
+            // ### ALEX close detailed view after 1.5s when user scrolls to the bottom
             setTimeout(() => {
                 console.log('### in timeout');
-                // emulateKey.escape();
+                scrollExitFlag = false;
                 $exit.forceExit();
             }, 1.5 * 1000);
         } else if (scroll < treshold) {
