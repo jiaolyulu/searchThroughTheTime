@@ -20,7 +20,7 @@ Class(function DetailView() {
     }
 
     async function getMilestone() {
-        console.log('### IAN GetMilestone DetailView')
+        console.log('### IAN GetMilestone DetailView');
         const main = ViewController.instance().views.main;
         await main.ready();
         const id = ViewController?.instance?.()?.routeParams?.id;
@@ -31,7 +31,7 @@ Class(function DetailView() {
     }
 
     async function layout() {
-        console.log('### IAN Layout DetailView')
+        console.log('### IAN Layout DetailView');
 
         // Fetch milestone object
         const milestone = await getMilestone();
@@ -102,7 +102,7 @@ Class(function DetailView() {
     // }
 
     function onPositionChange(p) {
-        console.log('### IAN onPositionChange DetailView')
+        console.log('### IAN onPositionChange DetailView');
 
         const isVertical = GlobalStore.get('vertical');
 
@@ -170,7 +170,7 @@ Class(function DetailView() {
     }
 
     //*** Public methods
-    this.onShow = async function() {
+    this.onShow = async function () {
         await _this.ready();
         await layout();
 
@@ -179,7 +179,8 @@ Class(function DetailView() {
         animateIn();
     };
 
-    this.onHide = async function() {
+    this.onHide = async function () {
+        console.log('### ALEX ONHIDE!!!');
         await reset();
         // animateOut();
     };

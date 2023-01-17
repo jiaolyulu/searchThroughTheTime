@@ -1,3 +1,4 @@
+
 Class(function DetailUIView() {
     Inherit(this, BaseUIView);
     Inherit(this, StateComponent);
@@ -62,19 +63,16 @@ Class(function DetailUIView() {
                 right: 80px;
                 font-size: 0;
                 transform-origin: 50% 50%;
-
                 svg {
                     position: relative!important;
                     transform: rotate(90 deg);// was 90
                     width: 60px;
                     height: 60px;
                 }
-
                 ${Styles.smaller(1100, `
                     display: none;
                 `)}
             }
-
             .scroll-container {
                 position: relative!important;
             }
@@ -144,6 +142,12 @@ Class(function DetailUIView() {
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
             console.log(`--> ### IAN START TIMER TO CLOSE DEEPDIVE HERE. `);
             showUp();
+            // ### ALEX close detailed view after 1.5s
+            setTimeout(() => {
+                console.log('### in timeout');
+                // emulateKey.escape();
+                $exit.forceExit();
+            }, 1.5 * 1000);
         } else if (scroll < treshold) {
             showDown();
         } else if (scroll > treshold && scroll < (detailCamera.scrollBounds.max - treshold)) {
@@ -190,7 +194,7 @@ Class(function DetailUIView() {
     }
 
     function onMilestoneChange(milestone) {
-        console.log('### IAN on MilestoneChange')
+        console.log('### IAN on MilestoneChange');
         if (!milestone?.data) return;
         if (_content) _content.destroy();
 
