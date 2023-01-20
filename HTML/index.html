@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -8,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://gstatic.com">
-    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400,500,700,400i,500i,700i|Google+Sans:400,500,700&amp;display=swap">
+    <link rel="preload" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400,500,700,400i,500i,700i|Google+Sans:400,500,700&amp;display=swap">
     <script>
         window._CMSPATH_ = 'https://storage.googleapis.com/search-innovation-goog.appspot.com/development/data/';
         window._LANGUAGE_ = 'en';
@@ -16,33 +18,38 @@
     <script>
         try {
             eval('let obj = {}; obj?.prop');
-        } catch(e) {
+        } catch (e) {
             window.location.href = "notSupported.html";
         }
     </script>
 
     <!-- UIL_ID = 'google-search-innovation'; -->
-	<script type="text/javascript" src="assets/runtime/boot.js"></script>
+    <script type="text/javascript" src="assets/runtime/attract.js"></script> <!-- ### ALEX adding attract loop -->
+    <script type="text/javascript" src="assets/runtime/boot.js"></script>
     <script type="text/javascript" src="assets/runtime/dev.js"></script>
+
 </head>
+
 <body>
     <div id="loader">
         <div id="loaderbg"></div>
 
         <div class="center" id="circle-container">
             <svg id="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274.52 274.52">
-                <circle id="circle-svg" class="cls-circle" cx="137.26" cy="137.26" r="91.71"/>
+                <circle id="circle-svg" class="cls-circle" cx="137.26" cy="137.26" r="91.71" />
             </svg>
         </div>
 
         <div class="center" id="arrow-container">
             <svg id="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274.52 274.52">
-                <path id="arrow-left" class="cls-arrow" d="M137.26,45.55C96.75,41.54,80,26.32,80,26.32"/>
-                <path id="arrow-right" class="cls-arrow" d="M102,91s8.44-28.7,35.31-45.42"/>
+                <path id="arrow-left" class="cls-arrow" d="M137.26,45.55C96.75,41.54,80,26.32,80,26.32" />
+                <path id="arrow-right" class="cls-arrow" d="M102,91s8.44-28.7,35.31-45.42" />
             </svg>
         </div>
 
         <p class="center" id="progress">0%</p>
     </div>
+    <div class="attractloop" style="display: none; background-color: pink; width:100%; height:100%" />
 </body>
+
 </html>
