@@ -5,7 +5,7 @@ Class(function Config() {
     // Start language settings
 
     const DEBUG_LANGUAGE = false;
-    const RTL = ['iw','ar'];
+    const RTL = ['iw', 'ar'];
 
     _this.LANGUAGE = Utils.query('hl') || window._LANGUAGE_ || 'en';
 
@@ -34,6 +34,8 @@ Class(function Config() {
         'he': 'iw',
         'fr-CA': 'fr'
     };
+
+    const _kioskMode = true;
 
     function findMapping(key) {
         return Object.keys(_this.ALIASES).find(k => k.toLowerCase() === key.toLowerCase());

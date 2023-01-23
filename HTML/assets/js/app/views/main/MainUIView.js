@@ -51,7 +51,7 @@ Class(function MainUIView() {
 
     //*** Event handlers
     function onVerticalUpdate(isVertical) {
-        console.log('### IAN onVerticalUpdate MainUIView')
+        console.log('### IAN onVerticalUpdate MainUIView');
         if (isVertical && !_timeMobile) {
             initTimeMobile();
         } else if (!isVertical && _timeMobile) {
@@ -68,7 +68,7 @@ Class(function MainUIView() {
     };
 
     this.animateOut = function () {
-        console.log('### IAN this.animateOut MainUIView.js')
+        console.log('### IAN this.animateOut MainUIView.js');
         _year?.hide?.();
         // _timeMobile?.hide();
     };
