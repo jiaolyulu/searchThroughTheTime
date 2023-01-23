@@ -1,7 +1,6 @@
 Class(function MouseMilestones(_milestones) {
     Inherit(this, Component);
     const _this = this;
-
     let _mouse = new Vector3();
     let _v3 = new Vector3();
     let _config;
@@ -47,12 +46,12 @@ Class(function MouseMilestones(_milestones) {
         }
 
         // IF IT'S MADE IT HERE, MILESTONE M IS ONSCREEN AND DRAWING.
-        // console.log(`### IAN m details ${m.id}`);
         // IF should be visible, we know it should be showing and ois ok to attempt to open.
 
         if (m.shouldBeVisible() === true) {
-            //  m.onToolTipTrig();
-            //  m.tooltip.show();
+            console.log(`### IAN milestone ${m.id} is visible.`);
+            //m.onToolTipTrig();
+            //m.tooltip.show();
             //  console.log(`###!!! IAN attempting to open ${m.id}`);
         }
 

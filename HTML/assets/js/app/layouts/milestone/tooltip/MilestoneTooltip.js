@@ -399,8 +399,6 @@ Class(function MilestoneTooltip({
         }
 
         if (MilestoneTooltip.TOUCH) {
-            console.log(`###IAN SHOW MOBILE`);
-
             return this.showMobile();
         }
 
@@ -433,7 +431,6 @@ Class(function MilestoneTooltip({
         }
 
         $layer.clearTween();
-        console.log(`###IAN layer width ${$box.div.clientWidth} and height ${$box.div.clientHeight}`);
 
         $layer.tween({
             width: $box.div.clientWidth,
