@@ -62,7 +62,23 @@ Class(function TimeDesktop() {
     let isPlayground = Global.PLAYGROUND === Utils.getConstructorName(_this);
     const PERSIST_YEARS = [2000, 2005, 2010, 2015, 2020];
 
+    /* #######################################################################################################
+####                                                                                                    ##
+####                                                                                                    ##
+####                                                                                                    ##
+####                           Hi Deeplocal:                                                            ##
+####                           Need to figure out how to read scrollbar layout from css                 ##
+####                                                                                                    ##
+####                                                                                                    ##
+##########################################################################################################
+*/
+
     const _kioskMode = true;
+    //const _verticalScrollBarHeight = 2000; Set by TrackSize Width
+    const _verticalScrollLeftOffset = 70;
+    const _verticalScrollTopOfffset = -70;
+
+
 
     const TRACK_SIZES = [
         {
@@ -128,6 +144,21 @@ Class(function TimeDesktop() {
                 '2015': [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63],
                 '2020': [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
             }
+        },
+        {
+            minSize: 2000,
+            trackWidth: 2002,
+            fullCenter: false,
+            years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
+            disabledDots: [4, 5, 6, 18, 19, 20, 31, 32, 33, 43, 44, 45, 64, 65, 66],
+            higlightDots: {
+                'default': [0, 1, 2],
+                '2000': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+                '2005': [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+                '2010': [33, 34, 35, 36, 37, 38, 39, 40, 41, 42],
+                '2015': [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63],
+                '2020': [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+            }
         }
         // trackLeft
         //
@@ -178,8 +209,6 @@ Class(function TimeDesktop() {
 
         const sizeObj = getCurrentSizeObj();
         const trackWidth = sizeObj.trackWidth;
-        const trackHeight = 1500;
-        // const trackWidth = sizeObj.trackHeight;//IAN
 
         $patternWrapper = $trackWrapper.create('pattern-wrapper');
         $pattern = $patternWrapper.create('pattern');
@@ -585,10 +614,10 @@ Class(function TimeDesktop() {
 
     function reduceResize(apply = true) {
         const sizeObj = getCurrentSizeObj();
-        //        const trackWidth = sizeObj.trackWidth;
-        const trackWidth = 2000;//##IAN ASK MARS HOW TO SET VIA CSS.
-        const left = 70; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
-        const up = -73;//DEEPLOCAL
+        const trackWidth = sizeObj.trackWidth;
+        //   const trackWidth = _verticalScrollBarHeight;//##IAN ASK MARS HOW TO SET VIA CSS.
+        const left = _verticalScrollLeftOffset; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
+        const up = _verticalScrollTopOfffset;//DEEPLOCAL
 
         // Thumbs range x
         const offset = 30;
@@ -659,6 +688,7 @@ Class(function TimeDesktop() {
     }
 
     async function updateDotPositionsAndVisibility() {
+        console.log(`##IAN Dots update position`);
         await _this.wait(1);
         const containerWidth = $pattern.div.getBoundingClientRect().width;
         const sizeObj = getCurrentSizeObj();
@@ -676,6 +706,7 @@ Class(function TimeDesktop() {
     }
 
     function assignDotYears() {
+        console.log(`##IAN Dots assign years`);
         const sizeObj = getCurrentSizeObj();
 
         let indicies;
@@ -716,24 +747,11 @@ Class(function TimeDesktop() {
 
         const trackStart = sizeObj.trackLeft;
 
-        /* #######################################################################################################
-####                                                                                                    ##
-####                                                                                                    ##
-####                                                                                                    ##
-####                           Hi Ian, Welcome back from the weekend.                                   ##
-####                           For some reason the sizeObj.trackWidth is always defaulting to 1100.     ##
-####                           This causes the track bar to be offset. Forcing to 2000 below            ##
-####                           Figure out the root cause. Also note the if(_kioskMode) on resize.       ##
-####                           Figure out why.    Good Luck. You've got this.                           ##
-####                                                                                                    ##
-####                                                                                                    ##
-####                                                                                                    ##
-##########################################################################################################
-*/
 
 
-        const trackEnd = sizeObj.trackLeft + 2000;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
-        _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd, START_PROGRESS, 1, true); // uses y
+
+        const trackEnd = sizeObj.trackLeft + sizeObj.trackWidth;// _verticalScrollBarHeight;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
+        _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd - 35, START_PROGRESS, 1, true); // uses y
 
         //_desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true); IAN OLD
         //_desiredCameraScrollProgress = Math.range(e.y, trackStart - 50, trackEnd, START_PROGRESS, 1, true); // uses y
@@ -793,7 +811,7 @@ Class(function TimeDesktop() {
             $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });
         }
 
-
+        console.log(`##IAN lastPattenBounds.x ${lastPatternBounds.x}`);
         $patternWrapper.transform({ x: firstPatternBounds.x - lastPatternBounds.x, y: '-50%' });
         years.forEach(($year, index) => {
             $year.transform({ x: firstYearBounds[index].x - lastYearBounds[index].x });

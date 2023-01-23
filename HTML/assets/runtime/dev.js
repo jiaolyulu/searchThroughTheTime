@@ -8,7 +8,6 @@
     }
 
     function loadES6() {
-        console.log("### Loading es6");
         RUNTIME_CSS.forEach(createLink);
         if (location.search.includes('bundle') || location.hash.includes('bundle') || navigator.userAgent.toLowerCase().includes('aura') || location.host.includes('atdev.online')) {
             window._BUNDLE_ = true;
