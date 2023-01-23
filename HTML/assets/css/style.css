@@ -9,6 +9,35 @@ body, html, #Stage {
 	touch-action: none;
 }
 
+
+
+
+#Stage{
+	background-color: rgb(255, 115, 0);
+}
+.YearScroller { /* year bar on top of screen*/
+	margin-left: 1000px;
+	margin-top: 600px;
+}
+
+.DOM3D { /*elements and content*/
+	margin-left: 1000px;
+	margin-top: 600px;
+}
+
+.Container canvas{ /*line drawing */
+	margin-left: 1000px;
+	margin-top: 600px;
+}
+
+.ScrollMore{ /* scroll more icon on right side. disapears after first scroll*/
+	right:100px;
+}
+
+.expand-container { /*icon on scrollbar to expand scroll bar to dot review*/
+    visibility: collapse;
+}
+
 .ios, .ios body, .ios #Stage {
 	overflow: visible;
 }

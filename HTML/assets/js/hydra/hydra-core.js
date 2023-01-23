@@ -3,6 +3,12 @@
  * @name Polyfill
  */
 
+const _isExhibitMode=true;
+const _exhibitStageWidth=3000;
+const _exhibitStageHeight=1000;
+
+
+
 if (typeof(console) === 'undefined') {
     window.console = {};
     console.log = console.error = console.info = console.debug = console.warn = console.trace = function() {};
@@ -2376,11 +2382,16 @@ Class(function Events() {
         defer(window.onresize);
 
         function updateStage() {
-            if (box) {
-                let bbox = box.getBoundingClientRect();
+
+             //## DEEPLOCAL modification
+             if(_isExhibitMode){
+                Stage.width = _exhibitStageWidth;
+                Stage.height = _exhibitStageHeight;
+                //end Mod
+            }else if (box) {
+                let bbox = box.getBoundingClientRect();   
                 Stage.width = bbox.width || window.innerWidth || document.body.clientWidth || document.documentElement.offsetWidth;
                 Stage.height = bbox.height || window.innerHeight || document.body.clientHeight || document.documentElement.offsetHeight;
-
                 document.body.parentElement.scrollTop = document.body.scrollTop = 0;
                 document.documentElement.style.width = document.body.style.width = `${Stage.width}px`;
                 document.documentElement.style.height = document.body.style.height = `${Stage.height}px`;
@@ -4485,8 +4496,17 @@ Hydra.ready(function() {
 
     Stage.size('100%');
     Stage.__useFragment = true;
-    Stage.width = window.innerWidth || document.body.clientWidth || document.documentElement.offsetWidth;
-    Stage.height = window.innerHeight || document.body.clientHeight || document.documentElement.offsetHeight;
+
+             //## DEEPLOCAL modification
+             if(_isExhibitMode){
+                Stage.width = _exhibitStageWidth;
+                Stage.height = _exhibitStageHeight;
+                //end Mod
+            }else{
+                Stage.width = window.innerWidth || document.body.clientWidth || document.documentElement.offsetWidth;
+                Stage.height = window.innerHeight || document.body.clientHeight || document.documentElement.offsetHeight;
+            }
+    
 });
 /**
  * @name HydraCSS

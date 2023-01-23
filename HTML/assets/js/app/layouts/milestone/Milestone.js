@@ -37,7 +37,8 @@ Class(function Milestone(_data) {
     let _autoExpandOnScroll = true; // if true, the tooltip will automatically open if it is between the right and left threshold listed below.
     let _rightAutoExpandThreshold = 0.0025; // 0 is the far right side
     let _leftAutoExpandThreshold = 0.02; // higher value is further left
-    let _durationBeforeAutoExpand = 1500; // time in millisecondsto wait before auto opening
+    let _durationBeforeAutoExpand = 1000; // time in millisecondsto wait before auto opening
+
     // timer
     let _autoExpandTimerId = 0;
 
@@ -371,7 +372,7 @@ Class(function Milestone(_data) {
     }
 
     function handleAutoExpand(screenPosition) {
-        console.log(`### IAN milestone screen position for ${_this.id}: ${screenPosition}`);
+        // console.log(`### IAN milestone screen position for ${_this.id}: ${screenPosition}`);
         if (screenPosition >= _rightAutoExpandThreshold && screenPosition <= _leftAutoExpandThreshold) {
             //show
             //onAutoOpenToolTip();
@@ -388,7 +389,6 @@ Class(function Milestone(_data) {
             _autoExpandTimerId = setTimeout(
                 () => {
                     onAutoOpenToolTip();
-                    _autoExpandTimerId = 0;
                 }, _durationBeforeAutoExpand
             );
         }
@@ -407,6 +407,7 @@ Class(function Milestone(_data) {
         }
 
         if (!_tooltip.open && !_tooltipAutoOpened) {
+            _autoExpandTimerId = 0;
             await _this.wait(50); // neccessary so the layer can finish becomeing visible first.
             _tooltip.show();
             _tooltipAutoOpened = true;

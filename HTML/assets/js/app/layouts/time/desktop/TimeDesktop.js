@@ -62,6 +62,8 @@ Class(function TimeDesktop() {
     let isPlayground = Global.PLAYGROUND === Utils.getConstructorName(_this);
     const PERSIST_YEARS = [2000, 2005, 2010, 2015, 2020];
 
+    const _kioskMode = true;
+
     const TRACK_SIZES = [
         {
             minSize: 0, // min Stage.width to enable this
@@ -176,6 +178,8 @@ Class(function TimeDesktop() {
 
         const sizeObj = getCurrentSizeObj();
         const trackWidth = sizeObj.trackWidth;
+        const trackHeight = 1500;
+        // const trackWidth = sizeObj.trackHeight;//IAN
 
         $patternWrapper = $trackWrapper.create('pattern-wrapper');
         $pattern = $patternWrapper.create('pattern');
@@ -258,7 +262,11 @@ Class(function TimeDesktop() {
 
         _expand = _this.initClass(TimeDesktopExpand, [$expandContainer]);
 
-        $timeContainer.transform({ y: 98 });
+        if (_kioskMode) {
+            $timeContainer.transform({ y: 0 });
+        } else {
+            $timeContainer.transform({ y: 98 });
+        }
     }
 
     function addListeners() {
@@ -278,7 +286,7 @@ Class(function TimeDesktop() {
 
         if (view === 'DetailView') return false;
 
-        if (p >= START_PROGRESS && !_show) {
+        if ((p >= START_PROGRESS || _kioskMode) && !_show) {
             return true;
         } else if (p < START_PROGRESS && _show) {
             return false;
@@ -291,7 +299,7 @@ Class(function TimeDesktop() {
 
         //duct tape solution for now, but progress change is called even when slightly moving the camera
         const transitioning = GlobalStore.get('transitioning');
-        if (p >= START_PROGRESS && !_show && !transitioning) {
+        if ((p >= START_PROGRESS || _kioskMode) && !_show && !transitioning) {
             show();
         } else if (p < START_PROGRESS && _show) {
             hide();
@@ -577,8 +585,10 @@ Class(function TimeDesktop() {
 
     function reduceResize(apply = true) {
         const sizeObj = getCurrentSizeObj();
-        const trackWidth = sizeObj.trackWidth;
+        //        const trackWidth = sizeObj.trackWidth;
+        const trackWidth = 2000;
 
+        console.log(`### IAN trackwidth= ${trackWidth}`);
         // Thumbs range x
         const offset = 30;
         _thumbRange[0] = offset;
@@ -591,7 +601,7 @@ Class(function TimeDesktop() {
             centerWidth += 80;
         }
 
-        const left = (Stage.width - centerWidth) / 2;
+        const left = 0; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
 
         if (apply) {
             $trackContainer.transform({ x: left });
@@ -705,9 +715,27 @@ Class(function TimeDesktop() {
         const sizeObj = getCurrentSizeObj();
 
         const trackStart = sizeObj.trackLeft;
-        const trackEnd = sizeObj.trackLeft + sizeObj.trackWidth;
 
-        _desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true);
+        /* #######################################################################################################
+####                                                                                                    ##
+####                                                                                                    ##
+####                                                                                                    ##
+####                           Hi Ian, Welcome back from the weekend.                                   ##
+####                           For some reason the sizeObj.trackWidth is always defaulting to 1100.     ##
+####                           This causes the track bar to be offset. Forcing to 2000 below            ##
+####                           Figure out the root cause. Also note the if(_kioskMode) on resize.       ##
+####                           Figure out why.    Good Luck. You've got this.                           ##
+####                                                                                                    ##
+####                                                                                                    ##
+####                                                                                                    ##
+##########################################################################################################
+*/
+
+
+        const trackEnd = sizeObj.trackLeft + 2000;//sizeObj.trackWidth;
+        console.log(`### IAN sizeObj.trackWidth ${sizeObj.trackWidth} and sizeObj.TRACK_SIZES ${sizeObj.TRACK_SIZES}`);//Deeplocal
+        //_desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true); IAN OLD
+        _desiredCameraScrollProgress = Math.range(e.y, trackStart - 50, trackEnd, START_PROGRESS, 1, true); // uses y
 
         const main = ViewController.instance().views?.main;
 
@@ -757,7 +785,14 @@ Class(function TimeDesktop() {
         });
 
         //INVERT
-        $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });
+        if (_kioskMode) {
+            //rotate 90deg and track y
+            $track.transform({ y: (firstTrackBounds.y - lastTrackBounds.y) });
+        } else {
+            $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });
+        }
+
+
         $patternWrapper.transform({ x: firstPatternBounds.x - lastPatternBounds.x, y: '-50%' });
         years.forEach(($year, index) => {
             $year.transform({ x: firstYearBounds[index].x - lastYearBounds[index].x });
