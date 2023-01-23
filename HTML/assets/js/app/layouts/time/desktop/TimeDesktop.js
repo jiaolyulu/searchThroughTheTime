@@ -263,7 +263,7 @@ Class(function TimeDesktop() {
         _expand = _this.initClass(TimeDesktopExpand, [$expandContainer]);
 
         if (_kioskMode) {
-            $timeContainer.transform({ y: 0 });
+            $timeContainer.transform({ y: 50 });
         } else {
             $timeContainer.transform({ y: 98 });
         }
@@ -586,9 +586,10 @@ Class(function TimeDesktop() {
     function reduceResize(apply = true) {
         const sizeObj = getCurrentSizeObj();
         //        const trackWidth = sizeObj.trackWidth;
-        const trackWidth = 2000;
+        const trackWidth = 2000;//##IAN ASK MARS HOW TO SET VIA CSS.
+        const left = 70; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
+        const up = -73;//DEEPLOCAL
 
-        console.log(`### IAN trackwidth= ${trackWidth}`);
         // Thumbs range x
         const offset = 30;
         _thumbRange[0] = offset;
@@ -601,10 +602,9 @@ Class(function TimeDesktop() {
             centerWidth += 80;
         }
 
-        const left = 0; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
-
+        console.log(`!!IAN CSS ${$trackContainer}`);
         if (apply) {
-            $trackContainer.transform({ x: left });
+            $trackContainer.transform({ x: left, y: up });
         }
 
         sizeObj.trackLeft = left;
@@ -620,7 +620,7 @@ Class(function TimeDesktop() {
             width: trackWidth
         });
 
-        $thumbContainer.transform({ x: left });
+        $thumbContainer.transform({ x: left, y: up });
 
         // Apply years offsets
         if (apply) {
@@ -732,10 +732,11 @@ Class(function TimeDesktop() {
 */
 
 
-        const trackEnd = sizeObj.trackLeft + 2000;//sizeObj.trackWidth;
-        console.log(`### IAN sizeObj.trackWidth ${sizeObj.trackWidth} and sizeObj.TRACK_SIZES ${sizeObj.TRACK_SIZES}`);//Deeplocal
+        const trackEnd = sizeObj.trackLeft + 2000;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
+        _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd, START_PROGRESS, 1, true); // uses y
+
         //_desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true); IAN OLD
-        _desiredCameraScrollProgress = Math.range(e.y, trackStart - 50, trackEnd, START_PROGRESS, 1, true); // uses y
+        //_desiredCameraScrollProgress = Math.range(e.y, trackStart - 50, trackEnd, START_PROGRESS, 1, true); // uses y
 
         const main = ViewController.instance().views?.main;
 
