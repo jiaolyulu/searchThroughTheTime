@@ -69,7 +69,7 @@ Class(function Timeline() {
 
     function initDetectYear() {
         _this.initClass(DetectYear, _milestones);
-        console.log("### YEAR DETECTED");
+        console.log("### IAN YEAR DETECTED");
     }
 
     function collectPositions() {

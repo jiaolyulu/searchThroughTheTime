@@ -10,8 +10,9 @@ Class(function ScrollMore() {
 
     let _show = false;
 
-    const DEBUG = true;// was false
+    const DEBUG = false;
     const TIMER = 3500;
+    const _isKioskMode = true;
 
     _this.s = { scale: 0 };
 
@@ -70,18 +71,22 @@ Class(function ScrollMore() {
     }
 
     function meetConditionForShow() {
+        if (_isKioskMode) {
+            return true;
+        }
         if (GlobalStore.get('view') === 'MainView' &&
             MainStore.get('end') === false &&
             MainStore.get('progress') > 0.042) {
             return true;
         }
 
+
         DEBUG && console.log('meet conditions not met');
         return false;
     }
 
     async function show() {
-      console.log(`### IAN scrollmore show()`);
+        console.log(`### IAN scrollmore show()`);
 
         if (_show) return;
         if (!meetConditionForShow()) return;
@@ -97,9 +102,6 @@ Class(function ScrollMore() {
             $icon.transform();
         });
 
-        // $text.classList().add('show');
-        // $icon.classList().add('show');
-
         DEBUG && console.log('show!');
     }
 
@@ -109,15 +111,11 @@ Class(function ScrollMore() {
 
         $wrapper.hit.hide();
         $text.tween({ y: '100%' }, 400, 'easeOutCubic');
-
         tween(_this.s, { scale: 0 }, 700, 'easeOutCubic', 200).onUpdate(() => {
             $icon.scale = _this.s.scale;
             $icon.transform();
         });
 
-        // $icon.tween({ scale: 0 }, 500, 'easeOutCubic', 200);
-        // $text.classList().remove('show');
-        // $icon.classList().remove('show');
 
         DEBUG && console.log('hide!');
     }

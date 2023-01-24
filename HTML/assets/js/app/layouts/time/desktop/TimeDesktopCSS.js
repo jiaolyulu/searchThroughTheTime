@@ -14,7 +14,7 @@ Class(function TimeDesktopCSS($obj) {
         `;
 
         const barBottom = `
-          bottom: 38px;
+          bottom: 0px; // !!DEEPLOCAL change. was 38px
 
           @media (max-height: 770px) {
               bottom: 20px;
@@ -52,31 +52,30 @@ Class(function TimeDesktopCSS($obj) {
             z-index: 10;
             ${barHeight}
             ${barBottom}
-            left: 0;
+            left: 0px; 
+            width:2000px;!important
           }
+
+.track{
+  width: inherit;
+}
+
 
           .track-container {
-            width: 1100px;
-            ${barHeight}
-            ${barBottom}
-            left: 0;
+            width:2000px; !important
+    //transform: translate3d(0px, 0px, 0px); !important
+           // ${barHeight}
+          //  ${barBottom}
+            left: 0px;
 
-            /*
-            ${Styles.smaller(1100, `
-                width: 920px;
-            `)}
-
-            ${Styles.smaller(770, `
-                width: 770px;
-            `)}
-            */
           }
+         
 
           .time-container {
             transform: translateY(98px);
-            width: 100%;
-            height: 100%;
-            left: 0;
+            rotate:90deg;
+            width: 0px; //IAN was 100%
+            height: 100%;           
           }
 
           .track-wrapper {
@@ -89,7 +88,7 @@ Class(function TimeDesktopCSS($obj) {
             /*position: relative !important;*/
             box-sizing: border-box;
             /*width: 100%;*/
-            width: ${1100}px;
+            width: ${2150}px;
             height: 100%;
             background-color: ${Styles.colors.concrete};
             border-radius: 50px;

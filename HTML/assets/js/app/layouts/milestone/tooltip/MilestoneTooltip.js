@@ -3,7 +3,8 @@ Class(function MilestoneTooltip({
     content,
     color,
     offsetX = 0,
-    offsetY = 0
+    offsetY = 0,
+    autoExpandOnScroll
 }) {
     Inherit(this, Object3D);
     Inherit(this, StateComponent);
@@ -15,17 +16,20 @@ Class(function MilestoneTooltip({
     let _open = false;
     let _idlePosition = new Vector3();
     let _plus = null;
-    let _checkMouseOut = false;
+    let _checkMouseOut = true;
     let _offset = new Vector2(offsetX, offsetY);
     let _cTransparent;
-
+    let _isVisible = false;
+    const _scrollOnly = autoExpandOnScroll;
     //*** Constructor
     (function () {
         init();
         initHtml();
         initStyles();
-
-        if (MilestoneTooltip.TOUCH) {
+        console.log(`### CHECKING INIT _scrollOnly${_scrollOnly}`);
+        if (_scrollOnly) {
+            console.log(`### IAN Tooltip set to scroll Only.`);
+        } else if (MilestoneTooltip.TOUCH) {
             enableTouch();
         } else {
             checkMouseOut();
@@ -44,7 +48,7 @@ Class(function MilestoneTooltip({
         $box.css({ pointerEvents: 'auto' });
 
         _this.startRender(() => {
-            if (!_checkMouseOut || !_open) return;
+            if (!_checkMouseOut || !_open || _scrollOnly) return;
 
             if (document?.querySelector(':focus')?.getAttribute('data-link-tooltip')) {
                 return;
@@ -395,6 +399,8 @@ Class(function MilestoneTooltip({
         }
 
         if (MilestoneTooltip.TOUCH) {
+            console.log(`###IAN SHOW MOBILE`);
+
             return this.showMobile();
         }
 
@@ -405,11 +411,13 @@ Class(function MilestoneTooltip({
 
         await _this.wait(1);
 
+        console.log(`### show background square x:${_offset.x} and y:${_offset.y}`);
         $box.tween({ x: `${_offset.x}%`, y: `${_offset.y}%` }, 600, 'easeOutCubic');
 
         tween(_this.group.position, {
             z: _idlePosition.z + 1
         }, 400, 'easeOutCubic');
+        // layer = colored box
 
         $layer.classList().add('open');
 
@@ -425,6 +433,8 @@ Class(function MilestoneTooltip({
         }
 
         $layer.clearTween();
+        console.log(`###IAN layer width ${$box.div.clientWidth} and height ${$box.div.clientHeight}`);
+
         $layer.tween({
             width: $box.div.clientWidth,
             height: $box.div.clientHeight,
@@ -444,7 +454,7 @@ Class(function MilestoneTooltip({
         $content.css({ opacity: 0 });
         // $content.transform({ y: 15 });
         await _this.wait(40);
-
+        //text
         $content.tween({
             // y: 0,
             opacity: 1
@@ -584,7 +594,7 @@ Class(function MilestoneTooltip({
         $box.transform({ scale: 0 });
 
         await _this.wait(40);
-        $container.css({ opacity: 1 });
+        $container.css({ opacity: 1 });// was 1
 
         $box.tween({
             scale: 1
@@ -599,6 +609,7 @@ Class(function MilestoneTooltip({
             $close.tween({ opacity: 1 }, 400, 'easeOutCubic', 550);
         }
     };
+
 
     this.hideMobile = async function() {
         console.log('### IAN hide mobile MilestoneToolTip');
@@ -627,6 +638,14 @@ Class(function MilestoneTooltip({
         }, 600);
     };
 
+    this.setPlusBorder = async function () {
+        console.log(`### IAN set plus border`);
+        $layer.tween({
+            borderColor: 'red',
+            borderWidth: '50px'
+            // opacity: 1
+        }, 200, 'easeOutCubic');
+    };
     // this.setPosition = function(pos) {
     //     _idlePosition.copy(pos);
     //     _this.group.position.copy(pos);
@@ -651,6 +670,7 @@ Class(function MilestoneTooltip({
     this.get('$box', _ => $box);
     this.get('$copy', _ => $copy);
     this.get('$layer', _ => $layer);
+    this.setOpacity('isVisible', _ => _isVisible);
 }, _ => {
     MilestoneTooltip.Z_INDEX = 101;
     MilestoneTooltip.TOUCH = Config.TOUCH;

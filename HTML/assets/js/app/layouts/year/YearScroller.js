@@ -409,7 +409,6 @@ Class(function YearScroller() {
     }
 
     function onYearChange(year) {
-        return;
         //$yearText.updateYear({ year });
         $yearPills.forEach($pill => {
             if (year === $pill.year) {

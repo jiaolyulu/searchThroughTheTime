@@ -2,6 +2,7 @@ Class(function Milestone(_data) {
     Inherit(this, Object3D);
     const _this = this;
     let _bbox = new Vector2();
+    //IAN add timer var
     let _container, _dot, _image, _title, _debug, _plus, _tooltip, _cta, _hit;
     const _layoutPosition = new Vector3();
 
@@ -33,7 +34,16 @@ Class(function Milestone(_data) {
 
     let _shouldBeVisible = false;
     let _tooltipAutoOpened = false;
-    let _autoExpandOnScroll = false;
+    let _autoExpandOnScroll = true; // if true, the tooltip will automatically open if it is between the right and left threshold listed below.
+    let _rightAutoExpandThreshold = 0.0025; // 0 is the far right side
+    let _leftAutoExpandThreshold = 0.02; // higher value is further left
+    let _durationBeforeAutoExpand = 1000; // time in millisecondsto wait before auto opening
+
+    // timer
+    let _autoExpandTimerId = 0;
+
+
+
     //*** Constructor
     (function () {
         _container = new Group();
@@ -71,7 +81,8 @@ Class(function Milestone(_data) {
             _tooltip = _this.initClass(MilestoneTooltip, {
                 title: _data.tooltip.title || _metadata.title,
                 content: _data.tooltip.content || _metadata.subtitle,
-                color: _color
+                color: _color,
+                autoExpandOnScroll: _autoExpandOnScroll
             });
         }
 
@@ -93,15 +104,10 @@ Class(function Milestone(_data) {
             if (obj) _container.add(obj.group);
         });
 
-        // setLayout();
-
         if (_isDive) {
             initHitArea();
         }
-
-        if (!_autoExpandOnScroll) {
-            addListeners();
-        }
+        addListeners();
     })();
 
     function initHitArea() {
@@ -129,15 +135,13 @@ Class(function Milestone(_data) {
 
             _plus.seoText = seo.seo.label;
             _plus.mesh.position.z += 0.002;
-
-            console.log(`### IAN milestone touch mode= ${MilestoneTooltip.TOUCH}`);
             if (MilestoneTooltip.TOUCH) {
                 _plus.mesh.hitArea = new PlaneGeometry(1.8, 1.8);
                 Interaction3D.find(World.CAMERA).add(_plus.mesh, null, onTooltipClick);
-                // _plus.mesh.hitMesh.shader.neverRender = false;
             } else {
                 Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
             }
+
 
             _tooltip.$copy.parentSeo = seo.root;
             GLSEO.textNode(_tooltip.$copy, _tooltip.$copy.div.textContent);
@@ -350,6 +354,8 @@ Class(function Milestone(_data) {
         return offset - scroll;
     }
 
+
+
     //call it should be visible
     //Return true or false
     function shouldBeVisible() {
@@ -357,57 +363,67 @@ Class(function Milestone(_data) {
         const global = ViewController.instance().views.global;
         const wireProgress = global.wire.progress;
 
-        _shouldBeVisible = wireProgress >= progress;
-        if (_shouldBeVisible === true) {
-            //  console.log(`### IAN Milestone ${_this.id} is visible.`);
-            if (_autoExpandOnScroll && _tooltip) {
-                onToolTipAutoTriggered();
-            } else {
-                // console.log(`### Tooltip does not exist for ${_this.id}.`);
-            }
-            //console.log(`### IAN --> Tracking milestone ${_this.id} progress is ${progress} and global is ${global}. WireProgress is ${wireProgress}. should be visible: ${_shouldBeVisible}`);
+        let onScreen = wireProgress >= progress;
+        let screenPosition = wireProgress - progress;
+        if (_tooltip && onScreen && _autoExpandOnScroll) {
+            handleAutoExpand(screenPosition);
         }
-        return _shouldBeVisible;
-
-        // const isVertical = GlobalStore.get('vertical');
-
-        // const lp = _this.layoutPosition;
-        // let scroll;
-
-        // if (isVertical) {
-        //     scroll = MainStore.get('scroll');
-        // } else {
-        //     const offset = ViewController.instance().views.main.camera.gaze.group.position.x;
-        //     scroll = MainStore.get('scroll') + offset;
-        // }
-
-        // if (isVertical) {
-        //     const heightCamera = MainStore.get('heightCamera');
-        //     _projection.y = Math.map(lp.y, scroll + (heightCamera / 2), scroll - (heightCamera / 2), 0, Stage.height);
-        //     const t = _projection;
-
-        //     let treshold = Stage.height * 0.8;
-
-        //     if (t.y <= treshold) {
-        //         _shouldBeVisible = true;
-        //     } else if (t.y > treshold) {
-        //         _shouldBeVisible = false;
-        //     }
-        // } else {
-        //     const widthCamera = MainStore.get('widthCamera');
-        //     _projection.x = Math.map(lp.x, scroll - (widthCamera / 2), scroll + (widthCamera / 2), 0, Stage.width);
-        //     const t = _projection;
-        //     let treshold = Stage.width * 0.8;
-
-        //     if (t.x <= treshold) {
-        //         _shouldBeVisible = true;
-        //     } else if (t.x > treshold) {
-        //         _shouldBeVisible = false;
-        //     }
-        // }
-
-        // return _shouldBeVisible;
+        return onScreen;
     }
+
+    function handleAutoExpand(screenPosition) {
+        // console.log(`### IAN milestone screen position for ${_this.id}: ${screenPosition}`);
+        if (screenPosition >= _rightAutoExpandThreshold && screenPosition <= _leftAutoExpandThreshold) {
+            //show
+            //onAutoOpenToolTip();
+            startAutoExpandTimer();
+        } else {
+            cancelAutoExpandTimer();
+            onAutoCloseToolTip();
+            //hide
+        }
+    }
+
+    function startAutoExpandTimer() {
+        if (_autoExpandTimerId === 0) {
+            _autoExpandTimerId = setTimeout(
+                () => {
+                    onAutoOpenToolTip();
+                }, _durationBeforeAutoExpand
+            );
+        }
+    }
+
+    function cancelAutoExpandTimer() {
+        clearTimeout(_autoExpandTimerId);
+        _autoExpandTimerId = 0;
+    }
+
+    async function onAutoOpenToolTip() {
+        // _tooltip.setPlusBorder();
+        console.log(`### IAN Opening tooltip ${_this.id}`);
+        if (!_this.flag('animateIn')) {
+            return;
+        }
+
+        if (!_tooltip.open && !_tooltipAutoOpened) {
+            _autoExpandTimerId = 0;
+            await _this.wait(50); // neccessary so the layer can finish becomeing visible first.
+            _tooltip.show();
+            _tooltipAutoOpened = true;
+            console.log(`### IAN auto opening ${_this.id}`);
+        }
+    }
+
+    function onAutoCloseToolTip() {
+        if (_tooltip.open && _tooltipAutoOpened) {
+            console.log(`### IAN auto CLOSE ${_this.id}`);
+            _tooltip.hide();
+            // animateOut();
+            _tooltipAutoOpened = false;
+        }
+    }
+
 
     function checkAnimateIn() {
         // if (_this.flag('animateIn')) return;
@@ -598,7 +614,7 @@ Class(function Milestone(_data) {
     function loop() {
         const transitioning = GlobalStore.get('transitioning');
         if (!transitioning) {
-            shouldBeVisible();
+            _shouldBeVisible = shouldBeVisible();
         }
         checkAnimateIn();
     }
@@ -632,13 +648,8 @@ Class(function Milestone(_data) {
             _tooltip.hide(e);
         }
     }
-    function onToolTipAutoTriggered() {
-        if (!_tooltipAutoOpened && !_tooltip.open) {
-            console.log(`### IAN auto opening ${_this.id}`);
-            _tooltip.show();
-            _tooltipAutoOpened = true;
-        }
-    }
+
+
 
     function onTooltipClick(e) {
         if (!_this.flag('animateIn')) {

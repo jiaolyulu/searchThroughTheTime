@@ -8,7 +8,7 @@ Class(function World() {
     //*** Constructor
     (function () {
         initWorld();
-        if (RenderManager.type == RenderManager.NORMAL) {
+        if (RenderManager.type === RenderManager.NORMAL) {
             Camera.instance(_camera);
             Render.capFPS = Tests.capFPS();
         }
@@ -77,8 +77,9 @@ Class(function World() {
     }
 
     function resize() {
+        console.log(`### IAN RESIZE`);
         _renderer.setSize(Stage.width, Stage.height);
-        _camera.aspect = Stage.width / Stage.height;
+        _camera.aspect = Stage.width / (Stage.height);
         _camera.updateProjectionMatrix();
     }
 
