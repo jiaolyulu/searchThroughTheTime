@@ -8,7 +8,7 @@
 
 /**Variables */
 
-const activityTimer = 6; // seconds to test for inactivity
+const activityTimer = 9; // seconds to test for inactivity
 let userHasScrolled = false;
 let userHasClicked = false;
 let attractLoopVisible = false;
