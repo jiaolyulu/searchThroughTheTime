@@ -4,7 +4,7 @@ Class(function MouseMilestones(_milestones) {
     let _mouse = new Vector3();
     let _v3 = new Vector3();
     let _config;
-
+    let _openMilestones = [];
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -25,7 +25,26 @@ Class(function MouseMilestones(_milestones) {
         _config.addNumber('maxDistance', 2, 0.1);
         _config.addNumber('force', 1, 0.1);
         _config.addNumber('rotation', 1, 0.1);
+        window.addEventListener("ToolTipOpenEvent", e => { onToolTipOpen(e); });
+        //_milestones.forEach(m => {
+        // console.log(`Add listeners for ${m.id} `);
+        //m.addEventListener("ToolTipOpenEvent", e => { console.log(`MOUSE TOOLTIP EVENT RECIEVED`); });
+        //});
     }
+
+    function onToolTipOpen(e) {
+        console.log(`MOUSE TOOLTIP EVENT RECIEVED:${e.detail?._this.id}`);
+        // close any items in the _openMilestones list)
+        _openMilestones.forEach(m => {
+            console.log(`Previously open items:`, m);
+            m._this?.AutoClose();
+        });
+        //clear the array
+        _openMilestones = [];
+
+        _openMilestones.push(e.detail);
+    }
+
 
     function loop() {
         _mouse.copy(ScreenProjection.unproject(Mouse, 7));
@@ -37,6 +56,25 @@ Class(function MouseMilestones(_milestones) {
         });
     }
 
+    //IAN Add an event listener if the tooltip or deepdive is open. If it is open,close everything in the open items list, close clear the list and then add this now open item to the list for next time. The list should never really be more than 2 items.
+
+    //depricated
+    /*  function checkIfShouldAutoOpen(milestone) {
+        if (milestone.shouldBeVisible() === true) { /*#######################################
+
+
+            let index = _openMilestones.findIndex(x => x.id === milestone.id);
+            console.log(`Checking status of ${milestone.id} at index of ${index} of ${_openMilestones.length}`);
+            if (index < 0) {
+                _openMilestones.push(milestone);
+                milestone.AutoExpandAfterDelay(2000);
+            } else if (index < _openMilestones.length - 1) {
+                // not the most recent. Close this item.
+                // milestone.AutoClose();
+            }
+        }
+    }*/
+
     function loopMilestone(m) {
         if (!m.drawing) return;
         // if (m.id !== 'pagerank') return;
@@ -44,19 +82,21 @@ Class(function MouseMilestones(_milestones) {
         if (m.cta) {
             return;
         }
-
+        /*###################################
+ IAN commented out here whie working on check if should open. Possible this can just go away
         // IF IT'S MADE IT HERE, MILESTONE M IS ONSCREEN AND DRAWING.
         // IF should be visible, we know it should be showing and ois ok to attempt to open.
 
         if (m.shouldBeVisible() === true) {
-            console.log(`### IAN milestone ${m.id} is visible.`);
+            console.log(`### IAN milestone ${m.id} is visible. Position= ${m.layoutPosition.x}.`);
+            //m.SetAutoExpand();
+            m.AutoExpandAfterDelay(2000);
             //m.onToolTipTrig();
             //m.tooltip.show();
             //  console.log(`###!!! IAN attempting to open ${m.id}`);
         }
-
-        //m.onTooltipClick();
-        //end ian
+#####################*/
+        //checkIfShouldAutoOpen(m);
 
         const diff = _v3.copy(m.layoutPosition).sub(_mouse);
         const distance = diff.length();
