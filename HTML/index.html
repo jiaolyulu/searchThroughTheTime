@@ -12,7 +12,7 @@
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
         href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400,500,700,400i,500i,700i|Google+Sans:400,500,700&amp;display=swap">
     <script>
-       // window._CMSPATH_ = 'https://storage.googleapis.com/search-innovation-goog.appspot.com/development/data/';
+        // window._CMSPATH_ = 'https://storage.googleapis.com/search-innovation-goog.appspot.com/development/data/';
         window._LANGUAGE_ = 'en';
     </script>
     <script>
@@ -24,6 +24,7 @@
     </script>
 
     <!-- UIL_ID = 'google-search-innovation'; -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script type="text/javascript" src="assets/runtime/attract.js"></script> <!-- ### ALEX adding attract loop -->
     <script type="text/javascript" src="assets/runtime/boot.js"></script>
     <script type="text/javascript" src="assets/runtime/dev.js"></script>
@@ -49,7 +50,12 @@
 
         <p class="center" id="progress">0%</p>
     </div>
-    <div class="attractloop" style="display: none; background-color: pink; width:100%; height:100%" />
+    <div class="attractLoopScr">
+        <div class="animationCont">
+            <img id='portal' src="./assets/images/attractLoop/portal.png" />
+        </div>
+    </div>
+
 </body>
 
 </html>
