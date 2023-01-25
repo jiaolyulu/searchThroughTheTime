@@ -4,7 +4,9 @@ Class(function MouseMilestones(_milestones) {
     let _mouse = new Vector3();
     let _v3 = new Vector3();
     let _config;
-    let _openMilestones = [];
+    let _currentOpenTooltip;
+    let _autoExpandMode = true;
+    const _autoExpandCenterLine = 0.02;
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -35,14 +37,14 @@ Class(function MouseMilestones(_milestones) {
     function onToolTipOpen(e) {
         console.log(`MOUSE TOOLTIP EVENT RECIEVED:${e.detail?._this.id}`);
         // close any items in the _openMilestones list)
-        _openMilestones.forEach(m => {
+        /* _openMilestones.forEach(m => {
             console.log(`Previously open items:`, m);
             m._this?.AutoClose();
         });
         //clear the array
         _openMilestones = [];
 
-        _openMilestones.push(e.detail);
+        _openMilestones.push(e.detail);*/
     }
 
 
@@ -54,6 +56,42 @@ Class(function MouseMilestones(_milestones) {
             // m.container.position.x = Math.sin(Render.TIME * 0.0003);
             loopMilestone(m);
         });
+
+        if (_autoExpandMode) {
+            openCenterMostToolTip();
+        }
+    }
+
+    function distanceToCenter(myPosition) {
+        return Math.abs(myPosition - _autoExpandCenterLine);
+    }
+
+    function sortByDistance(a, b) {
+        let compare = distanceToCenter(a.screenPosition) - distanceToCenter(b.screenPosition);
+        // console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
+        return compare;
+    }
+
+    function openCenterMostToolTip() {
+        let openMilestones = [];
+        _milestones.forEach(m => {
+            if (m.inView) {
+                if (m.tooltip) { openMilestones.push(m); }
+            }
+        });
+        // sort based on the distance from center
+        openMilestones.sort(sortByDistance);
+        if (openMilestones.length > 0) {
+            if (_currentOpenTooltip?.id !== openMilestones[0].id) {
+                console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
+                if (_currentOpenTooltip?.id ?? false) {
+                    _currentOpenTooltip.AutoClose();
+                    console.log(`Closing ${_currentOpenTooltip.id}`);
+                }
+                _currentOpenTooltip = openMilestones[0];
+                _currentOpenTooltip.AutoExpandAfterDelay(50);
+            }
+        }
     }
 
     //IAN Add an event listener if the tooltip or deepdive is open. If it is open,close everything in the open items list, close clear the list and then add this now open item to the list for next time. The list should never really be more than 2 items.

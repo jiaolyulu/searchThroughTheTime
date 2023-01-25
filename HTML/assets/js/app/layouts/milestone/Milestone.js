@@ -33,10 +33,12 @@ Class(function Milestone(_data) {
     let _projection = { x: 0, y: 0 };
 
     let _shouldBeVisible = false;
+    let _screenPosition = 0;
     let _tooltipAutoOpened = false;
     let _autoExpandOnScroll = true; // if true, the tooltip will automatically open if it is between the right and left threshold listed below.
-    let _rightAutoOpenThreshold = 0.0025; // 0 is the far right side
-    let _leftAutoOpenThreshold = 0.05; // higher value is further left
+    //let _rightAutoOpenThreshold = 0.015; // 0 is the far right side
+    //let _leftAutoOpenThreshold = 0.025; // higher value is further left
+
     // events
     const toolTipOpenEvent = new CustomEvent('ToolTipOpenEvent', { detail: { _this } });
     // timer
@@ -58,7 +60,6 @@ Class(function Milestone(_data) {
         }
 
         _dot = _this.initClass(MilestoneDot, {
-            // color: _color.normal
             color: _color.normal === '#FFD023' ? _color.dark : _color.normal
         });
 
@@ -76,7 +77,6 @@ Class(function Milestone(_data) {
 
         if (_data.tooltip && _data.tooltip.content) {
             _plus = _this.initClass(MilestonePlus, {
-                // color: _color.normal
                 color: _color.dark
             });
 
@@ -366,31 +366,10 @@ Class(function Milestone(_data) {
         const wireProgress = global.wire.progress;
 
         let onScreen = wireProgress >= progress;
-        let screenPosition = wireProgress - progress;
-        if (_autoExpandOnScroll) {
-            handleAutoExpand(onScreen, screenPosition);
-        }
+        _screenPosition = wireProgress - progress;
         return onScreen;
     }
 
-    function handleAutoExpand(onScreen, screenPosition) {
-        // console.log(`### IAN milestone screen position for ${_this.id}: ${screenPosition}`);
-        if (onScreen && screenPosition < _leftAutoOpenThreshold && screenPosition > _rightAutoOpenThreshold) {
-            //show
-            if (!_alreadyAutoOpened) {
-                _alreadyAutoOpened = true;
-                console.log(`Should only fire once. ${_this.id}`);
-                startAutoExpandTimer();
-            }
-        } else if (!onScreen) {
-            //hide
-            if (_alreadyAutoOpened) {
-                _alreadyAutoOpened = false;
-                autoCloseToolTip();
-                console.log(`Should be out of bounds`);
-            }
-        }
-    }
 
     function startAutoExpandTimer(duration = _autoExpandTimerDuration) {
         _autoExpandTimerId = setTimeout(
@@ -410,7 +389,6 @@ Class(function Milestone(_data) {
             return;
         }
         // _tooltip.setPlusBorder();
-        //  console.log(`### IAN Opening tooltip ${_this.id}`);
         if (!_this.flag('animateIn')) {
             return;
         }
@@ -719,17 +697,12 @@ Class(function Milestone(_data) {
     }
 
     //*** Public methods
-    //this.StartAutoExpandTimer = StartAutoExpandTimer();
-    // this.AutoCloseToolTip = onAutoCloseToolTip();
-    // this.get('StartAutoExpandTimer', _ => StartAutoExpandTimer());
     this.AutoExpandAfterDelay = function (duration) {
         startAutoExpandTimer(duration);
     };
     this.AutoClose = function() {
         autoCloseToolTip();
     };
-
-
     this.get('dot', _ => _dot);
     this.get('image', _ => _image);
     this.get('title', _ => _title);
@@ -783,6 +756,7 @@ Class(function Milestone(_data) {
 
     this.get('progress', _ => _this.state.get('progress'));
     this.set('progress', v => _this.state.set('progress', v));
+    this.get('screenPosition', _ => _screenPosition);
     this.get('color', _ => _color);
     this.get('cta', _ => _cta);
     this.get('custom', _ => _isCustom);
