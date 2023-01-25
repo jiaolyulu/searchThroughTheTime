@@ -109,6 +109,6 @@ function startExitAnimationHelper() {
 /**
  * TODO:
  * 1. Prevent scrolling while in attract loop from affecting timeline
- * 2. Check on mouse clicks not being recorded anymore
- * 3. Why is the right arrow from the timeline visible in the attract view?
+ * 2. Create an animation to fade the attract loop screen overlay when exiting to and from the timeline
+ * 3. Why is the right circle arrow from the timeline visible in the attract view?
  */
