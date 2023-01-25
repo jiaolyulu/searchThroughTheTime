@@ -26,9 +26,8 @@ Class(function MilestoneTooltip({
         init();
         initHtml();
         initStyles();
-        console.log(`### CHECKING INIT _scrollOnly${_scrollOnly}`);
         if (_scrollOnly) {
-            console.log(`### IAN Tooltip set to scroll Only.`);
+            console.log(`### DEEPLOCAL--> Tooltip set to scroll Only.`);
         } else if (MilestoneTooltip.TOUCH) {
             enableTouch();
         } else {
