@@ -59,20 +59,16 @@ Class(function TimeDesktopCSS($obj) {
 .track{
   width: inherit;
 }
-
-
           .track-container {
-            width:2000px; !important
-    //transform: translate3d(0px, 0px, 0px); !important
            // ${barHeight}
           //  ${barBottom}
-            left: 0px;
+            left: 50x;
 
           }
          
 
           .time-container {
-            transform: translateY(98px);
+           // transform: translate3d(90px, -77px, 0px);//translateY(98px);
             rotate:90deg;
             width: 0px; //IAN was 100%
             height: 100%;           

@@ -32,7 +32,6 @@ Class(function DetailStore() {
                 },
                 setMilestone(state, value) {
                     state.set('milestone', value);
-                    console.log('### milestone content');
                 },
                 setHeightContent(state, value) {
                     state.set('heightContent', value);

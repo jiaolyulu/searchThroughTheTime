@@ -1,11 +1,12 @@
 Class(function MouseMilestones(_milestones) {
     Inherit(this, Component);
     const _this = this;
-
     let _mouse = new Vector3();
     let _v3 = new Vector3();
     let _config;
-
+    let _currentOpenTooltip;
+    let _autoExpandMode = true;
+    const _autoExpandCenterLine = 0.02;
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -26,17 +27,58 @@ Class(function MouseMilestones(_milestones) {
         _config.addNumber('maxDistance', 2, 0.1);
         _config.addNumber('force', 1, 0.1);
         _config.addNumber('rotation', 1, 0.1);
+        window.addEventListener("ToolTipOpenEvent", e => { onToolTipOpen(e); });
     }
+
+    function onToolTipOpen(e) {
+        console.log(`MOUSE TOOLTIP EVENT RECIEVED:${e.detail?._this.id}`);
+    }
+
 
     function loop() {
         _mouse.copy(ScreenProjection.unproject(Mouse, 7));
 
         _milestones.forEach(m => {
-            //console.log(`### IAN loop ${m.id}`);
-            // m.container.position.x = Math.sin(Render.TIME * 0.0003);
             loopMilestone(m);
         });
+
+        if (_autoExpandMode) {
+            openCenterMostToolTip();
+        }
     }
+
+    function distanceToCenter(myPosition) {
+        return Math.abs(myPosition - _autoExpandCenterLine);
+    }
+
+    function sortByDistance(a, b) {
+        let compare = distanceToCenter(a.screenPosition) - distanceToCenter(b.screenPosition);
+        // console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
+        return compare;
+    }
+
+    function openCenterMostToolTip() {
+        let openMilestones = [];
+        _milestones.forEach(m => {
+            if (m.inView) {
+                if (m.tooltip) { openMilestones.push(m); }
+            }
+        });
+        // sort based on the distance from center
+        openMilestones.sort(sortByDistance);
+        if (openMilestones.length > 0) {
+            if (_currentOpenTooltip?.id !== openMilestones[0].id) {
+                console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
+                if (_currentOpenTooltip?.id ?? false) {
+                    _currentOpenTooltip.AutoClose();
+                    console.log(`Closing ${_currentOpenTooltip.id}`);
+                }
+                _currentOpenTooltip = openMilestones[0];
+                _currentOpenTooltip.AutoExpandAfterDelay(50);
+            }
+        }
+    }
+
 
     function loopMilestone(m) {
         if (!m.drawing) return;
@@ -45,19 +87,6 @@ Class(function MouseMilestones(_milestones) {
         if (m.cta) {
             return;
         }
-
-        // IF IT'S MADE IT HERE, MILESTONE M IS ONSCREEN AND DRAWING.
-        // console.log(`### IAN m details ${m.id}`);
-        // IF should be visible, we know it should be showing and ois ok to attempt to open.
-
-        if (m.shouldBeVisible() === true) {
-            //  m.onToolTipTrig();
-            //  m.tooltip.show();
-            //  console.log(`###!!! IAN attempting to open ${m.id}`);
-        }
-
-        //m.onTooltipClick();
-        //end ian
 
         const diff = _v3.copy(m.layoutPosition).sub(_mouse);
         const distance = diff.length();

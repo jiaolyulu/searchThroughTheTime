@@ -48,7 +48,8 @@
 Class(function Scroll(_object, _params) {
     Inherit(this, Component);
     const _this = this;
-
+const _isKioskMode=true;
+const _kioskScrollSpeed=.025;
     const PROHIBITED_ELEMENTS = ['prevent_interactionScroll'];
 
     // TODO: css transform not scrollLeft/Top
@@ -268,7 +269,7 @@ Class(function Scroll(_object, _params) {
             //__window.bind('DOMMouseScroll', () => {console.log('dommouse')});
             //__window.bind('mousewheel', () => {console.log('mousewheel')});
 
-            // TODO: hydraObject's .bind fucks with ie events and loses all data
+            // TODO: hydraObject's .bind #$#$ with ie events and loses all data
 
             let edgeWithPointerEvent = Device.system.browser === 'ie' && Device.system.browserVersion >= 17;
 
@@ -348,7 +349,13 @@ Class(function Scroll(_object, _params) {
 
         _axes.forEach(axis => {
             let delta = 'delta' + axis.toUpperCase();
-
+            if (_isKioskMode) {
+                _scrollTarget[axis] += e[delta] * _kioskScrollSpeed;
+                _scrollInertia[axis] = e[delta] * _kioskScrollSpeed;
+                _this.isInertia = true;
+                newDelta = _scrollInertia[axis];
+                return;
+            }
             if (Device.system.os == 'mac') {
                 if (Device.system.browser == 'firefox') {
 
@@ -365,6 +372,7 @@ Class(function Scroll(_object, _params) {
                     _scrollTarget[axis] += e[delta];
                     return;
                 }
+                
 
                 if (Device.system.browser.includes(['chrome', 'safari'])) {
 
@@ -409,6 +417,7 @@ Class(function Scroll(_object, _params) {
                     return;
                 }
             }
+          
 
             _scrollTarget[axis] += e[delta];
             newDelta = _scrollInertia[axis];
