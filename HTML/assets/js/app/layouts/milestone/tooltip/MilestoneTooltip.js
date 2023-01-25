@@ -26,9 +26,8 @@ Class(function MilestoneTooltip({
         init();
         initHtml();
         initStyles();
-        console.log(`### CHECKING INIT _scrollOnly${_scrollOnly}`);
         if (_scrollOnly) {
-            console.log(`### IAN Tooltip set to scroll Only.`);
+            console.log(`### DEEPLOCAL--> Tooltip set to scroll Only.`);
         } else if (MilestoneTooltip.TOUCH) {
             enableTouch();
         } else {
@@ -399,8 +398,6 @@ Class(function MilestoneTooltip({
         }
 
         if (MilestoneTooltip.TOUCH) {
-            console.log(`###IAN SHOW MOBILE`);
-
             return this.showMobile();
         }
 
@@ -433,7 +430,6 @@ Class(function MilestoneTooltip({
         }
 
         $layer.clearTween();
-        console.log(`###IAN layer width ${$box.div.clientWidth} and height ${$box.div.clientHeight}`);
 
         $layer.tween({
             width: $box.div.clientWidth,

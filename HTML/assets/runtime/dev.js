@@ -1,15 +1,13 @@
 (function() {
     try {
-        console.log("###hello world");
         eval('let obj = {}; if (obj.x?.y) {}');
         if (window.location.hash.toLowerCase().indexOf('_es5') > -1) return loadES5();
         loadES6();
-    } catch(e) {
+    } catch (e) {
         loadES5();
     }
 
     function loadES6() {
-        console.log("### Loading es6");
         RUNTIME_CSS.forEach(createLink);
         if (location.search.includes('bundle') || location.hash.includes('bundle') || navigator.userAgent.toLowerCase().includes('aura') || location.host.includes('atdev.online')) {
             window._BUNDLE_ = true;
@@ -22,7 +20,7 @@
     function loadES5() {
         window._ES5_ = true;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://' + window.location.hostname + '/runtime/?' + window.location.href + '', true);
+        xhr.open('GET', `http://${window.location.hostname}/runtime/?${window.location.href}`, true);
         xhr.send();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
@@ -40,7 +38,7 @@
                     }
                 }, 100);
             }
-        }
+        };
     }
 
     function createLink(href) {
