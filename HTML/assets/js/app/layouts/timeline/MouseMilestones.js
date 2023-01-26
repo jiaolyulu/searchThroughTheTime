@@ -7,6 +7,7 @@ Class(function MouseMilestones(_milestones) {
     let _currentOpenTooltip;
     let _autoExpandMode = true;
     const _autoExpandCenterLine = 0.02;
+    const _autoExpandPauseDuration = 1500;
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -16,6 +17,9 @@ Class(function MouseMilestones(_milestones) {
         initConfig();
 
         _this.startRender(loop, RenderManager.AFTER_LOOPS);
+        if (_autoExpandMode) {
+            setInterval(openCenterMostMilestone, _autoExpandPauseDuration);
+        }
     })();
 
     function initConfig() {
@@ -42,9 +46,9 @@ Class(function MouseMilestones(_milestones) {
             loopMilestone(m);
         });
 
-        if (_autoExpandMode) {
-            openCenterMostToolTip();
-        }
+        //  if (_autoExpandMode) {
+        //      openCenterMostToolTip();
+        //  }
     }
 
     function distanceToCenter(myPosition) {
@@ -53,15 +57,17 @@ Class(function MouseMilestones(_milestones) {
 
     function sortByDistance(a, b) {
         let compare = distanceToCenter(a.screenPosition) - distanceToCenter(b.screenPosition);
-        // console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
+        console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
         return compare;
     }
 
-    function openCenterMostToolTip() {
+    function openCenterMostMilestone() {
         let openMilestones = [];
         _milestones.forEach(m => {
             if (m.inView) {
-                if (m.tooltip) { openMilestones.push(m); }
+                //if (m.tooltip) { openMilestones.push(m); }
+                openMilestones.push(m);
+                console.log(`Adding milestone ${m.id}`);
             }
         });
         // sort based on the distance from center
@@ -69,10 +75,18 @@ Class(function MouseMilestones(_milestones) {
         if (openMilestones.length > 0) {
             if (_currentOpenTooltip?.id !== openMilestones[0].id) {
                 console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
-                if (_currentOpenTooltip?.id ?? false) {
+                // close all milestones, even those off screen in case of super fast scrolling.
+                _milestones.forEach(m => {
+                    m.AutoClose();
+                });
+
+
+                /*  if (_currentOpenTooltip?.id ?? false) {
                     _currentOpenTooltip.AutoClose();
-                    console.log(`Closing ${_currentOpenTooltip.id}`);
-                }
+
+    ------------------------------> //IAN NEED TO CLOSE ALL BUT THE ACTIVE TOOL TIP IN CASE OF SPEED SCROLLING
+                    console.log(`Closing ${_currentOpenTooltip.id}`);*/
+                // }
                 _currentOpenTooltip = openMilestones[0];
                 _currentOpenTooltip.AutoExpandAfterDelay(50);
             }

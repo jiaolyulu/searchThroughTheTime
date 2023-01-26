@@ -38,6 +38,17 @@ body, html, #Stage {
     visibility: collapse;
 }
 
+.DetailView{ /*The Deepdive content background */
+background: rgba(255, 255, 255, 0.83);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+	margin-left: 50%;
+	width: 800px !important; 
+}
+
 .ios, .ios body, .ios #Stage {
 	overflow: visible;
 }
