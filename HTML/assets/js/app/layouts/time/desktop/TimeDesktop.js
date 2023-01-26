@@ -72,7 +72,7 @@ Class(function TimeDesktop() {
 ####                                                                                                    ##
 ##########################################################################################################
 */
-
+    let $instructions;
     const _kioskMode = true;
     //const _verticalScrollBarHeight = 2000; Set by TrackSize Width
     const _verticalScrollLeftOffset = 70;
@@ -201,6 +201,10 @@ Class(function TimeDesktop() {
         $trackContainer = $timeContainer.create('track-container');
         $trackWrapper = $trackContainer.create('track-wrapper');
         $track = $trackWrapper.create('track');
+
+        $instructions = $this.create('instructions');
+        $instructions.innerHTML = 'hello';
+        //$timeContainer.append('<div>scroll me</div>');
 
         // $rightDot = $trackWrapper.create('time-container-dot');
         // $rightDot.css({ 'right': '27px' });

@@ -385,6 +385,11 @@ Class(function Milestone(_data) {
     }
 
     async function autoOpenToolTip() {
+        if (_cta) {
+            console.log(`OPENING CTA: ${_this.id}}`);
+            ctaExpand();
+            return;
+        }
         if (!_tooltip ?? false) {
             return;
         }
@@ -672,6 +677,22 @@ Class(function Milestone(_data) {
     }
 
     function onCTAClick(e) {
+        ctaExpand();
+        /*if (Global.PLAYGROUND === 'MainView') return;
+        if (!_this.flag('animateIn')) return;
+        MainStore.commit('setSelectedMileStone', _this.id);
+        ViewController.instance()
+            .navigate(`/detail/${_this.id}`);
+
+        if (typeof (Analytics) !== 'undefined') {
+            Analytics.captureEvent('ExploreStory', {
+                event_category: 'cta',
+                event_label: _this.id
+            });
+        }*/
+    }
+
+    function ctaExpand() {
         if (Global.PLAYGROUND === 'MainView') return;
         if (!_this.flag('animateIn')) return;
         MainStore.commit('setSelectedMileStone', _this.id);
@@ -685,7 +706,6 @@ Class(function Milestone(_data) {
             });
         }
     }
-
     function getBoxImage() {
         if (_image && _boxImageDirty) {
             _boxImage.makeEmpty();
@@ -703,6 +723,7 @@ Class(function Milestone(_data) {
     this.AutoClose = function() {
         autoCloseToolTip();
     };
+
     this.get('dot', _ => _dot);
     this.get('image', _ => _image);
     this.get('title', _ => _title);
