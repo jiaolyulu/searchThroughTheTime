@@ -1,4 +1,6 @@
-body, html, #Stage {
+body,
+html,
+#Stage {
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -12,30 +14,36 @@ body, html, #Stage {
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
 
 
-#Stage{
+#Stage {
 	background-color: rgb(255, 115, 0);
 }
-.YearScroller { /* year bar on top of screen*/
+
+.YearScroller {
+	/* year bar on top of screen*/
 	margin-left: 1000px;
 	margin-top: 600px;
 }
 
-.DOM3D { /*elements and content*/
+.DOM3D {
+	/*elements and content*/
 	margin-left: 1000px;
 	margin-top: 600px;
 }
 
-.Container canvas{ /*line drawing */
+.Container canvas {
+	/*line drawing */
 	margin-left: 1000px;
 	margin-top: 600px;
 }
 
-.ScrollMore{ /* scroll more icon on right side. disapears after first scroll*/
-	right:100px;
+.ScrollMore {
+	/* scroll more icon on right side. disapears after first scroll*/
+	right: 100px;
 }
 
-.expand-container { /*icon on scrollbar to expand scroll bar to dot review*/
-    visibility: collapse;
+.expand-container {
+	/*icon on scrollbar to expand scroll bar to dot review*/
+	visibility: collapse;
 }
 
 .DetailView{ /*The Deepdive content background */
@@ -49,10 +57,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 	width: 800px !important; 
 }
 
-.ios, .ios body, .ios #Stage {
+.ios,
+.ios body,
+.ios #Stage {
 	overflow: visible;
 }
-.ios, .mob {
+
+.ios,
+.mob {
 	position: relative;
 	height: 100vh;
 }
@@ -65,28 +77,30 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow: hidden;
 }
 
-#Stage, #Stage * {
+#Stage,
+#Stage * {
 	position: absolute;
 	user-select: none;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-o-user-select: none;
 	-ms-user-select: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	-webkit-text-size-adjust: none;
 }
 
 #Stage * {
-	 pointer-events: none;
+	pointer-events: none;
 }
 
 #Stage .hit,
 #Stage canvas,
 #Stage a {
-	pointer-events: all!important;
+	pointer-events: all !important;
 }
 
-#Stage * input,  #Stage * textarea {
+#Stage * input,
+#Stage * textarea {
 	-moz-user-select: auto;
 	-webkit-user-select: auto;
 	-o-user-select: auto;
@@ -94,7 +108,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 	-webkit-tap-highlight-color: auto;
 }
 
-#Stage br, #Stage span {
+#Stage br,
+#Stage span {
 	position: relative;
 }
 
@@ -233,5 +248,25 @@ body {
 }
 
 .SplitText * {
-	position: relative!important;
+	position: relative !important;
 }
+
+/* ### Alex Attract Loop */
+.attractLoopScr {
+	background-color: pink;
+	width: 100%;
+	height: 100%;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.animationCont {
+	/* background-color: gray; */
+}
+
+#animationText {
+	color: purple
+}
+
+#portal {}
