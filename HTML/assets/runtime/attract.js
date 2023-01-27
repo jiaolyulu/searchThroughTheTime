@@ -9,7 +9,7 @@
 
 /**Variables */
 
-const activityTimer = 6; // seconds to test for inactivity
+const activityTimer = 9; // seconds to test for inactivity
 // state management
 let userHasScrolled = false;
 let userHasClicked = false;
@@ -131,6 +131,6 @@ function startExitAnimationHelper() {
 /**
  * TODO:
  * 1. Prevent scrolling while in attract loop from affecting timeline
- * 2. Create an animation to fade the attract loop screen overlay when exiting to and from the timeline
- * 3. Why is the right circle arrow from the timeline visible in the attract view?
+ * 2. Why is the right circle arrow from the timeline visible in the attract view?
+ * 3. Sometimes mouse clicks dont register...
  */
