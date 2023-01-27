@@ -46,8 +46,6 @@ Class(function Milestone(_data) {
     let _autoExpandTimerId = 0;
     let _autoExpandTimerDuration = 1500;
 
-
-
     //*** Constructor
     (function () {
         _container = new Group();
