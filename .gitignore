@@ -9,16 +9,16 @@ Build
 Electron/node_modules
 Android/app/src/main/assets/assets
 Node/node_modules
-HTML/assets/runtime/es5
-HTML/assets/runtime/boot.js
-HTML/assets/shaders/compiled.vs
+#HTML/assets/runtime/es5
+#HTML/assets/runtime/boot.js
+#HTML/assets/shaders/compiled.vs
 Platform/runtime.js
 Platform/HTML/worlds
 node_modules
 Server/.firebase
 AE/static
 Server/firebase-debug.log
-HTML/assets/uploads
-HTML/assets/data/cms-snapshot-en-dev.json
-HTML/assets/data/i18n
+#HTML/assets/uploads
+#HTML/assets/data/cms-snapshot-en-dev.json
+#HTML/assets/data/i18n
 #note we may have to remove the above HTML/assets/uploads and HTML/assets/data/i18n before going live!

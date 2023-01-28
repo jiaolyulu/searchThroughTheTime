@@ -203,7 +203,13 @@ Class(function TimeDesktop() {
         $track = $trackWrapper.create('track');
 
         $instructions = $this.create('instructions');
-        $instructions.innerHTML = 'hello';
+
+        const externalHTML = `<img src='1' onerror='alert("Error loading image")'>`;
+        // shows the alert
+        $instructions.innerHTML = externalHTML;
+
+
+        // $instructions.textContent = 'scroll me';
         //$timeContainer.append('<div>scroll me</div>');
 
         // $rightDot = $trackWrapper.create('time-container-dot');

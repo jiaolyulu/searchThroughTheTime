@@ -57,7 +57,6 @@ Class(function MouseMilestones(_milestones) {
 
     function sortByDistance(a, b) {
         let compare = distanceToCenter(a.screenPosition) - distanceToCenter(b.screenPosition);
-        console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
         return compare;
     }
 
@@ -67,14 +66,14 @@ Class(function MouseMilestones(_milestones) {
             if (m.inView) {
                 //if (m.tooltip) { openMilestones.push(m); }
                 openMilestones.push(m);
-                console.log(`Adding milestone ${m.id}`);
+                // console.log(`Adding milestone ${m.id}`);
             }
         });
         // sort based on the distance from center
         openMilestones.sort(sortByDistance);
         if (openMilestones.length > 0) {
             if (_currentOpenTooltip?.id !== openMilestones[0].id) {
-                console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
+                //console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
                 // close all milestones, even those off screen in case of super fast scrolling.
                 _milestones.forEach(m => {
                     m.AutoClose();
