@@ -10,10 +10,12 @@
 /**Variables */
 
 const activityTimer = 9; // seconds to test for inactivity
+
 // state management
 let userHasScrolled = false;
 let userHasClicked = false;
 let attractLoopVisible = false;
+let ignoreUserInput = false; // flag to ignore user input during into/exit attract loop animations
 // gsap animation
 let portalTween;
 // events
@@ -26,24 +28,27 @@ console.log('ATTRACT: attract.js loaded...');
 window.onwheel = function (e) {
     console.log('ATTRACT: USER SCROLLED');
     userHasScrolled = true;
-    if (attractLoopVisible) {
+    if (attractLoopVisible && !ignoreUserInput) {
+        ignoreUserInput = true;
         startExitAnimation();
     }
 };
 window.onclick = function (e) {
     console.log('ATTRACT: USER CLICKED');
     userHasClicked = true;
-    if (attractLoopVisible) {
+    if (attractLoopVisible && !ignoreUserInput) {
+        ignoreUserInput = true;
         startExitAnimation();
     }
 };
+// DEV (to remove): listen for custom event we fire when view change happens in either direction to make sure it fires
 window.addEventListener('ATTRACT_ENABLED', (e) => console.log(`ATTRACT: CUSTOM EVENT FIRED!!!!! Value: ${e.detail} varialble: ${attractLoopVisible}`));
 
 
 /**State Machine & Interval Logic */
 
-// function to be called on the interval
-const timeOutLogic = () => {
+// function to be called by setInterval (this runs during timeline view and tests to engage attract loop)
+const checkForInactivity = () => {
     console.log(`TIMEOUT: ATTRACT: userhasclicked:${userHasClicked}, userhasscrolled:${userHasScrolled}, attractloopvisible:${attractLoopVisible} `);
     if (!attractLoopVisible && (!userHasClicked && !userHasScrolled)) {
         // if user hasn't engaged the main timeline screen for {activityTimer} time, turn on the attract loop
@@ -51,19 +56,21 @@ const timeOutLogic = () => {
         // toggle the attract loop div
         toggleAttractLoop();
         // start attract loop animation
-        initAnimation();
-        // clear interval
-        clearInterval(userTimeout);
+        startIntroAnimation();
         // fire event for attract loop toggled
         fireAttractLoopMsg();
+        // clear interval
+        clearInterval(userTimeout);
+        // update state to allow user clicks to be recorded again (turned off during attract loop exit animation execution)
+        ignoreUserInput = false;
     } else {
         console.log('ATTRACT: no state change required');
-        cleanUpUserState();
+        resetUserInteractedStates();
     }
 };
 
-// set interval to check state
-let userTimeout = setInterval(timeOutLogic, activityTimer * 1000);
+// set interval to check state and start attract loop
+let userTimeout = setInterval(checkForInactivity, activityTimer * 1000);
 
 
 // function to toggle the attract loop and clean up the state machine
@@ -72,13 +79,13 @@ function toggleAttractLoop() {
     // toggle the attract loop div
     const el = document.getElementsByClassName('attractLoopScr');
     !attractLoopVisible ? el[0].style.display = 'flex' : el[0].style.display = 'none';
-    cleanUpUserState();
+    resetUserInteractedStates();
     attractLoopVisible = !attractLoopVisible;
-    console.log(`TOGGLE: ATTRACT: userhasclicked:${userHasClicked}, userhasscrolled:${userHasScrolled}, attractloopvisible:${attractLoopVisible} `);
+    // console.log(`TOGGLE: ATTRACT: userhasclicked:${userHasClicked}, userhasscrolled:${userHasScrolled}, attractloopvisible:${attractLoopVisible} `);
 }
 
 // helper function to clean up user state excluding the attractLoopVisible flag
-function cleanUpUserState() {
+function resetUserInteractedStates() {
     console.log('ATTRACT: cleanup user state');
     // user interaction state management
     if (userHasClicked) userHasClicked = !userHasClicked;
@@ -93,7 +100,7 @@ function fireAttractLoopMsg() {
 /** ANIMATIONS */
 
 // function to start the attract animation
-function initAnimation() {
+function startIntroAnimation() {
     portalTween = gsap.timeline()
         .fromTo('#portal', { scale: 0, rotation: 0 }, { scale: 1, rotation: 360, ease: 'none', duration: 5, paused: false })
         .from('#portal', { rotation: -360, duration: 10, ease: 'none', repeat: -1 });
@@ -112,20 +119,14 @@ function startExitAnimation() {
             onComplete: startExitAnimationHelper
 
         });
-    // .to('.attractLoopScr', {
-    //     opacity: 0,
-    //     duration: 3,
-    //     // display: 'none',
-    //     onComplete: startExitAnimationHelper
-    // });
 }
 // helper function for exit animation's onComplete callback
 function startExitAnimationHelper() {
     // portalTween = gsap.fromTo('.attractLoopScr', {opacity:1 }, {opacity: 0, duration: 3, })
     toggleAttractLoop(); // hide attract loop
-    userTimeout = setInterval(timeOutLogic, activityTimer * 1000); // set a new timer for the timeline view
     // fire attract loop message for other components
     fireAttractLoopMsg();
+    userTimeout = setInterval(checkForInactivity, activityTimer * 1000); // set a new timer for the timeline view
 }
 
 /**
