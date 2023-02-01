@@ -694,8 +694,7 @@ Class(function Milestone(_data) {
         if (Global.PLAYGROUND === 'MainView') return;
         if (!_this.flag('animateIn')) return;
         MainStore.commit('setSelectedMileStone', _this.id);
-        ViewController.instance()
-            .navigate(`/detail/${_this.id}`);
+        ViewController.instance().navigate(`/detail/${_this.id}`);
 
         if (typeof (Analytics) !== 'undefined') {
             Analytics.captureEvent('ExploreStory', {

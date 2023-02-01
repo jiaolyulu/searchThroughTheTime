@@ -18,7 +18,6 @@ Class(function MainUIView() {
 
     async function initYear() {
         await DataModel.ready();
-        console.log('### IAN initYear mainUIview');
 
         if (Utils.query('oldYearTicker')) {
             _year = _this.initClass(Year);

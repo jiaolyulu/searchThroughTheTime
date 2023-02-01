@@ -10,19 +10,23 @@ Class(function MouseMilestones(_milestones) {
     const _autoExpandPauseDuration = 500;
     //*** Constructor
     (function () {
+        console.log("In mouse milestones")
         if (!Tests.mouseMilestones()) {
             return;
         }
 
-        initConfig();
+        console.log("after return")
 
+        initConfig();
         _this.startRender(loop, RenderManager.AFTER_LOOPS);
+        console.log(`##Auto expand mode is ${_autoExpandMode}`)
         if (_autoExpandMode) {
             setInterval(openCenterMostMilestone, _autoExpandPauseDuration);
         }
     })();
 
     function initConfig() {
+        console.log("in init confi")
         _config = InputUIL.create('mousemilestones');
         _config.setLabel('Mouse Milestones');
 
@@ -57,7 +61,6 @@ Class(function MouseMilestones(_milestones) {
 
     function sortByDistance(a, b) {
         let compare = distanceToCenter(a.screenPosition) - distanceToCenter(b.screenPosition);
-        console.log(`comparing ${a.id} to ${b.id}. Compare= ${compare}`);
         return compare;
     }
 
@@ -67,7 +70,7 @@ Class(function MouseMilestones(_milestones) {
             if (m.inView) {
                 //if (m.tooltip) { openMilestones.push(m); }
                 openMilestones.push(m);
-                console.log(`Adding milestone ${m.id}`);
+                 console.log(`## Adding milestone ${m.id}`);
             }
         });
         // sort based on the distance from center

@@ -21,7 +21,6 @@ Class(function Timeline() {
         }
 
         _batching = _this.initClass(TimelineBatching, _this, _milestones);
-
         const _mouseMilestones = _this.initClass(MouseMilestones, _milestones);
 
         _this.bind(GlobalStore, 'vertical', updatePosition);

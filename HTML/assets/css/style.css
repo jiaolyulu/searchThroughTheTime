@@ -20,20 +20,22 @@ html,
 
 .YearScroller {
 	/* year bar on top of screen*/
-	margin-left: 1000px;
-	margin-top: 600px;
+	margin-left: 1100px;
+	margin-top: 100px;
 }
 
 .DOM3D {
 	/*elements and content*/
-	margin-left: 1000px;
-	margin-top: 600px;
+	margin-left: 1100px;
+	margin-top: 100px;
 }
 
 .Container canvas {
+	width:4000px !important;
+	height:2000px !important;
 	/*line drawing */
-	margin-left: 1000px;
-	margin-top: 600px;
+	margin-left:1100px;
+	margin-top: 100px;
 }
 
 .ScrollMore {

@@ -101,7 +101,7 @@ Class(function Tests() {
     // Wiggle and move miletones items with cursor
     this.mouseMilestones = function() {
         if (Device.mobile) return false;
-        if (GPU.lt(1)) return false;
+        //if (GPU.lt(1)) return false;
 
         return true;
     };

@@ -9,6 +9,7 @@
 
 /**Variables */
 
+
 const activityTimer = 9; // seconds to test for inactivity
 // state management
 let userHasScrolled = false;

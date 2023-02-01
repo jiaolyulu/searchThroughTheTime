@@ -203,7 +203,13 @@ Class(function TimeDesktop() {
         $track = $trackWrapper.create('track');
 
         $instructions = $this.create('instructions');
-        $instructions.innerHTML = 'hello';
+
+        const externalHTML = `<img src='1' onerror='alert("Error loading image")'>`;
+        // shows the alert
+        $instructions.innerHTML = externalHTML;
+
+
+        // $instructions.textContent = 'scroll me';
         //$timeContainer.append('<div>scroll me</div>');
 
         // $rightDot = $trackWrapper.create('time-container-dot');
@@ -692,7 +698,7 @@ Class(function TimeDesktop() {
     }
 
     async function updateDotPositionsAndVisibility() {
-        console.log(`##IAN Dots update position`);
+        //console.log(`##IAN Dots update position`);
         await _this.wait(1);
         const containerWidth = $pattern.div.getBoundingClientRect().width;
         const sizeObj = getCurrentSizeObj();

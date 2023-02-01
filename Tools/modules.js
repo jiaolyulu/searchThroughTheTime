@@ -1,4 +1,5 @@
-const _DIR_ = __dirname.split('/Tools')[0];
+const path = require('path');
+const _DIR_ =  path.resolve(__dirname, '..');
 const _HTML_ = `${_DIR_}/HTML/`;
 const _TOOLS_ = `${_DIR_}/Tools/`;
 const _APP_ = require('./utils/find-app')();
