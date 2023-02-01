@@ -12,7 +12,7 @@ html,
 }
 
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
-
+/*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
 
 #Stage {
 	background-color: rgb(255, 115, 0);
@@ -20,21 +20,21 @@ html,
 
 .YearScroller {
 	/* year bar on top of screen*/
-	margin-left: 1100px;
+	margin-left: 768px;
 	margin-top: 100px;
 }
 
 .DOM3D {
 	/*elements and content*/
-	margin-left: 1100px;
+	margin-left: 768px;
 	margin-top: 100px;
 }
 
 .Container canvas {
-	width:4000px !important;
-	height:2000px !important;
+	/*width:4000px !important;
+	height:2000px !important;*/
 	/*line drawing */
-	margin-left:1100px;
+	margin-left:768px;
 	margin-top: 100px;
 }
 
@@ -57,7 +57,7 @@ html,
 	-webkit-backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	margin-left: 50%;
-	width: 800px !important;
+	width: 1600px !important;
 }
 
 .ios,

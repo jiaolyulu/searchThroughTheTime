@@ -67,7 +67,6 @@ Class(function MainUIView() {
     };
 
     this.animateOut = function () {
-        console.log('### IAN this.animateOut MainUIView.js');
         _year?.hide?.();
         // _timeMobile?.hide();
     };
