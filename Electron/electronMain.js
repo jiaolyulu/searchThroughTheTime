@@ -14,8 +14,8 @@ const _hideFrame = true;
 //private vars
 let _contentPath = _path.join(__dirname, '..')+_contentFolder;
 let _win;
-let _w = 0;//(3840+720);
-let _h = 0; //1920;
+let _w = 720+ 3840; // touch screen + widescreen. If _w or _h is set to 0, the app will dynamically scale to fill all screens.
+let _h = 1920;
 let _x = 0;
 let _y = 0;
 
@@ -27,18 +27,22 @@ const startExpressServer = () => {
     })
 }
 const setScreenDimensions = () => {
-    const allScreens = screen.getAllDisplays();
-    allScreens.forEach(screen => {
-    console.log(`Screen resolution = ${screen.size.width}+${screen.size.height}`);
-        console.log(`Screen.bounds.x= ${screen.bounds.x} y= ${screen.bounds.y}`);
-        _w += screen.size.width;
-        _h = screen.size.height;
-        // setting to left most screen as left anchor.
-        if (_x > screen.bounds.x) {
-            _x = screen.bounds.x;
-        }
-        
-    });
+    if (_w === 0 || _h === 0) {
+        console.log(`Screen dimensions not set. Setting screen size to cover all screens.`)
+        const allScreens = screen.getAllDisplays();
+        allScreens.forEach(screen => {
+        console.log(`Screen resolution = ${screen.size.width}+${screen.size.height}`);
+            console.log(`Screen.bounds.x= ${screen.bounds.x} y= ${screen.bounds.y}`);
+            _w += screen.size.width;
+            _h = screen.size.height;
+            // setting to left most screen as left anchor.
+            if (_x > screen.bounds.x) {
+                _x = screen.bounds.x;
+            }
+            
+        });
+    }
+   
     console.log(`Total resolution = ${_w}+${_h}`);
 }
 

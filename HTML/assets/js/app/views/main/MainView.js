@@ -57,7 +57,7 @@ Class(function MainView() {
         if (milestone) {
             console.log('### IANanimate to milestone deep');
 
-            _camera.scrollToObject(milestone, true);
+           // _camera.scrollToObject(milestone, true);
         }
 
         _camera.gaze.transition(1000, 'easeInOutCubic');

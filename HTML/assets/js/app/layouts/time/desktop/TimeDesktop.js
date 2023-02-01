@@ -147,7 +147,7 @@ Class(function TimeDesktop() {
         },
         {
             minSize: 2000,
-            trackWidth: 2002,
+            trackWidth: 1501, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
             fullCenter: false,
             years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
             disabledDots: [4, 5, 6, 18, 19, 20, 31, 32, 33, 43, 44, 45, 64, 65, 66],
