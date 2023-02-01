@@ -698,7 +698,7 @@ Class(function TimeDesktop() {
     }
 
     async function updateDotPositionsAndVisibility() {
-        console.log(`##IAN Dots update position`);
+        //console.log(`##IAN Dots update position`);
         await _this.wait(1);
         const containerWidth = $pattern.div.getBoundingClientRect().width;
         const sizeObj = getCurrentSizeObj();
