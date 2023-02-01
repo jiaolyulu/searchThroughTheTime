@@ -6,18 +6,19 @@ Class(function TimeDesktopCSS($obj) {
     (function () {
         // Keep barHeight in sync with TimeDesktopExpand
         const barHeight = `
-          height: 44px;
+          height: 140px;
 
           @media (min-height: 770px) {
-            height: 60px;
+            height: 160px;
           }
         `;
 
-        const barBottom = `
-          bottom: 0px; // !!DEEPLOCAL change. was 38px
+        const barBottom      = `
+          left:-90px;
+          bottom: 290px; // !!DEEPLOCAL change. was 38px
 
           @media (max-height: 770px) {
-              bottom: 20px;
+              bottom: 328px;
           }
         `;
 
@@ -34,9 +35,9 @@ Class(function TimeDesktopCSS($obj) {
         // `;
 
         const thumbStyle = `
-          width: 46px;
-          height: 30px;
-          margin-top: -15px;
+          width: 96px;
+          height: 60px;
+          margin-top: -30px;
         `;
 
         GoobCache.apply('TimeDesktop', $obj, /* scss */ `
@@ -52,7 +53,7 @@ Class(function TimeDesktopCSS($obj) {
             z-index: 10;
             ${barHeight}
             ${barBottom}
-            left: 0px; 
+           
             width:2000px;!important
           }
 
@@ -62,7 +63,6 @@ Class(function TimeDesktopCSS($obj) {
           .track-container {
            // ${barHeight}
           //  ${barBottom}
-            left: 50x;
 
           }
          
@@ -87,7 +87,7 @@ Class(function TimeDesktopCSS($obj) {
             width: ${2150}px;
             height: 100%;
             background-color: ${Styles.colors.concrete};
-            border-radius: 50px;
+            border-radius: 90px; //deeplocal change
             padding: 0 30px;
             will-change: transform, width;
             transform-origin: center left;
@@ -261,7 +261,7 @@ Class(function TimeDesktopCSS($obj) {
               display: inline-block;
               /*background-color: ${Styles.colors.concrete};*/
               color: ${Styles.colors.mineShaft};
-              font-size: 15px;
+              font-size: 35px;
               /*top: calc(50% - 3px);*/
               /*transform: translate(-50%, -50%);*/
               transform: translate(-50%, 0%);

@@ -75,8 +75,8 @@ Class(function TimeDesktop() {
     let $instructions;
     const _kioskMode = true;
     //const _verticalScrollBarHeight = 2000; Set by TrackSize Width
-    const _verticalScrollLeftOffset = 70;
-    const _verticalScrollTopOfffset = -70;
+    const _verticalScrollLeftOffset = 100; //<-- LU I think this is the scrollbar left offset.
+    const _verticalScrollTopOfffset = 0;
 
 
 
@@ -147,7 +147,7 @@ Class(function TimeDesktop() {
         },
         {
             minSize: 2000,
-            trackWidth: 1501, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
+            trackWidth: 1900, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
             fullCenter: false,
             years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
             disabledDots: [4, 5, 6, 18, 19, 20, 31, 32, 33, 43, 44, 45, 64, 65, 66],
@@ -302,9 +302,9 @@ Class(function TimeDesktop() {
         _expand = _this.initClass(TimeDesktopExpand, [$expandContainer]);
 
         if (_kioskMode) {
-            $timeContainer.transform({ y: 50 });
+            $timeContainer.transform({ y: 150 });//deeplocal change
         } else {
-            $timeContainer.transform({ y: 98 });
+            $timeContainer.transform({ y: 198 });//deeplocal change
         }
     }
 
@@ -485,7 +485,7 @@ Class(function TimeDesktop() {
         if (!_show) return;
         _show = false;
         $timeContainer.clearTween();
-        $timeContainer.tween({ y: 98 }, 800, 'easeInOutCubic');
+        $timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //deeplocal change
 
         arrows.forEach((arrow, index) => {
             arrow.hide({ delay: index * 100 });

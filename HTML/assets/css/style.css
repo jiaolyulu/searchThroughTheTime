@@ -14,28 +14,28 @@ html,
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
 /*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
 
+
 #Stage {
 	background-color: rgb(255, 115, 0);
 }
 
-.YearScroller {
-	/* year bar on top of screen*/
-	margin-left: 768px;
-	margin-top: 100px;
+/* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
+.YearScroller { 
+	/* year bar on top of screen*/ 
+	margin-left: 740px;
+	margin-top: 500px;
 }
 
 .DOM3D {
 	/*elements and content*/
-	margin-left: 768px;
-	margin-top: 100px;
+	margin-left: 720px; //deeplocal change
+	margin-top: 0px;
 }
 
 .Container canvas {
-	/*width:4000px !important;
-	height:2000px !important;*/
 	/*line drawing */
-	margin-left:768px;
-	margin-top: 100px;
+	margin-left:720px;  // deeplocal change
+	margin-top: 0px;
 }
 
 .ScrollMore {
@@ -49,15 +49,16 @@ html,
 }
 
 .DetailView {
-	/*The Deepdive content background */
+	/*This is the content popup. The Deepdive content background */    
 	background: rgba(255, 255, 255, 0.83);
 	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	margin-left: 50%;
-	width: 1600px !important;
+	margin-left: 1680px;/*<--- position of window on screen */  /*<---deeplocal change */
+	width: 1600px !important;/*<--- width of window*/
+	/*LU content might need to be top justified?*/
 }
 
 .ios,
@@ -182,8 +183,8 @@ body {
 
 #loader .center {
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	 top: 50%; 
+	left: 2520px;/*deeplocal change */
 	transform: translate(-50%, -50%) translateY(-3px);
 }
 
@@ -215,8 +216,8 @@ body {
 	max-width: 720px;
 	margin-top: 100px;
 	top: 50%;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 2520px;/* deeplocal change */
+	transform: translateX(-50%);/* deeplocal change */
 	position: absolute;
 	z-index: 10;
 	text-align: center;

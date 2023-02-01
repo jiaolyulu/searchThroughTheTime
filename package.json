@@ -17,6 +17,7 @@
     "emulate-key-in-browser": "^1.0.0-rc.1",
     "fs-extra": "^9.1.0",
     "gsap": "^3.11.4",
+    "http-server": "^14.1.1",
     "msdf-bmfont-xml": "^2.4.0",
     "node-fetch": "^2.6.0",
     "node-watch": "^0.7.1",
