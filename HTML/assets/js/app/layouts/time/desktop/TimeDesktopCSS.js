@@ -14,8 +14,8 @@ Class(function TimeDesktopCSS($obj) {
         `;
 
         const barBottom      = `
-          left:-90px;
-          bottom: 290px; // !!DEEPLOCAL change. was 38px
+          left:-40px;
+          bottom: 290px; // !!DEEPLOCAL change. was 38px lulus deeplocal change
 
           @media (max-height: 770px) {
               bottom: 328px;
@@ -133,21 +133,24 @@ Class(function TimeDesktopCSS($obj) {
             position: relative !important;
             width: 100%;
             height: 100%;
-            display: flex;
+            display: inline-flex;
+            flex-direction:row;
             align-items: center;
             overflow: hidden;
             padding: 0 14px;
-            gap: 10px;
+            gap: 18px;
             box-sizing: border-box;
           }
 
           .pattern-dot {
             position: relative !important;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
+            /* lulu's deeplocal change*/
             border-radius: 999px;
             background-color: #BDBDBD;
             flex-shrink: 0;
+            
             display: grid;
           }
 
@@ -210,9 +213,10 @@ Class(function TimeDesktopCSS($obj) {
           }
 
           .year-container {
-            top: 0;
+            top: 55px;
             right: 55px;
-            bottom: 0;
+            /* lulu's deeplocal change*/
+            bottom: 55px;
             left: 55px;
           }
           
@@ -266,7 +270,7 @@ Class(function TimeDesktopCSS($obj) {
               /*transform: translate(-50%, -50%);*/
               transform: translate(-50%, 0%);
               line-height: 1;
-              padding: 0 5px;
+              padding: 0 0px;
               will-change: transform;
             }
           }

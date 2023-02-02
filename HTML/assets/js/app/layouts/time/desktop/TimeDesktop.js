@@ -147,10 +147,10 @@ Class(function TimeDesktop() {
         },
         {
             minSize: 2000,
-            trackWidth: 1900, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
-            fullCenter: false,
+            trackWidth: 1800, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
+            fullCenter: false, //lulu's deeplocal change
             years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
-            disabledDots: [4, 5, 6, 18, 19, 20, 31, 32, 33, 43, 44, 45, 64, 65, 66],
+            disabledDots: [4, 5, 6, 7, 18, 19, 20, 32, 33, 34, 35, 45, 46, 47, 48, 63, 64, 65, 66],
             higlightDots: {
                 'default': [0, 1, 2],
                 '2000': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
@@ -262,7 +262,7 @@ Class(function TimeDesktop() {
             $year.classList().add(`year-${currentYear}`);
             const $yearText = $year.create('year-content', 'span').text(currentYear);
 
-            const left = Math.range(i, 0, _availableYears.length - 1, 0, 100, true);
+            const left = Math.range(i, 0, _availableYears.length - 1, 0, 100, true); //lulu's deeplocal change
             $year.css({ left: `${left}%` });
 
             let phase = i / (_availableYears.length - 1);
@@ -302,9 +302,9 @@ Class(function TimeDesktop() {
         _expand = _this.initClass(TimeDesktopExpand, [$expandContainer]);
 
         if (_kioskMode) {
-            $timeContainer.transform({ y: 150 });//deeplocal change
+            $timeContainer.transform({ y: 150 });//lulu's deeplocal change
         } else {
-            $timeContainer.transform({ y: 198 });//deeplocal change
+            $timeContainer.transform({ y: 198 });//lulu's deeplocal change
         }
     }
 
@@ -485,7 +485,7 @@ Class(function TimeDesktop() {
         if (!_show) return;
         _show = false;
         $timeContainer.clearTween();
-        $timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //deeplocal change
+        $timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //lulu's deeplocal change
 
         arrows.forEach((arrow, index) => {
             arrow.hide({ delay: index * 100 });
@@ -573,7 +573,8 @@ Class(function TimeDesktop() {
         if (GlobalStore.get('transitioning')) return;
         if (!_show) return;
         $dots.forEach(($dot, index) => {
-            const dist = Math.abs(thumbPos - $dot.pos.x);
+            // lulu's deeplocal change, still dont know why I need to *0.095 to make the mapping right, cause pos.x is supposed to be the location of the period position
+            const dist = Math.abs(thumbPos - $dot.pos.x * 0.095);
             const distRange = Math.range(dist, 0, 70, 1, 0, true);
             let targetScale = Math.min(_velocity * 6.0, 2.0) * distRange;
             targetScale = Math.min(1 + targetScale, 3);
@@ -632,7 +633,7 @@ Class(function TimeDesktop() {
         // Thumbs range x
         const offset = 30;
         _thumbRange[0] = offset;
-        _thumbRange[1] = trackWidth - (30 + offset);
+        _thumbRange[1] = trackWidth - (30 + offset); //lulu's deeplocal change
 
         // Keep track in the center
         let centerWidth = trackWidth;
@@ -641,7 +642,7 @@ Class(function TimeDesktop() {
             centerWidth += 80;
         }
 
-        console.log(`!!IAN CSS ${$trackContainer}`);
+        //console.log(`!!IAN CSS ${$trackContainer}`);
         if (apply) {
             $trackContainer.transform({ x: left, y: up });
         }
@@ -704,6 +705,8 @@ Class(function TimeDesktop() {
         const sizeObj = getCurrentSizeObj();
         $dots.forEach(($dot, index) => {
             const offsetLeft = $dot.el.div.offsetLeft;
+            //lulu's deeplocal change
+            //console.log("lulu offset left", offsetLeft)
             const phase = offsetLeft / containerWidth;
             $dot.pos.x = Math.floor(Math.map(phase, 0.0, 1.0, _thumbRange[0], _thumbRange[1]));
             $dot.pos.XNorm = phase;
@@ -716,7 +719,7 @@ Class(function TimeDesktop() {
     }
 
     function assignDotYears() {
-        console.log(`##IAN Dots assign years`);
+        //console.log(`##IAN Dots assign years`);
         const sizeObj = getCurrentSizeObj();
 
         let indicies;
@@ -821,7 +824,7 @@ Class(function TimeDesktop() {
             $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });
         }
 
-        console.log(`##IAN lastPattenBounds.x ${lastPatternBounds.x}`);
+        //console.log(`##IAN lastPattenBounds.x ${lastPatternBounds.x}`);
         $patternWrapper.transform({ x: firstPatternBounds.x - lastPatternBounds.x, y: '-50%' });
         years.forEach(($year, index) => {
             $year.transform({ x: firstYearBounds[index].x - lastYearBounds[index].x });
