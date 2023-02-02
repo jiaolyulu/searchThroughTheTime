@@ -191,7 +191,6 @@ Class(function MilestoneTooltip({
 
                 .box {
                     width: 90%;
-                    max-width: 400px; /*lulu's deeplocal change super ugly */
                     margin: 0 auto;
                     margin-top: 140px;
                     z-index: 200;
@@ -199,7 +198,6 @@ Class(function MilestoneTooltip({
 
                 .layer {
                     border-color: transparent;
-                    max-width: 400px; /*lulu's deeplocal change super ugly */
                 }
 
                 .layer.open {
@@ -231,7 +229,6 @@ Class(function MilestoneTooltip({
                 top: 50%;
                 transform: translate(-50%, -50%)!important;
                 width: ${Config.DOM3DPx(35)};
-                max-width: 400px; /*lulu's deeplocal change super ugly */
                 height: ${Config.DOM3DPx(35)};
                 background: transparent;
                 border-radius: ${Config.DOM3DPx(30)};
@@ -241,7 +238,6 @@ Class(function MilestoneTooltip({
 
             .layer.open {
                 border-radius: ${Config.DOM3DPx(20)};
-                max-width: 400px; /*lulu's deeplocal change super ugly */
                 border-color: transparent;
                 /*width: 100%;
                 height: 100%;*/
@@ -278,7 +274,6 @@ Class(function MilestoneTooltip({
             .content {
                 ${Styles.googleSansTextRegular}
                 display: block!important;
-                width: 200px; /*lulu's deeplocal change super ugly */
                 position: static!important;
                 color: ${Styles.colors.emperor};
                 font-size: ${Config.DOM3DPx(16)};
@@ -450,9 +445,8 @@ Class(function MilestoneTooltip({
             });
         }
 
-        $copy.css({ visibility: 'visible', width: "200px" }); /*lulu's deeplocal change super ugly */
-        //lulu's deeplocal change
-        $content.css({ opacity: 0, width: "200px" }); /*lulu's deeplocal change super ugly */
+        $copy.css({ visibility: 'visible'}); 
+        $content.css({ opacity: 0}); 
         // $content.transform({ y: 15 });
         await _this.wait(40);
         //text
