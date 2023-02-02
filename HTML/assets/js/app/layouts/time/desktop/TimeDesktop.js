@@ -150,7 +150,7 @@ Class(function TimeDesktop() {
             trackWidth: 1800, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
             fullCenter: false, //lulu's deeplocal change
             years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
-            disabledDots: [4, 5, 6, 7, 18, 19, 20, 32, 33, 34, 35, 45, 46, 47, 48, 63, 64, 65, 66],
+            disabledDots: [4, 5, 6, 7, 18, 19, 20, 21, 32, 33, 34, 35, 45, 46, 47, 48, 63, 64, 65, 66],
             higlightDots: {
                 'default': [0, 1, 2],
                 '2000': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],

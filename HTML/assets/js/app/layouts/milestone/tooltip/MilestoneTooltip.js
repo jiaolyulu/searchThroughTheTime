@@ -374,8 +374,8 @@ Class(function MilestoneTooltip({
     _this.get('drawing', _ => isDrawing());
 
 
-    this.show = async function() {
-        console.log('### IAN show milestoneToolTip');
+    this.show = async function () {
+        //console.log('### IAN show milestoneToolTip');
         if (_open) return;
 
         if (GlobalStore.get('transitioning')) {
@@ -446,8 +446,8 @@ Class(function MilestoneTooltip({
         }
 
         $copy.css({ visibility: 'visible' });
-
-        $content.css({ opacity: 0 });
+        //lulu's deeplocal change
+        $content.css({ opacity: 0, width: "800px" });
         // $content.transform({ y: 15 });
         await _this.wait(40);
         //text
@@ -459,7 +459,7 @@ Class(function MilestoneTooltip({
         _checkMouseOut = true;
     };
 
-    this.hide = async function(e) {
+    this.hide = async function (e) {
         console.log('### IAN hide milestoneToolTip');
         if (e && e.seo) {
             const focus = document.querySelector(':focus');
@@ -534,7 +534,7 @@ Class(function MilestoneTooltip({
         }
     };
 
-    this.showMobile = async function() {
+    this.showMobile = async function () {
         Stage.add($container);
         $container.css({ display: 'block', opacity: 0 });
         await _this.wait(50);
@@ -607,7 +607,7 @@ Class(function MilestoneTooltip({
     };
 
 
-    this.hideMobile = async function() {
+    this.hideMobile = async function () {
         console.log('### IAN hide mobile MilestoneToolTip');
         if ($close) {
             $close.tween({ opacity: 0 }, 200, 'easeOutCubic', 0);
@@ -648,7 +648,7 @@ Class(function MilestoneTooltip({
     //     normalizeCopySize();
     // };
 
-    this.setPlus = function(plus) {
+    this.setPlus = function (plus) {
         _plus = plus;
         _idlePosition.copy(plus.group.position);
         _this.group.position.copy(plus.group.position);
