@@ -22,6 +22,7 @@ Class(function DetailUIView() {
 
     // ### Alex bookeeping for scrolling exit in DD
     let scrollExitFlag = false;
+    const deepDiveExitPause = 0.75; // time to wait before exiting deepdive on user interaction
 
     //*** Constructor
     (async function () {
@@ -151,7 +152,7 @@ Class(function DetailUIView() {
             setTimeout(() => {
                 console.log('### in timeout');
                 $exit.forceExit();
-            }, 1.5 * 1000);
+            }, deepDiveExitPause * 1000);
         }
 
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
@@ -162,7 +163,7 @@ Class(function DetailUIView() {
                 console.log('### in timeout');
                 scrollExitFlag = false;
                 $exit.forceExit();
-            }, 1.5 * 1000);
+            }, deepDiveExitPause * 1000);
         } else if (scroll < treshold) {
             showDown();
         } else if (scroll > treshold && scroll < (detailCamera.scrollBounds.max - treshold)) {

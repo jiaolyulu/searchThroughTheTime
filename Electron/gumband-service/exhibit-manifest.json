@@ -1,0 +1,70 @@
+{
+    "manifest": {
+        "statuses": [
+            {
+                "id": "lastAppStart",
+                "type": "String",
+                "display": "Last App Start",
+                "default": "Jan 1, 1970"
+            },
+            {
+                "id": "serverIP",
+                "type": "String",
+                "display": "ServerIP Dev",
+                "default": "127.0.0.1:8080"
+            }
+        ],
+        "settings": [
+            {
+                "id": "attractScreenWaitDuration",
+                "type": "TextInput",
+                "display": "Attract Screen Wait (s)",
+                "default": "9"
+            },
+            {
+                "id": "scrollSpeed",
+                "type": "TextInput",
+                "display": "Scroll Speed (s)",
+                "default": "0.025"
+            },
+            {
+                "id": "autoOpenPauseDelay",
+                "type": "TextInput",
+                "display": "Auto Open Pause Delay (s)",
+                "default": "0.5"
+            },
+            {
+                "id": "autoCloseDeepDiveDelay",
+                "type": "TextInput",
+                "display": "Auto Close DeepDive Delay (s)",
+                "default": "0.75"
+            },
+            {
+                "id": "autoOpenCenterLine",
+                "type": "TextInput",
+                "display": "Auto Open Center Line (s)",
+                "default": "0.02"
+            }
+        ],
+        "controls": [
+            {
+                "id": "OP_CONTROLS",
+                "type": "Group",
+                "display": "Operation",
+                "items": [
+                    {
+                        "id": "APP_RESET",
+                        "display": "Reset Exhibit",
+                        "order": 0
+                    },
+                    {
+                        "id": "KILL_EXHIBIT",
+                        "display": "Terminate App",
+                        "order": 1
+                    }
+                ],
+                "order": 0
+            }
+        ]
+    }
+}
