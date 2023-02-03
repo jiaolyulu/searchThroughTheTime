@@ -11,6 +11,7 @@ Class(function MilestoneTooltip({
     const _this = this;
     const maxinumBoxWidth = 700;
     const fontSizeTipText = 26;
+    const touchscreenWidth = 720;
     let $anchor;
     let $container, $box, $layer, $copy, $content, $close;
 
@@ -147,7 +148,6 @@ Class(function MilestoneTooltip({
         });
 
         GoobCache.apply('MilestoneTooltip', $container, /* scss */ `
-            $maxBoxWidth: $maxinumBoxWidth px;
             & {
                 display: flex;
                 flex-direction: column;
@@ -223,7 +223,7 @@ Class(function MilestoneTooltip({
 
             .box {
                 position: relative!important;
-                max-width: $maxBoxWidth;
+                max-width: ${maxinumBoxWidth}px;
             }
 
             .layer {
@@ -401,7 +401,8 @@ Class(function MilestoneTooltip({
         }
 
         if (MilestoneTooltip.TOUCH) {
-            return this.showMobile();
+            console.log("lulu milstonetip.touch is true");
+            //return this.showMobile();
         }
 
         MilestoneTooltip.Z_INDEX += 1;
@@ -565,6 +566,8 @@ Class(function MilestoneTooltip({
             // 400 is box max-width
             left -= maxinumBoxWidth / 2;
             left = Math.clamp(left, padding, (Stage.width - maxinumBoxWidth) - padding);
+            left+=touchscreenWidth;
+            console.log("leftCalcutaed: lulu", left);
         }
 
         $layer.css({
