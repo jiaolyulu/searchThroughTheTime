@@ -9,7 +9,7 @@ $webUI-margin-left: calc( $mainscreen-width/2 + $touchscreen-width );
 $webUI-margin-top:calc(($mainscreen-height - $touchscreen-height)/2);
 @debug calc(($mainscreen-height - $touchscreen-height)/2);
 $detailview-width:1600px;
-$detailview-margin-left: calc($detailview-width + $mainscreen-width/2);
+$detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
 
 
 body,
