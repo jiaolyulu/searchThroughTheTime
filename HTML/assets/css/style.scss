@@ -36,9 +36,10 @@ html,
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
 .YearScroller {
 	/* year bar on top of screen*/
-	/* lulu's deeplocal change */
 	margin-left: $touchscreen-width;
+    /*<---lulu's deeplocal change */
 	margin-top: $scrollbar-margin-top;
+    /*<---lulu's deeplocal change */
 }
 
 .DOM3D {
@@ -46,6 +47,7 @@ html,
 	margin-left: $touchscreen-width;
 	/* lulu's deeplocal change */
 	margin-top: $webUI-margin-top;
+    /*<---lulu's deeplocal change */
 }
 
 .Container canvas {
@@ -57,6 +59,8 @@ html,
 
 .ScrollMore {
 	/* scroll more icon on right side. disapears after first scroll*/
+    margin-top: $webUI-margin-top;
+    /* lulu's deeplocal change */
 	right: 100px;
 }
 
@@ -73,6 +77,7 @@ html,
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
+    /*<---lulu's deeplocal change */
 	margin-left: $detailview-margin-left;
 	/*<--- position of window on screen */
 	/*<---lulu's deeplocal change */
@@ -204,6 +209,7 @@ body {
 #loader .center {
 	position: absolute;
 	top: calc(50% + $webUI-margin-top);
+    /*<---lulu's deeplocal change */
 	left: $webUI-margin-left;
 	/*lulu's deeplocal change */
 	transform: translate(-50%, -50%) translateY(-3px);
@@ -222,7 +228,9 @@ body {
 #circle-container,
 #arrow-container {
 	width: $arrow-size;
+    /*<---lulu's deeplocal change */
 	height: $arrow-size;
+    /*<---lulu's deeplocal change */
 }
 
 #loader svg {
@@ -235,12 +243,13 @@ body {
 	z-index: 10;
 	width: 80%;
 	max-width: $touchscreen-width;
+    /*<---lulu's deeplocal change */
 	margin-top: $webUI-margin-top;
+    /*<---lulu's deeplocal change */
 	top: 50%;
 	left: $webUI-margin-left;
 	/* lulu's deeplocal change */
 	transform: translateX(-50%);
-	/* lulu's deeplocal change */
 	position: absolute;
 	z-index: 10;
 	text-align: center;
