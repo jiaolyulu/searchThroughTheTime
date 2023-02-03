@@ -221,6 +221,7 @@ Class(function MilestoneTooltip({
 
             .box {
                 position: relative!important;
+                max-width: 400px;
             }
 
             .layer {
@@ -445,8 +446,8 @@ Class(function MilestoneTooltip({
             });
         }
 
-        $copy.css({ visibility: 'visible'}); 
-        $content.css({ opacity: 0}); 
+        $copy.css({ visibility: 'visible' });
+        $content.css({ opacity: 0 });
         // $content.transform({ y: 15 });
         await _this.wait(40);
         //text
