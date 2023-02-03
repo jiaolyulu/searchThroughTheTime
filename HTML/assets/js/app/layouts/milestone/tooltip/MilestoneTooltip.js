@@ -9,7 +9,8 @@ Class(function MilestoneTooltip({
     Inherit(this, Object3D);
     Inherit(this, StateComponent);
     const _this = this;
-
+    const maxinumBoxWidth = 700;
+    const fontSizeTipText = 26;
     let $anchor;
     let $container, $box, $layer, $copy, $content, $close;
 
@@ -146,6 +147,7 @@ Class(function MilestoneTooltip({
         });
 
         GoobCache.apply('MilestoneTooltip', $container, /* scss */ `
+            $maxBoxWidth: $maxinumBoxWidth px;
             & {
                 display: flex;
                 flex-direction: column;
@@ -153,75 +155,75 @@ Class(function MilestoneTooltip({
                 z-index: 100;
             }
 
-            &.touch {
-                display: none;
-                transform: none!important;
-                width: 100%!important;
-                height: 100%!important;
-                overflow-y: auto;
-                pointer-events: auto !important;
+            // &.touch {
+            //     display: none;
+            //     transform: none!important;
+            //     width: 100%!important;
+            //     height: 100%!important;
+            //     overflow-y: auto;
+            //     pointer-events: auto !important;
 
-                .close {
-                    top: 0px;
-                    right: 0px;
-                    width: 40px;
-                    height: 40px;
-                    z-index: 100;
-                    opacity: 0;
-                }
+            //     .close {
+            //         top: 0px;
+            //         right: 0px;
+            //         width: 40px;
+            //         height: 40px;
+            //         z-index: 100;
+            //         opacity: 0;
+            //     }
 
-                .close:before,
-                .close:after {
-                    content: ' ';
-                    position: absolute;
-                    left: 19px;
-                    top: 12px;
-                    height: 15px;
-                    width: 2px;
-                    background-color: ${Styles.colors.shark};
-                }
+            //     .close:before,
+            //     .close:after {
+            //         content: ' ';
+            //         position: absolute;
+            //         left: 19px;
+            //         top: 12px;
+            //         height: 15px;
+            //         width: 2px;
+            //         background-color: ${Styles.colors.shark};
+            //     }
 
-                .close:before {
-                    transform: rotate(45deg);
-                }
+            //     .close:before {
+            //         transform: rotate(45deg);
+            //     }
 
-                .close:after {
-                    transform: rotate(-45deg);
-                }
+            //     .close:after {
+            //         transform: rotate(-45deg);
+            //     }
 
-                .box {
-                    width: 90%;
-                    margin: 0 auto;
-                    margin-top: 140px;
-                    z-index: 200;
-                }
+            //     .box {
+            //         width: 90%;
+            //         margin: 0 auto;
+            //         margin-top: 140px;
+            //         z-index: 200;
+            //     }
 
-                .layer {
-                    border-color: transparent;
-                }
+            //     .layer {
+            //         border-color: transparent;
+            //     }
 
-                .layer.open {
-                    border-radius: 20px;
-                }
+            //     .layer.open {
+            //         border-radius: 20px;
+            //     }
 
-                .copy {
-                    padding: 34px;
-                }
+            //     .copy {
+            //         padding: 34px;
+            //     }
 
-                .title {
-                    font-size: 18px;
-                    margin-bottom: 8px;
-                }
+            //     .title {
+            //         font-size: 18px;
+            //         margin-bottom: 8px;
+            //     }
 
-                .content {
-                    font-size: 16px;
-                    max-width: 400px;
-                }
-            }
+            //     .content {
+            //         font-size: 16px;
+            //         max-width: 400px;
+            //     }
+            // }
 
             .box {
                 position: relative!important;
-                max-width: 400px;
+                max-width: $maxBoxWidth;
             }
 
             .layer {
@@ -561,8 +563,8 @@ Class(function MilestoneTooltip({
         if (!isVertical) {
             left = t.x;
             // 400 is box max-width
-            left -= 200;
-            left = Math.clamp(left, padding, (Stage.width - 400) - padding);
+            left -= maxinumBoxWidth / 2;
+            left = Math.clamp(left, padding, (Stage.width - maxinumBoxWidth) - padding);
         }
 
         $layer.css({
