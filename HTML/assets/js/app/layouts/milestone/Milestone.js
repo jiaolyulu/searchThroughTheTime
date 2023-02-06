@@ -135,12 +135,13 @@ Class(function Milestone(_data) {
 
             _plus.seoText = seo.seo.label;
             _plus.mesh.position.z += 0.002;
-            if (MilestoneTooltip.TOUCH) {
-                _plus.mesh.hitArea = new PlaneGeometry(1.8, 1.8);
-                Interaction3D.find(World.CAMERA).add(_plus.mesh, null, onTooltipClick);
-            } else {
-                Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
-            }
+            Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
+            // if (MilestoneTooltip.TOUCH) {
+            //     _plus.mesh.hitArea = new PlaneGeometry(1.8, 1.8);
+            //     Interaction3D.find(World.CAMERA).add(_plus.mesh, null, onTooltipClick);
+            // } else {
+            //     Interaction3D.find(World.CAMERA).add(_plus.mesh, onPlusHover, null, seo);
+            // }
 
 
             _tooltip.$copy.parentSeo = seo.root;

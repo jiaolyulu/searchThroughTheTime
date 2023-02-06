@@ -1,0 +1,329 @@
+$touchscreen-width: 720px;
+$touchscreen-height:1920px;
+$mainscreen-width: 3840px;
+$mainscreen-height: 2160px;
+$scrollbar-margin-top:100px;
+$arrow-size:120px;
+$webUI-margin-left: calc( $mainscreen-width/2 + $touchscreen-width );
+@debug calc($mainscreen-width/2 + $touchscreen-width );
+$webUI-margin-top:calc(($mainscreen-height - $touchscreen-height)/2);
+@debug calc(($mainscreen-height - $touchscreen-height)/2);
+$detailview-width:1600px;
+$detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
+@debug calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
+
+body,
+html,
+#Stage {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	-ms-content-zooming: none;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+
+/* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
+/*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
+
+
+#Stage {
+	background-color: rgb(8, 120, 148);
+}
+
+/* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
+.YearScroller {
+	/* year bar on top of screen*/
+	margin-left: $touchscreen-width;
+    /*<---lulu's deeplocal change */
+	margin-top: $scrollbar-margin-top;
+    /*<---lulu's deeplocal change */
+}
+
+.DOM3D {
+	/*elements and content*/
+	margin-left: $touchscreen-width;
+	/* lulu's deeplocal change */
+	margin-top: $webUI-margin-top;
+    /*<---lulu's deeplocal change */
+}
+
+.Container canvas {
+	/*line drawing */
+	margin-left: $touchscreen-width;
+    margin-top: $webUI-margin-top;
+	/* lulu's deeplocal change */
+}
+
+.ScrollMore {
+	/* scroll more icon on right side. disapears after first scroll*/
+    margin-top: $webUI-margin-top;
+    /* lulu's deeplocal change */
+	right: 100px;
+}
+
+.expand-container {
+	/*icon on scrollbar to expand scroll bar to dot review*/
+	visibility: collapse;
+}
+
+.DetailView {
+	/*This is the content popup. The Deepdive content background */
+	background: rgba(255, 255, 255, 0.83);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+    /*<---lulu's deeplocal change */
+	margin-left: $detailview-margin-left;
+	/*<--- position of window on screen */
+	/*<---lulu's deeplocal change */
+	width: $detailview-width !important;
+	/*<--- width of window*/
+	/*LU content might need to be top justified?*/
+}
+
+.ios,
+.ios body,
+.ios #Stage {
+	overflow: visible;
+}
+
+.ios,
+.mob {
+	position: relative;
+	height: 100vh;
+}
+
+.GLA11y {
+	position: absolute;
+	width: 0;
+	height: 100%;
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+#Stage,
+#Stage * {
+	position: absolute;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-text-size-adjust: none;
+}
+
+#Stage * {
+	pointer-events: none;
+}
+
+#Stage .hit,
+#Stage canvas,
+#Stage a {
+	pointer-events: all !important;
+}
+
+#Stage * input,
+#Stage * textarea {
+	-moz-user-select: auto;
+	-webkit-user-select: auto;
+	-o-user-select: auto;
+	-ms-user-select: auto;
+	-webkit-tap-highlight-color: auto;
+}
+
+#Stage br,
+#Stage span {
+	position: relative;
+}
+
+#Stage a,
+#Stage a:visited,
+#Stage a:hover,
+#Stage a:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.feature-detects {
+	visibility: hidden;
+	pointer-events: none;
+	position: absolute;
+	width: 0;
+	height: 100vh;
+	clip: rect(0 0 0 0);
+}
+
+@supports (--css: variables) and (padding: env(safe-area-inset-bottom)) {
+	.feature-detects {
+		--safe-area-inset-top: env(safe-area-inset-top);
+		--safe-area-inset-right: env(safe-area-inset-right);
+		--safe-area-inset-bottom: env(safe-area-inset-bottom);
+		--safe-area-inset-left: env(safe-area-inset-left);
+	}
+}
+
+html,
+body {
+	font-family: "Google Sans", Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+#loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background-color: #fff;
+}
+
+#loaderbg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #fff;
+	background-repeat: repeat;
+}
+
+#progress {
+	font-family: "Google Sans", Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 23px;
+	text-align: center;
+	color: #333333;
+	margin: 0;
+	opacity: 0;
+}
+
+#loader .center {
+	position: absolute;
+	top: calc(50% + $webUI-margin-top);
+    /*<---lulu's deeplocal change */
+	left: $webUI-margin-left;
+	/*lulu's deeplocal change */
+	transform: translate(-50%, -50%) translateY(-3px);
+}
+
+@media only screen and (max-width: 768px) {
+	#loader .center {
+		transform: translate(-50%, -50%) translateY(-6px);
+	}
+}
+
+#circle {
+	transform: rotate(-90deg);
+}
+
+#circle-container,
+#arrow-container {
+	width: $arrow-size;
+    /*<---lulu's deeplocal change */
+	height: $arrow-size;
+    /*<---lulu's deeplocal change */
+}
+
+#loader svg {
+	width: 100%;
+	height: 100%;
+}
+
+#slogan {
+	position: absolute;
+	z-index: 10;
+	width: 80%;
+	max-width: $touchscreen-width;
+    /*<---lulu's deeplocal change */
+	margin-top: $webUI-margin-top;
+    /*<---lulu's deeplocal change */
+	top: 50%;
+	left: $webUI-margin-left;
+	/* lulu's deeplocal change */
+	transform: translateX(-50%);
+	position: absolute;
+	z-index: 10;
+	text-align: center;
+}
+
+#arrow-left {
+	stroke-dasharray: 62 62;
+	stroke-dashoffset: -62;
+}
+
+#arrow-right {
+	stroke-dasharray: 58 58;
+	stroke-dashoffset: -58;
+}
+
+.cls-circle {
+	fill: none;
+	stroke: #333;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2px;
+	stroke-dasharray: 577;
+	stroke-dashoffset: 577;
+}
+
+.cls-arrow {
+	fill: none;
+	stroke: #333;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2px;
+}
+
+.SplitText * {
+	position: relative !important;
+}
+
+/* ### Alex Attract Loop */
+.attractLoopScr {
+	background-color: pink;
+	width: 100%;
+	height: 100%;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	animation: fadeIn 2s;
+}
+
+.animationCont {
+	/* background-color: gray; */
+}
+
+#animationText {
+	color: purple
+}
+
+#portal {}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	100% {
+		opacity: 1;
+	}
+
+	0% {
+		opacity: 0;
+	}
+}
