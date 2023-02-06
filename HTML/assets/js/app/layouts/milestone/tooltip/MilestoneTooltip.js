@@ -27,7 +27,6 @@ Class(function MilestoneTooltip({
         initHtml();
         initStyles();
         if (_scrollOnly) {
-            console.log(`### DEEPLOCAL--> Tooltip set to scroll Only.`);
         } else if (MilestoneTooltip.TOUCH) {
             //enableTouch();
         } else {
@@ -292,7 +291,6 @@ Class(function MilestoneTooltip({
     }
 
     function enableTouch() {
-        console.log('### IAN enableTouch');
         $container.classList().add('touch');
 
         $container.interact(false, _ => {
@@ -375,7 +373,6 @@ Class(function MilestoneTooltip({
 
 
     this.show = async function () {
-        //console.log('### IAN show milestoneToolTip');
         if (_open) return;
 
         if (GlobalStore.get('transitioning')) {
@@ -408,7 +405,6 @@ Class(function MilestoneTooltip({
 
         await _this.wait(1);
 
-        console.log(`### show background square x:${_offset.x} and y:${_offset.y}`);
         $box.tween({ x: `${_offset.x}%`, y: `${_offset.y}%` }, 600, 'easeOutCubic');
 
         tween(_this.group.position, {
@@ -445,8 +441,8 @@ Class(function MilestoneTooltip({
             });
         }
 
-        $copy.css({ visibility: 'visible'}); 
-        $content.css({ opacity: 0}); 
+        $copy.css({ visibility: 'visible' });
+        $content.css({ opacity: 0 });
         // $content.transform({ y: 15 });
         await _this.wait(40);
         //text
@@ -459,7 +455,6 @@ Class(function MilestoneTooltip({
     };
 
     this.hide = async function (e) {
-        console.log('### IAN hide milestoneToolTip');
         if (e && e.seo) {
             const focus = document.querySelector(':focus');
 
@@ -607,7 +602,6 @@ Class(function MilestoneTooltip({
 
 
     this.hideMobile = async function () {
-        console.log('### IAN hide mobile MilestoneToolTip');
         if ($close) {
             $close.tween({ opacity: 0 }, 200, 'easeOutCubic', 0);
         }
@@ -634,7 +628,6 @@ Class(function MilestoneTooltip({
     };
 
     this.setPlusBorder = async function () {
-        console.log(`### IAN set plus border`);
         $layer.tween({
             borderColor: 'red',
             borderWidth: '50px'
