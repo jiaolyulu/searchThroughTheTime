@@ -16,7 +16,12 @@ html,
 #Stage {
   background-color: rgb(51, 98, 200);
 }
-
+ .bg-wrapper{
+  scale:2!important;
+ }
+ .year-text-container{
+  scale:2!important;
+ }
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
 .YearScroller {
   /* year bar on top of screen*/
@@ -25,6 +30,7 @@ html,
   margin-top: 100px;
   /*<---lulu's deeplocal change */
 }
+.YearScroller 
 
 .DOM3D {
   /*elements and content*/
@@ -186,18 +192,16 @@ body {
   text-align: center;
   color: #333333;
   opacity: 0;
-  padding-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 #loader .center {
-  position: absolute;
-  top: calc(50% - 350px);
-  /*   top: calc(50% + 120px);
- */  /*<---lulu's deeplocal change */
-/*   left: 2640px;
- */  /*lulu's deeplocal change */
- margin-left: 4000px;
- 
+  position: relative;
+  top: calc(50% + 120px);
+  /*<---lulu's deeplocal change */
+  left: 2640px;
+  /*lulu's deeplocal change */
+
  transform: translate(-50%, -50%) translateY(-3px);
 }
 
