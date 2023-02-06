@@ -5,6 +5,7 @@ const { Gumband, Sockets } = require('@deeplocal/gumband-node-sdk');
 const EventEmitter = require('events');
 const logger = require('hagen').default;
 
+
 /** UTILITIES */
 
 
@@ -12,7 +13,7 @@ const logger = require('hagen').default;
 const EXHIBIT_TOKEN = process.env.GB_EXHIBIT_TOKEN;
 const EXHIBIT_ID = process.env.GB_EXHIBIT_ID;
 const GB_ENV = process.env.GB_ENV;
-const EXHIBIT_MANIFEST = './gumband-service/exhibit-manifest.json';
+const EXHIBIT_MANIFEST = process.env.GB_MANIFEST_PATH;
 
 //** HELPERS */
 const wait = (ms) => new Promise((resolve) => {
@@ -49,22 +50,17 @@ class GumbandService extends EventEmitter {
     addListeners() {
         this.gb.on(Sockets.CONTROL_RECEIVED, (payload) => {
             logger.log('GUMBAND', `Payload in Contrl Rec: ${payload.id}`);
-            switch (payload.id) {
-                case 'APP_RESET':
-                    // TODO Reset Experience
-                    // emit message where applicable
-                    this.emit('CONTROL_RECEIVED', payload.id);
-                    break;
-                case 'KILL_EXHIBIT':
-                    // kill process
-                    process.exit(0);
-            }
+            this.emit('CONTROL_RECEIVED', payload.id);
         });
         this.gb.on(Sockets.SETTING_RECEIVED, (payload) => {
             logger.log('GUMBAND', `${payload.id} setting changed from gumband dashboard`);
             logger.log('GUMBAND', `updated setting: ${JSON.stringify(payload)}`); // payload.value
             // emit message
             this.emit('SETTINGS_CHANGE', payload);
+            // TODO update value in local json db
+
+            // TODO read the file and turn into object
+            // TODO emit settings object
         });
         this.gb.on(Sockets.HARDWARE_ONLINE, (payload) => {
             logger.log('GUMBAND', `Hardware Online Received: {payload.value}`);
@@ -102,6 +98,7 @@ class GumbandService extends EventEmitter {
                 break;
         }
     }
+
 
     /** HELPERS */
     getTimeStamp() {
