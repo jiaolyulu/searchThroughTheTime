@@ -668,7 +668,8 @@ Class(function MilestoneTooltip({
     this.setOpacity('isVisible', _ => _isVisible);
 }, _ => {
     MilestoneTooltip.Z_INDEX = 101;
-    MilestoneTooltip.TOUCH = Config.TOUCH;
+    //MilestoneTooltip.TOUCH = Config.TOUCH;
+    MilestoneTooltip.TOUCH = false;
     MilestoneTooltip.OPEN = 'MilestoneTooltip.OPEN';
     MilestoneTooltip.CLOSING = 'MilestoneTooltip.CLOSING';
     MilestoneTooltip.CLOSE = 'MilestoneTooltip.CLOSE';
