@@ -10,7 +10,6 @@ const { setgroups } = require('process');
 const LocalLogger = require('@deeplocal/gumband-node-sdk/lib/localLogger');
 const logger = require('hagen').default;
 const LOC_STOR_FILENAME = process.env.LOC_STOR_FILENAME; // for local json db to preserve op/config values
-const WebSocketServer = require('ws');
 
 // configuration
 const _port = 8080;
@@ -18,10 +17,6 @@ const _contentFolder = `/HTML`;
 const _useCacheBuster = true;
 const _backgroundColor = '2e2c29';
 const _hideFrame = true;
-
-// create wss
-const wss = new WebSocketServer.Server({ port: process.env.WS_PORT });
-let ws = [];
 
 
 //private vars
@@ -86,48 +81,29 @@ const makeFullScreen = () => {
 const wait = (ms) => new Promise((resolve) => {
     setTimeout(resolve, ms);
 });
-const getAppDataPath = () => {
-    // TODO provide case for windows & linux
-    switch (process.platform) {
-        case "darwin": {
-            logger.log('ELECTRON', PATH.join(process.env.HOME, "Library", "Application Support", app.getName()));
-            return PATH.join(process.env.HOME, "Library", "Application Support", app.getName());
-        }
-        default: {
-            logger.log('ELECTRON', "Unsupported platform!");
-            process.exit(1);
-        }
-    }
-};
+// const getAppDataPath = () => {
+//     // TODO provide case for windows & linux or delete this if the current code works below in db = .....
+//     switch (process.platform) {
+//         case "darwin": {
+//             logger.log('ELECTRON', PATH.join(process.env.HOME, "Library", "Application Support", app.getName()));
+//             return PATH.join(process.env.HOME, "Library", "Application Support", app.getName());
+//         }
+//         default: {
+//             logger.log('ELECTRON', "Unsupported platform!");
+//             process.exit(1);
+//         }
+//     }
+// };
 
 app.whenReady().then(async () => {
+    logger.log('ELECTRON', `PIZZA APP.getPath(): ${app.getPath('appData')}`);
     // set up local json db
-    db = new JSONdb(getAppDataPath() + LOC_STOR_FILENAME); // used in executable due to constraints with reading file system in production
+    db = new JSONdb(PATH.join(app.getPath('appData'), app.getName(), LOC_STOR_FILENAME)); // used in executable due to constraints with reading file system in production
     // electron start up
     startExpressServer();
     setScreenDimensions();
     createWindow();
     makeFullScreen();
-    // set up wss
-    wss.on('connection', async (ws) => {
-        ws.push(ws);
-        logger.log('ELECTRON', 'ws server connected!');
-
-        ws.on('message', (data) => {
-            logger.log('ELECTRON', `wss received: ${data}`);
-            ws.send('hello from wss...');
-        });
-        ws.on('close', () => {
-            logger.log('ELECTRON', 'wss on close...');
-            ws = this.ws.filter(socket => (
-                socket != ws
-            ));
-        });
-        ws.onerror = () => {
-            logger.log('ELECTRON', 'wss error...');
-        };
-    });
-    logger.log('ELECTRON', `the wss is running on port: ${process.env.WS_PORT}`);
 
     // set up gb
     const gbWrapper = new GumbandService();
@@ -148,24 +124,10 @@ app.whenReady().then(async () => {
         gbWrapper.on('SETTINGS_CHANGE', (payload) => {
             logger.log('ELECTRON', `Settings change from gb: ${payload.id}, ${payload.value}`);
             // get settings change, update local json db and then send setting over wss
-            // todo sanitize and provide settings value parameters to check for here
-            // provide location of storage to other stakeholders
+            // TODO sanitize and provide settings value parameters to check for here
             if (gbSettings.includes(payload.id)) {
                 db.set(payload.id, payload.value); // save to local db
-                // check for ws connections and send update message
-                if (ws.length > 0) {
-                    ws.forEach((socketConn) => {
-                        socketConn.send(
-                            'SETTINGS_CHANGE',
-                            {
-                                id: payload.id,
-                                value: payload.value
-                            }
-                        );
-                    });
-                } else {
-                    logger.log('ELECTRON', 'No active ws connections to send gb settings update message to...');
-                }
+                // TODO NOW WHAT DO WE DO?
             } else {
                 logger.warn('ELECTRON', 'GB SETTING ID not found in gbSettings array when attempting to save to local db....');
             }
@@ -173,4 +135,8 @@ app.whenReady().then(async () => {
 
         //
     });
+});
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') app.quit();
 });
