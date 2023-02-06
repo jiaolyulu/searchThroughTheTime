@@ -40,6 +40,7 @@ class GumbandService extends EventEmitter {
     setup() {
         this.gb.on(Sockets.READY, () => {
             logger.log('GUMBAND', 'Gumband ready!');
+            this.emit('READY', 'Gumband Ready');
             this.addListeners();
             this.setStateFromGumband();
             this.setStatus('lastAppStart', this.getTimeStamp());
