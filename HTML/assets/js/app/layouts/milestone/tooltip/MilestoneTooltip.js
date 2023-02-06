@@ -9,9 +9,7 @@ Class(function MilestoneTooltip({
     Inherit(this, Object3D);
     Inherit(this, StateComponent);
     const _this = this;
-    const maxinumBoxWidth = 700;
-    const fontSizeTipText = 26;
-    const touchscreenWidth = 720;
+
     let $anchor;
     let $container, $box, $layer, $copy, $content, $close;
 
@@ -31,7 +29,7 @@ Class(function MilestoneTooltip({
         if (_scrollOnly) {
             console.log(`### DEEPLOCAL--> Tooltip set to scroll Only.`);
         } else if (MilestoneTooltip.TOUCH) {
-            enableTouch();
+            //enableTouch();
         } else {
             checkMouseOut();
         }
@@ -41,7 +39,7 @@ Class(function MilestoneTooltip({
 
     function handleResize() {
         if (MilestoneTooltip.TOUCH && _open) {
-            _this?.hide();
+            //_this?.hide();
         }
     }
 
@@ -100,9 +98,9 @@ Class(function MilestoneTooltip({
         $box = $container.create('box');
         $layer = $box.create('layer');
 
-        if (MilestoneTooltip.TOUCH) {
-            $close = $box.create('close');
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     $close = $box.create('close');
+        // }
 
         $copy = $box.create('copy');
 
@@ -155,75 +153,74 @@ Class(function MilestoneTooltip({
                 z-index: 100;
             }
 
-            // &.touch {
-            //     display: none;
-            //     transform: none!important;
-            //     width: 100%!important;
-            //     height: 100%!important;
-            //     overflow-y: auto;
-            //     pointer-events: auto !important;
+            &.touch {
+                display: none;
+                transform: none!important;
+                width: 100%!important;
+                height: 100%!important;
+                overflow-y: auto;
+                pointer-events: auto !important;
 
-            //     .close {
-            //         top: 0px;
-            //         right: 0px;
-            //         width: 40px;
-            //         height: 40px;
-            //         z-index: 100;
-            //         opacity: 0;
-            //     }
+                .close {
+                    top: 0px;
+                    right: 0px;
+                    width: 40px;
+                    height: 40px;
+                    z-index: 100;
+                    opacity: 0;
+                }
 
-            //     .close:before,
-            //     .close:after {
-            //         content: ' ';
-            //         position: absolute;
-            //         left: 19px;
-            //         top: 12px;
-            //         height: 15px;
-            //         width: 2px;
-            //         background-color: ${Styles.colors.shark};
-            //     }
+                .close:before,
+                .close:after {
+                    content: ' ';
+                    position: absolute;
+                    left: 19px;
+                    top: 12px;
+                    height: 15px;
+                    width: 2px;
+                    background-color: ${Styles.colors.shark};
+                }
 
-            //     .close:before {
-            //         transform: rotate(45deg);
-            //     }
+                .close:before {
+                    transform: rotate(45deg);
+                }
 
-            //     .close:after {
-            //         transform: rotate(-45deg);
-            //     }
+                .close:after {
+                    transform: rotate(-45deg);
+                }
 
-            //     .box {
-            //         width: 90%;
-            //         margin: 0 auto;
-            //         margin-top: 140px;
-            //         z-index: 200;
-            //     }
+                .box {
+                    width: 90%;
+                    margin: 0 auto;
+                    margin-top: 140px;
+                    z-index: 200;
+                }
 
-            //     .layer {
-            //         border-color: transparent;
-            //     }
+                .layer {
+                    border-color: transparent;
+                }
 
-            //     .layer.open {
-            //         border-radius: 20px;
-            //     }
+                .layer.open {
+                    border-radius: 20px;
+                }
 
-            //     .copy {
-            //         padding: 34px;
-            //     }
+                .copy {
+                    padding: 34px;
+                }
 
-            //     .title {
-            //         font-size: 18px;
-            //         margin-bottom: 8px;
-            //     }
+                .title {
+                    font-size: 18px;
+                    margin-bottom: 8px;
+                }
 
-            //     .content {
-            //         font-size: 16px;
-            //         max-width: 400px;
-            //     }
-            // }
+                .content {
+                    font-size: 16px;
+                    max-width: 400px;
+                }
+            }
 
             .box {
                 position: relative!important;
-                max-width: ${maxinumBoxWidth}px;
             }
 
             .layer {
@@ -341,7 +338,7 @@ Class(function MilestoneTooltip({
     }
 
     function normalizeCopySize() {
-        if (MilestoneTooltip.TOUCH) return;
+        //if (MilestoneTooltip.TOUCH) return;
         // await _this.parent.parent.parent.ready();
         // await _this.wait(1400);
         $anchor.forceUpdate();
@@ -400,10 +397,9 @@ Class(function MilestoneTooltip({
             });
         }
 
-        if (MilestoneTooltip.TOUCH) {
-            console.log("lulu milstonetip.touch is true");
-            //return this.showMobile();
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     return this.showMobile();
+        // }
 
         MilestoneTooltip.Z_INDEX += 1;
         $container.css({ zIndex: MilestoneTooltip.Z_INDEX });
@@ -449,8 +445,8 @@ Class(function MilestoneTooltip({
             });
         }
 
-        $copy.css({ visibility: 'visible' });
-        $content.css({ opacity: 0 });
+        $copy.css({ visibility: 'visible'}); 
+        $content.css({ opacity: 0}); 
         // $content.transform({ y: 15 });
         await _this.wait(40);
         //text
@@ -483,9 +479,9 @@ Class(function MilestoneTooltip({
         _this.commit(MainStore, 'setTooltip', false);
         _this.events.fire(MilestoneTooltip.CLOSING);
 
-        if (MilestoneTooltip.TOUCH) {
-            return this.hideMobile();
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     return this.hideMobile();
+        // }
 
         $content.tween({
             // y: 0,
@@ -564,10 +560,8 @@ Class(function MilestoneTooltip({
         if (!isVertical) {
             left = t.x;
             // 400 is box max-width
-            left -= maxinumBoxWidth / 2;
-            left = Math.clamp(left, padding, (Stage.width - maxinumBoxWidth) - padding);
-            left+=touchscreenWidth;
-            console.log("leftCalcutaed: lulu", left);
+            left -= 200;
+            left = Math.clamp(left, padding, (Stage.width - 400) - padding);
         }
 
         $layer.css({
