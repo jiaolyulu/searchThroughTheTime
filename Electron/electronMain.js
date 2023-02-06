@@ -152,8 +152,22 @@ app.whenReady().then(async () => {
             // provide location of storage to other stakeholders
             if (gbSettings.includes(payload.id)) {
                 db.set(payload.id, payload.value); // save to local db
+                // check for ws connections and send update message
+                if (ws.length > 0) {
+                    ws.forEach((socketConn) => {
+                        socketConn.send(
+                            'SETTINGS_CHANGE',
+                            {
+                                id: payload.id,
+                                value: payload.value
+                            }
+                        );
+                    });
+                } else {
+                    logger.log('ELECTRON', 'No active ws connections to send gb settings update message to...');
+                }
             } else {
-                logger.warn('ELECTRON', 'GB SETTING ID not found in gbSettings array....');
+                logger.warn('ELECTRON', 'GB SETTING ID not found in gbSettings array when attempting to save to local db....');
             }
         });
 
