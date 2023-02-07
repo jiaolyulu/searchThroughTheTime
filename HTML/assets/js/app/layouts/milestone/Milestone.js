@@ -697,12 +697,12 @@ Class(function Milestone(_data) {
         MainStore.commit('setSelectedMileStone', _this.id);
         ViewController.instance().navigate(`/detail/${_this.id}`);
 
-        if (typeof (Analytics) !== 'undefined') {
+        /* if (typeof (Analytics) !== 'undefined') {
             Analytics.captureEvent('ExploreStory', {
                 event_category: 'cta',
                 event_label: _this.id
             });
-        }
+        }*/
     }
     function getBoxImage() {
         if (_image && _boxImageDirty) {

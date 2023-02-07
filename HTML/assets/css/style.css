@@ -30,11 +30,10 @@ html,
   margin-top: 100px;
   /*<---lulu's deeplocal change */
 }
-.YearScroller 
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 720px;
+  margin-left: 720px!important;
   /* lulu's deeplocal change */
   margin-top: 120px;
   /*<---lulu's deeplocal change */
@@ -75,8 +74,33 @@ html,
   /*<--- width of window*/
   /*LU content might need to be top justified?*/
 }
+ .DetailParagraph{ 
+/*   This is the detailed view paragraph width
+ */  min-width: 1400px;
+ }
 
-.ios,
+ .DetailParagraph:not(:first-child) .UIText{ /* all but the first */
+  /* font-size: 28pt!important;
+  background-color: blueviolet; */
+/* background-color: blueviolet!important; 
+background: red; */}
+
+ .DetailParagraph:first-of-type .UIText {
+  font-size: 48pt!important;
+  background-color: rgb(0, 160, 19);
+ }
+ 
+.DetailParagraph:last-child .UIText{ /* last paragraph */
+  margin-bottom: 500px;
+  background-color: red;
+  } 
+
+ .DetailImage { /* detail view image */
+  min-width: 1400px;
+ }
+
+
+ .ios,
 .ios body,
 .ios #Stage {
   overflow: visible;
