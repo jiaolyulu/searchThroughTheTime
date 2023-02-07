@@ -818,7 +818,7 @@ Class(function TimeDesktop() {
 
         //INVERT
         if (_kioskMode) {
-            //rotate 90deg and track y
+            //rotate TimeD and track y
             $track.transform({ y: (firstTrackBounds.y - lastTrackBounds.y) });
         } else {
             $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });

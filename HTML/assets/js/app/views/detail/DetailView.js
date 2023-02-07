@@ -20,7 +20,6 @@ Class(function DetailView() {
     }
 
     async function getMilestone() {
-        console.log('### IAN GetMilestone DetailView');
         const main = ViewController.instance().views.main;
         await main.ready();
         const id = ViewController?.instance?.()?.routeParams?.id;
@@ -31,8 +30,6 @@ Class(function DetailView() {
     }
 
     async function layout() {
-        console.log('### IAN Layout DetailView');
-
         // Fetch milestone object
         const milestone = await getMilestone();
         _this.commit(DetailStore, 'setMilestone', milestone);
