@@ -58,7 +58,7 @@ Class(function IntroTitle() {
         _this.add($anchor.group);
 
         const text = DataModel.get('landingTitle');
-
+        
         GLA11y.setPageH1(_this.findParent('MainView'), Milestone.CLEAN_TITLE(text));
 
         _text = _this.initClass(UIText, {

@@ -66,6 +66,9 @@ Class(function GlobalUIView() {
     }
 
     function initTime() {
+        $beginContainer = $this.create('begin-container');
+        _this.initClass(TimeDesktopBegin, [$beginContainer]);
+        return;
         _timeDesktop = _this.initClass(TimeDesktop);
         _timeDesktop.element.classList().add('time-desktop');
     }

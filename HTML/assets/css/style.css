@@ -14,7 +14,7 @@ html,
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
 /*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
 #Stage {
-  background-color: rgb(8, 120, 148);
+  background-color: rgb(235, 251, 255);
 }
 
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
