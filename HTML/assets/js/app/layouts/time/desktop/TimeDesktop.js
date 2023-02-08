@@ -355,7 +355,7 @@ Class(function TimeDesktop() {
         if ((p >= START_PROGRESS || _kioskMode) && !_show && !transitioning) {
             show();
         } else if (p < START_PROGRESS && _show) {
-            hide();
+           // hide();
         }
     }
 
@@ -381,7 +381,7 @@ Class(function TimeDesktop() {
 
     function onEndChange(isEnd) {
         if (isEnd) {
-            hide();
+           // hide();
         } else if (MainStore.get('progress') >= START_PROGRESS && !isEnd) {
             // show();
         }
@@ -499,7 +499,7 @@ Class(function TimeDesktop() {
         if (!_show) return;
         _show = false;
         $timeContainer.clearTween();
-        $timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //lulu's deeplocal change
+        //$timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //lulu's deeplocal change
 
         arrows.forEach((arrow, index) => {
             arrow.hide({ delay: index * 100 });

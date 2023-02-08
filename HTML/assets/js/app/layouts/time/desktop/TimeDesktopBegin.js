@@ -25,8 +25,8 @@ Class(function TimeDesktopBegin() {
         const interaction = _this.initClass(Interaction, $beginButtonContainer);
         interaction.ignoreLeave = true;
 
-       // _this.events.sub(interaction, Interaction.START, onClick);
-        $beginButtonContainer.addEventListener('touchend',onClick, false);
+        //_this.events.sub(interaction, Interaction.END, onClick);
+        $beginButtonContainer.div.addEventListener('touchend',onClick, false);
         $beginButtonContainer.interact(false, onClick); //however this only work with mouse not touchscreen touch
     }
     async function onClick() {
@@ -36,6 +36,7 @@ Class(function TimeDesktopBegin() {
         _timeDesktop = _this.initClass(TimeDesktop);
         _timeDesktop.element.classList().add('time-desktop');
     }
+
     function leave() {
         _this.clearTimers();
         $beginButtonContainer.tween({ width: 1800,opacity: 0}, 1300, 'easeOutCubic');
