@@ -22,7 +22,11 @@ Class(function TimeDesktopBegin() {
     }
 
     function addListeners() {
-        $beginButtonContainer.interact(false, onClick);
+        const interaction = _this.initClass(Interaction, $beginButtonContainer);
+        interaction.ignoreLeave = true;
+
+        _this.events.sub(interaction, Interaction.START, onClick);
+        $beginButtonContainer.interact(false, onClick); //however this only work with mouse not touchscreen touch
     }
     async function onClick() {
         leave();
@@ -33,12 +37,8 @@ Class(function TimeDesktopBegin() {
     }
     function leave() {
         _this.clearTimers();
-        // $beginButtonContainer.clearTween();
-
-        // $beginButtonContainer.css({ backgroundColor: "#4285F4", width: `${buttonWidth}px`, height: `${buttonHeight}px`, borderRadius: `${buttonHeight}px`, left: "50%", top: "50%", transform: "translate(-50%,-50%)" });
-
         $beginButtonContainer.tween({ width: 1800,opacity: 0}, 1300, 'easeOutCubic');
-        //$beginButtonContainer.tween({ scale: 0 }, 600, 'easeOutCubic');
+
     }
 
 });
