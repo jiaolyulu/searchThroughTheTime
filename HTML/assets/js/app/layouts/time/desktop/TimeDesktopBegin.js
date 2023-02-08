@@ -4,19 +4,41 @@ Class(function TimeDesktopBegin() {
 
     const _this = this;
     const $this = _this.element;
-
+    let $beginContainer, $beginButtonContainer, $beginButtonContent;
     const buttonWidth = 1000;
     const buttonHeight = 140;
 
-    let $beginContainer;
+
     initHTML();
+    addListeners();
 
     function initHTML() {
         $beginContainer = $this.create('begin-container');
-        $beginContainer.css({ "transform-origin": "top left", "width": "1920px", "height": "720px", "transform": "rotate(90deg) translate(0,-720px)" });
+        $beginContainer.css({ "transform-origin": "top left", "width": "1920px", "height": "720px", "transform": "rotate(90deg) translate(0,-720px)", position: "relative !important", display: "flex", "justify-content": "center" , "align-items": "center" });
         $beginButtonContainer = $beginContainer.create('begin-button-container');
-        $beginButtonContainer.css({ backgroundColor: "#4285F4", width: `${buttonWidth}px`, height: `${buttonHeight}px`, borderRadius: `${buttonHeight}px`, left: "50%", top: "50%", transform: "translate(-50%,-50%)" });
+        $beginButtonContainer.css({backgroundColor: "#4285F4", width: `${buttonWidth}px`, height: `${buttonHeight}px`, borderRadius: `${buttonHeight}px`, position: "relative !important", display: "flex", "justify-content": "center" , "align-items": "center" });
         $beginButtonContent = $beginButtonContainer.create('begin-button-content', 'span').text("Scroll to Begin");
         $beginButtonContent.css({ color: "white", fontSize: "40px", position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" });
     }
+
+    function addListeners() {
+        $beginButtonContainer.interact(false, onClick);
+    }
+    async function onClick() {
+        leave();
+        //await $this.wait(500);
+        await _this.wait(1300);
+        _timeDesktop = _this.initClass(TimeDesktop);
+        _timeDesktop.element.classList().add('time-desktop');
+    }
+    function leave() {
+        _this.clearTimers();
+        // $beginButtonContainer.clearTween();
+
+        // $beginButtonContainer.css({ backgroundColor: "#4285F4", width: `${buttonWidth}px`, height: `${buttonHeight}px`, borderRadius: `${buttonHeight}px`, left: "50%", top: "50%", transform: "translate(-50%,-50%)" });
+
+        $beginButtonContainer.tween({ width: 1800,opacity: 0}, 1300, 'easeOutCubic');
+        //$beginButtonContainer.tween({ scale: 0 }, 600, 'easeOutCubic');
+    }
+
 });

@@ -6,7 +6,7 @@ Class(function MouseMilestones(_milestones) {
     let _config;
     let _currentOpenTooltip;
     let _autoExpandMode = true;
-    const _autoExpandCenterLine = 0.02;
+    const _autoExpandCenterLine = 0.015;
     const _autoExpandPauseDuration = 500;
     //*** Constructor
     (function () {
