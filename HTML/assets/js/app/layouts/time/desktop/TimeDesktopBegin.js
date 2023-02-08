@@ -25,7 +25,8 @@ Class(function TimeDesktopBegin() {
         const interaction = _this.initClass(Interaction, $beginButtonContainer);
         interaction.ignoreLeave = true;
 
-        _this.events.sub(interaction, Interaction.START, onClick);
+       // _this.events.sub(interaction, Interaction.START, onClick);
+        $beginButtonContainer.addEventListener('touchend',onClick, false);
         $beginButtonContainer.interact(false, onClick); //however this only work with mouse not touchscreen touch
     }
     async function onClick() {
