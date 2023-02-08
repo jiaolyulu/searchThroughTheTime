@@ -20,8 +20,11 @@ Class(function DetailUIView() {
     let _hidden = false;
     let _revealed = false;
 
-    // ### Alex bookeeping for scrolling exit in DD
+    // ### DEEPLOCAL bookeeping for scrolling exit in DD
     let scrollExitFlag = false;
+    // ### DEEPLOCAL Time to pause at bottom of deepdive in ms
+    const _deepDiveClosePause = 3000;
+
 
     //*** Constructor
     (async function () {
@@ -106,7 +109,7 @@ Class(function DetailUIView() {
     }
 
     function showDown() {
-        console.log('!!### Ian Show down detailUiView');
+        //console.log('!!### Ian Show down detailUiView');
         if (_atTop) return;
         _atTop = true;
         _hidden = false;
@@ -120,9 +123,9 @@ Class(function DetailUIView() {
     }
 
     function showUp() {
-        console.log('!!### Ian Show Up detailUiView');
+        //console.log('!!### Ian Show Up detailUiView');
 
-        return;
+        //return;
 
         if (_atBottom) return;
         _atBottom = true;
@@ -155,14 +158,13 @@ Class(function DetailUIView() {
         }
 
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
-            console.log(`--> ### IAN START TIMER TO CLOSE DEEPDIVE HERE. `);
             showUp();
             // ### ALEX close detailed view after 1.5s when user scrolls to the bottom
             setTimeout(() => {
                 console.log('### in timeout');
                 scrollExitFlag = false;
                 $exit.forceExit();
-            }, 1.5 * 1000);
+            }, _deepDiveClosePause);
         } else if (scroll < treshold) {
             showDown();
         } else if (scroll > treshold && scroll < (detailCamera.scrollBounds.max - treshold)) {
@@ -200,7 +202,6 @@ Class(function DetailUIView() {
     }
 
     function onScrollClick() {
-        console.log('### IAN on scroll click DetailUIView');
         // if (!_rotate) return;
         const detailCamera = ViewController.instance().views.detail.camera;
         detailCamera.scrollTo({
@@ -209,7 +210,6 @@ Class(function DetailUIView() {
     }
 
     function onMilestoneChange(milestone) {
-        console.log('### IAN on MilestoneChange');
         if (!milestone?.data) return;
         if (_content) _content.destroy();
 

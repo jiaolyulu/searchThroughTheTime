@@ -22,10 +22,10 @@ Class(function SceneTransition() {
         const t = ScreenProjection.project(milestone.layoutPosition);
         const centerDist = Math.abs(t.x - (Stage.width / 2));
 
-        if (centerDist > 150) {
+        /*  if (centerDist > 150) {
             // const centerDuration = Math.range(centerDist, 150, 400, 250, 500, true);
             await main.camera.tweenToObject(milestone, 600, 'easeInOutCubic', true);
-        }
+        }*/
 
         await deep.layout();
 

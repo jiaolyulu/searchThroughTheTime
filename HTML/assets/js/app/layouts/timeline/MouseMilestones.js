@@ -64,10 +64,10 @@ Class(function MouseMilestones(_milestones) {
     function openCenterMostMilestone() {
         let openMilestones = [];
         _milestones.forEach(m => {
-            if (m.inView) {
+            if (m.inView && m.shouldBeVisible()) {
                 //if (m.tooltip) { openMilestones.push(m); }
                 openMilestones.push(m);
-                console.log(`## Adding milestone ${m.id}`);
+                // console.log(`## Adding milestone ${m.id} and length= ${openMilestones.length}`);
             }
         });
         // sort based on the distance from center
