@@ -134,7 +134,6 @@ Class(function DetailUIContent({ id, data, milestone }) {
     }
 
     function show() {
-        console.log('### IAN show DetailUIContent')
         const stagger = 600;
 
         $this.css({ opacity: 1 });

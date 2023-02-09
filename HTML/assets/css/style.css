@@ -39,6 +39,13 @@ html,
   /*<---lulu's deeplocal change */
 }
 
+.DOM3D h1:first-of-type .SplitText{/*  <--- Introduction Title Text. Hidden in kiosk mode. */
+  top:150px;
+}
+.DOM3D h2{/*  <--- Introduction Description Text. Hidden in kiosk mode. */
+  visibility:collapse;
+}
+
 .Container canvas {
   /*line drawing */
   margin-left: 720px;
@@ -79,25 +86,32 @@ html,
  */  min-width: 1400px;
  }
 
- .DetailParagraph:not(:first-child) .UIText{ /* all but the first */
-  /* font-size: 28pt!important;
-  background-color: blueviolet; */
-/* background-color: blueviolet!important; 
-background: red; */}
+.content-container .DetailParagraph .UIText{ /* <--- Deepdive title */
+  font-size: 36pt!important;
 
- .DetailParagraph:first-of-type .UIText {
-  font-size: 48pt!important;
-  background-color: rgb(0, 160, 19);
- }
- 
-.DetailParagraph:last-child .UIText{ /* last paragraph */
-  margin-bottom: 500px;
-  background-color: red;
-  } 
+}
 
- .DetailImage { /* detail view image */
+.content-container .DetailParagraph ~.DetailParagraph .UIText{ /* <------ All text for DeepDive */
+  font-size: 28pt!important;
+}
+.DetailImage { /* <---- detail view image */
   min-width: 1400px;
  }
+
+
+ #spinDial { /* <---- Spin dial icon at start */
+  top:20px;
+  scale:2;
+  will-change: transform;
+  animation-name: spinWheelIcon;
+animation-duration: 3s; 
+animation-iteration-count: infinite;
+}
+
+@keyframes spinWheelIcon { /* <--- animation for spin dial Icon */
+  from {transform:rotate(-90deg);}
+  to {transform:rotate(270deg)}
+}
 
 
  .ios,
@@ -228,6 +242,8 @@ body {
   /*lulu's deeplocal change */
   transform: translate(-50%, -50%) translateY(-3px);
 }
+
+
 
 @media only screen and (max-width: 768px) {
   #loader .center {
