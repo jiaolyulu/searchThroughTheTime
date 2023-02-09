@@ -1,25 +1,21 @@
 Class(function TimeDesktopCSS($obj) {
     Inherit(this, Component);
     const _this = this;
-
+    const timebarHeight = 140;
     //*** Constructor
     (function () {
         // Keep barHeight in sync with TimeDesktopExpand
         const barHeight = `
-          height: 140px;
+          height: ${timebarHeight}px;
 
-          @media (min-height: 770px) {
-            height: 160px;
-          }
+        
         `;
 
         const barBottom      = `
-          left:-40px;
+          left:0px;
           bottom: 290px; // !!DEEPLOCAL change. was 38px lulus deeplocal change
 
-          @media (max-height: 770px) {
-              bottom: 328px;
-          }
+          
         `;
 
         // const thumbStyle = `
@@ -63,15 +59,25 @@ Class(function TimeDesktopCSS($obj) {
           .track-container {
            // ${barHeight}
           //  ${barBottom}
+            position:relative;
+          }
 
+          .instruction-container {
+           // ${barHeight}
+          //  ${barBottom}
+            position:relative;
+            text-align: center;
+          }
+          .instruction-content{
+            font-size: 50px;
+            color: #202124；
           }
          
 
           .time-container {
            // transform: translate3d(90px, -77px, 0px);//translateY(98px);
             rotate:90deg;
-            width: 0px; //IAN was 100%
-            height: 100%;           
+            width:0px; //IAN was 100%0         
           }
 
           .track-wrapper {
