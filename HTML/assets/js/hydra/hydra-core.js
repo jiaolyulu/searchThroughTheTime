@@ -5,7 +5,7 @@
 
 const _isExhibitMode=true;
 const _exhibitStageWidth=3840;
-const _exhibitStageHeight=1000;
+const _exhibitStageHeight=1920;
 
 
 

@@ -1,24 +1,21 @@
 Class(function TimeDesktopCSS($obj) {
     Inherit(this, Component);
     const _this = this;
-
+    const timebarHeight = 140;
     //*** Constructor
     (function () {
         // Keep barHeight in sync with TimeDesktopExpand
         const barHeight = `
-          height: 44px;
+          height: ${timebarHeight}px;
 
-          @media (min-height: 770px) {
-            height: 60px;
-          }
+        
         `;
 
-        const barBottom = `
-          bottom: 0px; // !!DEEPLOCAL change. was 38px
+        const barBottom      = `
+          left:0px;
+          bottom: 290px; // !!DEEPLOCAL change. was 38px lulus deeplocal change
 
-          @media (max-height: 770px) {
-              bottom: 20px;
-          }
+          
         `;
 
         // const thumbStyle = `
@@ -34,9 +31,9 @@ Class(function TimeDesktopCSS($obj) {
         // `;
 
         const thumbStyle = `
-          width: 46px;
-          height: 30px;
-          margin-top: -15px;
+          width: 96px;
+          height: 60px;
+          margin-top: -30px;
         `;
 
         GoobCache.apply('TimeDesktop', $obj, /* scss */ `
@@ -52,7 +49,7 @@ Class(function TimeDesktopCSS($obj) {
             z-index: 10;
             ${barHeight}
             ${barBottom}
-            left: 0px; 
+           
             width:2000px;!important
           }
 
@@ -62,16 +59,25 @@ Class(function TimeDesktopCSS($obj) {
           .track-container {
            // ${barHeight}
           //  ${barBottom}
-            left: 50x;
+            position:relative;
+          }
 
+          .instruction-container {
+           // ${barHeight}
+          //  ${barBottom}
+            position:relative;
+            text-align: center;
+          }
+          .instruction-content{
+            font-size: 50px;
+            color: #202124；
           }
          
 
           .time-container {
            // transform: translate3d(90px, -77px, 0px);//translateY(98px);
             rotate:90deg;
-            width: 0px; //IAN was 100%
-            height: 100%;           
+            width:0px; //IAN was 100%0         
           }
 
           .track-wrapper {
@@ -87,7 +93,7 @@ Class(function TimeDesktopCSS($obj) {
             width: ${2150}px;
             height: 100%;
             background-color: ${Styles.colors.concrete};
-            border-radius: 50px;
+            border-radius: 90px; //deeplocal change
             padding: 0 30px;
             will-change: transform, width;
             transform-origin: center left;
@@ -133,21 +139,24 @@ Class(function TimeDesktopCSS($obj) {
             position: relative !important;
             width: 100%;
             height: 100%;
-            display: flex;
+            display: inline-flex;
+            flex-direction:row;
             align-items: center;
             overflow: hidden;
             padding: 0 14px;
-            gap: 10px;
+            gap: 18px;
             box-sizing: border-box;
           }
 
           .pattern-dot {
             position: relative !important;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
+            /* lulu's deeplocal change*/
             border-radius: 999px;
             background-color: #BDBDBD;
             flex-shrink: 0;
+            
             display: grid;
           }
 
@@ -210,9 +219,10 @@ Class(function TimeDesktopCSS($obj) {
           }
 
           .year-container {
-            top: 0;
+            top: 55px;
             right: 55px;
-            bottom: 0;
+            /* lulu's deeplocal change*/
+            bottom: 55px;
             left: 55px;
           }
           
@@ -261,12 +271,12 @@ Class(function TimeDesktopCSS($obj) {
               display: inline-block;
               /*background-color: ${Styles.colors.concrete};*/
               color: ${Styles.colors.mineShaft};
-              font-size: 15px;
+              font-size: 35px;
               /*top: calc(50% - 3px);*/
               /*transform: translate(-50%, -50%);*/
               transform: translate(-50%, 0%);
               line-height: 1;
-              padding: 0 5px;
+              padding: 0 0px;
               will-change: transform;
             }
           }

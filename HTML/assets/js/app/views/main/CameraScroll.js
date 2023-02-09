@@ -53,7 +53,6 @@ Class(function CameraScroll(_input, _group) {
 
         const main = _this.findParent('MainView');
         await main.ready();
-        //console.log('### Ian camera scroll constructor');
         _this.onResize(onResize);
         _this.startRender(loop, RenderManager.BEFORE_RENDER);
 
@@ -81,7 +80,6 @@ Class(function CameraScroll(_input, _group) {
     })();
 
     function initConfig() {
-        //  console.log('### Ian camera scroll init config');
         const name = `${_input.prefix}_camerascroll`;
         _config = InputUIL.create(name, _group);
         _config.setLabel('Camera Scroll');
@@ -360,7 +358,6 @@ Class(function CameraScroll(_input, _group) {
     _this.forceToMilestone = function(milestone) {
         const { x, y } = milestone.layoutPosition;
         _this.forceTo(x, y);
-        //  console.log('### Ian force to milestone camerascroll');
     };
 
     function addScroll(v) {
@@ -381,8 +378,6 @@ Class(function CameraScroll(_input, _group) {
     }
 
     function scrollToObject(object, direct = false) {
-        // console.log('### Ian scroll to object camerascroll');
-
         if (!object) return;
 
         _direct = direct;
@@ -400,8 +395,6 @@ Class(function CameraScroll(_input, _group) {
 
     //tween to object position
     async function tweenToObject(object, duration = 1000, ease = 'easeInOutCubic', dynamic = false) {
-        //   console.log('### Ian tween to object camerascroll');
-
         if (!object) return;
         if (!_this._V3) _this._V3 = new Vector3();
         object.group.getWorldPosition(_this._V3);
@@ -430,7 +423,7 @@ Class(function CameraScroll(_input, _group) {
     }
 
     async function tweenToObjectDiff(object, duration = 1000, ease = 'easeInOutCubic') {
-        // console.log('### Ian tween to object dif camerascroll');
+        console.log('### Ian tween to object dif camerascroll');
 
         if (!object) return;
         const isVertical = GlobalStore.get('vertical');
@@ -448,8 +441,6 @@ Class(function CameraScroll(_input, _group) {
     }
 
     function scrollToProgress(progress, accountdiff = false, invoke = true) {
-        // console.log('### Ian scroll to progress camerascroll');
-
         const isVertical = GlobalStore.get('vertical');
         let v = 0;
 
@@ -487,8 +478,6 @@ Class(function CameraScroll(_input, _group) {
         // });
 
         if (MilestoneTooltip.TOUCH) {
-            //   console.log('### IAN milestone tooltop touch camerascroll');
-
             _this.events.sub(MilestoneTooltip.OPEN, () => {
                 _active = false;
             });
@@ -503,14 +492,10 @@ Class(function CameraScroll(_input, _group) {
     }
 
     function onTooltipChange(tooltip) {
-        console.log(`### Ian onTooltipChange camerascroll tooltip: ${tooltip}`);
-
         tween(_this, { extraZoom: tooltip ? -0.4 : 0 }, 900, 'easeOutCubic');
     }
 
     function onHoverCTAChange(hover) {
-        console.log('### Ian onHoverCTAChange camerascroll');
-
         tween(_this, { extraZoom: hover ? -0.5 : 0 }, 900, 'easeOutCubic');
     }
 

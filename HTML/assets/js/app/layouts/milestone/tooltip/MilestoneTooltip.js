@@ -27,9 +27,8 @@ Class(function MilestoneTooltip({
         initHtml();
         initStyles();
         if (_scrollOnly) {
-            console.log(`### DEEPLOCAL--> Tooltip set to scroll Only.`);
         } else if (MilestoneTooltip.TOUCH) {
-            enableTouch();
+            //enableTouch();
         } else {
             checkMouseOut();
         }
@@ -39,7 +38,7 @@ Class(function MilestoneTooltip({
 
     function handleResize() {
         if (MilestoneTooltip.TOUCH && _open) {
-            _this?.hide();
+            //_this?.hide();
         }
     }
 
@@ -98,9 +97,9 @@ Class(function MilestoneTooltip({
         $box = $container.create('box');
         $layer = $box.create('layer');
 
-        if (MilestoneTooltip.TOUCH) {
-            $close = $box.create('close');
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     $close = $box.create('close');
+        // }
 
         $copy = $box.create('copy');
 
@@ -191,7 +190,6 @@ Class(function MilestoneTooltip({
 
                 .box {
                     width: 90%;
-                    max-width: 400px;
                     margin: 0 auto;
                     margin-top: 140px;
                     z-index: 200;
@@ -216,6 +214,7 @@ Class(function MilestoneTooltip({
 
                 .content {
                     font-size: 16px;
+                    max-width: 400px;
                 }
             }
 
@@ -292,7 +291,6 @@ Class(function MilestoneTooltip({
     }
 
     function enableTouch() {
-        console.log('### IAN enableTouch');
         $container.classList().add('touch');
 
         $container.interact(false, _ => {
@@ -338,7 +336,7 @@ Class(function MilestoneTooltip({
     }
 
     function normalizeCopySize() {
-        if (MilestoneTooltip.TOUCH) return;
+        //if (MilestoneTooltip.TOUCH) return;
         // await _this.parent.parent.parent.ready();
         // await _this.wait(1400);
         $anchor.forceUpdate();
@@ -374,8 +372,7 @@ Class(function MilestoneTooltip({
     _this.get('drawing', _ => isDrawing());
 
 
-    this.show = async function() {
-        console.log('### IAN show milestoneToolTip');
+    this.show = async function () {
         if (_open) return;
 
         if (GlobalStore.get('transitioning')) {
@@ -397,9 +394,9 @@ Class(function MilestoneTooltip({
             });
         }
 
-        if (MilestoneTooltip.TOUCH) {
-            return this.showMobile();
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     return this.showMobile();
+        // }
 
         MilestoneTooltip.Z_INDEX += 1;
         $container.css({ zIndex: MilestoneTooltip.Z_INDEX });
@@ -408,7 +405,6 @@ Class(function MilestoneTooltip({
 
         await _this.wait(1);
 
-        console.log(`### show background square x:${_offset.x} and y:${_offset.y}`);
         $box.tween({ x: `${_offset.x}%`, y: `${_offset.y}%` }, 600, 'easeOutCubic');
 
         tween(_this.group.position, {
@@ -446,7 +442,6 @@ Class(function MilestoneTooltip({
         }
 
         $copy.css({ visibility: 'visible' });
-
         $content.css({ opacity: 0 });
         // $content.transform({ y: 15 });
         await _this.wait(40);
@@ -459,8 +454,7 @@ Class(function MilestoneTooltip({
         _checkMouseOut = true;
     };
 
-    this.hide = async function(e) {
-        console.log('### IAN hide milestoneToolTip');
+    this.hide = async function (e) {
         if (e && e.seo) {
             const focus = document.querySelector(':focus');
 
@@ -480,9 +474,9 @@ Class(function MilestoneTooltip({
         _this.commit(MainStore, 'setTooltip', false);
         _this.events.fire(MilestoneTooltip.CLOSING);
 
-        if (MilestoneTooltip.TOUCH) {
-            return this.hideMobile();
-        }
+        // if (MilestoneTooltip.TOUCH) {
+        //     return this.hideMobile();
+        // }
 
         $content.tween({
             // y: 0,
@@ -534,7 +528,7 @@ Class(function MilestoneTooltip({
         }
     };
 
-    this.showMobile = async function() {
+    this.showMobile = async function () {
         Stage.add($container);
         $container.css({ display: 'block', opacity: 0 });
         await _this.wait(50);
@@ -607,8 +601,7 @@ Class(function MilestoneTooltip({
     };
 
 
-    this.hideMobile = async function() {
-        console.log('### IAN hide mobile MilestoneToolTip');
+    this.hideMobile = async function () {
         if ($close) {
             $close.tween({ opacity: 0 }, 200, 'easeOutCubic', 0);
         }
@@ -635,7 +628,6 @@ Class(function MilestoneTooltip({
     };
 
     this.setPlusBorder = async function () {
-        console.log(`### IAN set plus border`);
         $layer.tween({
             borderColor: 'red',
             borderWidth: '50px'
@@ -648,7 +640,7 @@ Class(function MilestoneTooltip({
     //     normalizeCopySize();
     // };
 
-    this.setPlus = function(plus) {
+    this.setPlus = function (plus) {
         _plus = plus;
         _idlePosition.copy(plus.group.position);
         _this.group.position.copy(plus.group.position);
@@ -669,7 +661,8 @@ Class(function MilestoneTooltip({
     this.setOpacity('isVisible', _ => _isVisible);
 }, _ => {
     MilestoneTooltip.Z_INDEX = 101;
-    MilestoneTooltip.TOUCH = Config.TOUCH;
+    //MilestoneTooltip.TOUCH = Config.TOUCH;
+    MilestoneTooltip.TOUCH = false;
     MilestoneTooltip.OPEN = 'MilestoneTooltip.OPEN';
     MilestoneTooltip.CLOSING = 'MilestoneTooltip.CLOSING';
     MilestoneTooltip.CLOSE = 'MilestoneTooltip.CLOSE';

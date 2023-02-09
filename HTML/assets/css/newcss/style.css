@@ -14,14 +14,9 @@ html,
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
 /*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
 #Stage {
-  background-color: rgb(235, 251, 255);
+  background-color: rgb(8, 120, 148);
 }
- .bg-wrapper{
-  scale:2!important;
- }
- .year-text-container{
-  scale:2!important;
- }
+
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
 .YearScroller {
   /* year bar on top of screen*/
@@ -33,7 +28,7 @@ html,
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 720px!important;
+  margin-left: 720px;
   /* lulu's deeplocal change */
   margin-top: 120px;
   /*<---lulu's deeplocal change */
@@ -74,33 +69,8 @@ html,
   /*<--- width of window*/
   /*LU content might need to be top justified?*/
 }
- .DetailParagraph{ 
-/*   This is the detailed view paragraph width
- */  min-width: 1400px;
- }
 
- .DetailParagraph:not(:first-child) .UIText{ /* all but the first */
-  /* font-size: 28pt!important;
-  background-color: blueviolet; */
-/* background-color: blueviolet!important; 
-background: red; */}
-
- .DetailParagraph:first-of-type .UIText {
-  font-size: 48pt!important;
-  background-color: rgb(0, 160, 19);
- }
- 
-.DetailParagraph:last-child .UIText{ /* last paragraph */
-  margin-bottom: 500px;
-  background-color: red;
-  } 
-
- .DetailImage { /* detail view image */
-  min-width: 1400px;
- }
-
-
- .ios,
+.ios,
 .ios body,
 .ios #Stage {
   overflow: visible;
@@ -217,7 +187,6 @@ body {
   color: #333333;
   margin: 0;
   opacity: 0;
-  margin-bottom: 50px;
 }
 
 #loader .center {

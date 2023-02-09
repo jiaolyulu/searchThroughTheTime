@@ -22,6 +22,7 @@ const _hideFrame = true;
 //private vars
 let _contentPath = _path.join(__dirname, '..') + _contentFolder;
 let _win;
+
 let _w = 720 + 3840; // touch screen + widescreen. If _w or _h is set to 0, the app will dynamically scale to fill all screens.
 let _h = 1920;
 let _x = 0;
@@ -38,11 +39,13 @@ const startExpressServer = () => {
 };
 const setScreenDimensions = () => {
     if (_w === 0 || _h === 0) {
+
         logger.log('ELECTRON', `Screen dimensions not set. Setting screen size to cover all screens.`);
         const allScreens = screen.getAllDisplays();
         allScreens.forEach(screen => {
             logger.log('ELECTRON', `Screen resolution = ${screen.size.width}+${screen.size.height}`);
             logger.log('ELECTRON', `Screen.bounds.x= ${screen.bounds.x} y= ${screen.bounds.y}`);
+
             _w += screen.size.width;
             _h = screen.size.height;
             // setting to left most screen as left anchor.
@@ -56,8 +59,9 @@ const setScreenDimensions = () => {
 };
 
 const createWindow = () => {
+    console.log("x:", _x, "    y:", _y);
     _win = new BrowserWindow({
-        x: _x,
+        x: _x, // was -720
         y: _y,
         frame: !_hideFrame,
         backgroundColor: _backgroundColor,
@@ -69,6 +73,7 @@ const createWindow = () => {
     }
     _win.loadURL(`http://127.0.0.1:${_port}/${param}`);
 };
+
 
 const makeFullScreen = () => {
     // _win.setMinimumSize(_w, _h); //TODO remove this after gb integration
@@ -95,6 +100,9 @@ const wait = (ms) => new Promise((resolve) => {
 //     }
 // };
 
+
+
+
 app.whenReady().then(async () => {
     logger.log('ELECTRON', `PIZZA APP.getPath(): ${app.getPath('appData')}`);
     // set up local json db
@@ -104,6 +112,7 @@ app.whenReady().then(async () => {
     setScreenDimensions();
     createWindow();
     makeFullScreen();
+
 
     // set up gb
     const gbWrapper = new GumbandService();

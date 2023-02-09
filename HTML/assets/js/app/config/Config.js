@@ -128,7 +128,7 @@ Class(function Config() {
     // - Gaze camera movement x,y
     // - Tooltip click instead of hover
     // - Scroll lerping...
-    _this.TOUCH = Device.touchCapable;
+    _this.TOUCH = (Device.touchCapable && !_kioskMode); // When in kiosk mode, items will auto expand so touch should generally be treated as off
 
 
     _this.DOM3DRatio = 1;

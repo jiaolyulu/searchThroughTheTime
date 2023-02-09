@@ -75,20 +75,22 @@ Class(function TimeDesktop() {
     let $instructions;
     const _kioskMode = true;
     //const _verticalScrollBarHeight = 2000; Set by TrackSize Width
-    const _verticalScrollLeftOffset = 70;
-    const _verticalScrollTopOfffset = -70;
+    const _verticalScrollLeftOffset = 0; //<-- LU I think this is the scrollbar left offset.
+    const _verticalScrollTopOfffset = 0;
 
-
+    const touchScreenHeight = 1920;
+    const scrollBarLength = 1800;
+    // DEEPLOCAL also have to change the period hidden index if the above number is changed, Lu
 
     const TRACK_SIZES = [
         {
             minSize: 0, // min Stage.width to enable this
             trackWidth: 610, // width of the track
             fullCenter: true, // If needs to center also the expand btn
-            // Offsets (X) of the persistent years.
+            // Offsets (X) of the persistfpent years.
             // This is done for two reasons:
             // 1. Avoid overlap with the dot pattern
-            // 2. Manually positioning to make sure they match milestones
+            // 2. Manually positioning to make sure they match milestonesf
             years: { 'year_2000': -19, 'year_2005': -25, 'year_2010': -30, 'year_2015': -65, 'year_2020': 0 },
             disabledDots: [2, 3, 4, 9, 10, 11, 16, 17, 18, 21, 22, 23, 33, 34, 35],
             higlightDots: {
@@ -147,10 +149,10 @@ Class(function TimeDesktop() {
         },
         {
             minSize: 2000,
-            trackWidth: 1501, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
-            fullCenter: false,
+            trackWidth: scrollBarLength, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
+            fullCenter: false, //lulu's deeplocal change
             years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
-            disabledDots: [4, 5, 6, 18, 19, 20, 31, 32, 33, 43, 44, 45, 64, 65, 66],
+            disabledDots: [4, 5, 6, 7, 18, 19, 20, 21, 32, 33, 34, 35, 45, 46, 47, 48, 63, 64, 65, 66],
             higlightDots: {
                 'default': [0, 1, 2],
                 '2000': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
@@ -194,23 +196,35 @@ Class(function TimeDesktop() {
     }
 
     function initHTML() {
+
         $timeContainer = $this.create('time-container');
+
+        $instructionContainer = $timeContainer.create('instruction-container');
+        $instructionContent = $instructionContainer.create('instruction-content', 'span').text("Tap to Explore Timeline");
+
         $thumbContainer = $timeContainer.create('thumb-container');
         $thumbContainer.accessible('hidden');
 
         $trackContainer = $timeContainer.create('track-container');
+
+
+
         $trackWrapper = $trackContainer.create('track-wrapper');
         $track = $trackWrapper.create('track');
 
-        $instructions = $this.create('instructions');
 
-        const externalHTML = `<img src='1' onerror='alert("Error loading image")'>`;
         // shows the alert
-        $instructions.innerHTML = externalHTML;
 
 
-        // $instructions.textContent = 'scroll me';
-        //$timeContainer.append('<div>scroll me</div>');
+        // _text = _this.initClass(UIText, {
+        //     'this is instruction by deeplocal',
+        //     type: 'h1'
+        // });
+        // _text.css({'position': 'absolute'});
+        // $instructions.add(_text);
+
+        //$instructions.textContent = 'scroll me';
+        // $timeContainer.append('<div>scroll me</div>');
 
         // $rightDot = $trackWrapper.create('time-container-dot');
         // $rightDot.css({ 'right': '27px' });
@@ -262,7 +276,7 @@ Class(function TimeDesktop() {
             $year.classList().add(`year-${currentYear}`);
             const $yearText = $year.create('year-content', 'span').text(currentYear);
 
-            const left = Math.range(i, 0, _availableYears.length - 1, 0, 100, true);
+            const left = Math.range(i, 0, _availableYears.length - 1, 0, 100, true); //lulu's deeplocal change
             $year.css({ left: `${left}%` });
 
             let phase = i / (_availableYears.length - 1);
@@ -301,11 +315,11 @@ Class(function TimeDesktop() {
 
         _expand = _this.initClass(TimeDesktopExpand, [$expandContainer]);
 
-        if (_kioskMode) {
-            $timeContainer.transform({ y: 50 });
-        } else {
-            $timeContainer.transform({ y: 98 });
-        }
+        // if (_kioskMode) {
+        //     $timeContainer.transform({ y: 150 });//lulu's deeplocal change
+        // } else {
+        //     $timeContainer.transform({ y: 198 });//lulu's deeplocal change
+        // }
     }
 
     function addListeners() {
@@ -341,7 +355,7 @@ Class(function TimeDesktop() {
         if ((p >= START_PROGRESS || _kioskMode) && !_show && !transitioning) {
             show();
         } else if (p < START_PROGRESS && _show) {
-            hide();
+           // hide();
         }
     }
 
@@ -349,7 +363,7 @@ Class(function TimeDesktop() {
         if (shouldBeVisible()) {
             show();
         } else {
-            hide();
+            // hide();
         }
 
         // if (view === 'DetailView') {
@@ -367,9 +381,9 @@ Class(function TimeDesktop() {
 
     function onEndChange(isEnd) {
         if (isEnd) {
-            hide();
+           // hide();
         } else if (MainStore.get('progress') >= START_PROGRESS && !isEnd) {
-            show();
+            // show();
         }
     }
 
@@ -485,7 +499,7 @@ Class(function TimeDesktop() {
         if (!_show) return;
         _show = false;
         $timeContainer.clearTween();
-        $timeContainer.tween({ y: 98 }, 800, 'easeInOutCubic');
+        //$timeContainer.tween({ y: 198 }, 800, 'easeInOutCubic'); //lulu's deeplocal change
 
         arrows.forEach((arrow, index) => {
             arrow.hide({ delay: index * 100 });
@@ -573,7 +587,8 @@ Class(function TimeDesktop() {
         if (GlobalStore.get('transitioning')) return;
         if (!_show) return;
         $dots.forEach(($dot, index) => {
-            const dist = Math.abs(thumbPos - $dot.pos.x);
+            // lulu's deeplocal change, still dont know why I need to *0.095 to make the mapping right, cause pos.x is supposed to be the location of the period position
+            const dist = Math.abs(thumbPos - $dot.pos.x * 0.095);
             const distRange = Math.range(dist, 0, 70, 1, 0, true);
             let targetScale = Math.min(_velocity * 6.0, 2.0) * distRange;
             targetScale = Math.min(1 + targetScale, 3);
@@ -626,13 +641,13 @@ Class(function TimeDesktop() {
         const sizeObj = getCurrentSizeObj();
         const trackWidth = sizeObj.trackWidth;
         //   const trackWidth = _verticalScrollBarHeight;//##IAN ASK MARS HOW TO SET VIA CSS.
-        const left = _verticalScrollLeftOffset; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
+        const left = (touchScreenHeight - trackWidth) / 2; //DEEPLOCAL MODIFICATION TO MAKE REMOVE CENTERING //(Stage.width - centerWidth) / 2;
         const up = _verticalScrollTopOfffset;//DEEPLOCAL
 
         // Thumbs range x
         const offset = 30;
         _thumbRange[0] = offset;
-        _thumbRange[1] = trackWidth - (30 + offset);
+        _thumbRange[1] = trackWidth - (30 + offset); //lulu's deeplocal change
 
         // Keep track in the center
         let centerWidth = trackWidth;
@@ -641,7 +656,7 @@ Class(function TimeDesktop() {
             centerWidth += 80;
         }
 
-        console.log(`!!IAN CSS ${$trackContainer}`);
+        //console.log(`!!IAN CSS ${$trackContainer}`);
         if (apply) {
             $trackContainer.transform({ x: left, y: up });
         }
@@ -660,6 +675,11 @@ Class(function TimeDesktop() {
         });
 
         $thumbContainer.transform({ x: left, y: up });
+
+        $instructionContainer.transform({ x: left, y: up - 90 }); //lulu's deeplocal change, pretty hard code css for the instruction div
+        $instructionContainer.css({
+            width: trackWidth
+        });
 
         // Apply years offsets
         if (apply) {
@@ -704,6 +724,8 @@ Class(function TimeDesktop() {
         const sizeObj = getCurrentSizeObj();
         $dots.forEach(($dot, index) => {
             const offsetLeft = $dot.el.div.offsetLeft;
+            //lulu's deeplocal change
+            //console.log("lulu offset left", offsetLeft)
             const phase = offsetLeft / containerWidth;
             $dot.pos.x = Math.floor(Math.map(phase, 0.0, 1.0, _thumbRange[0], _thumbRange[1]));
             $dot.pos.XNorm = phase;
@@ -716,7 +738,7 @@ Class(function TimeDesktop() {
     }
 
     function assignDotYears() {
-        console.log(`##IAN Dots assign years`);
+        //console.log(`##IAN Dots assign years`);
         const sizeObj = getCurrentSizeObj();
 
         let indicies;
@@ -815,13 +837,13 @@ Class(function TimeDesktop() {
 
         //INVERT
         if (_kioskMode) {
-            //rotate 90deg and track y
+            //rotate TimeD and track y
             $track.transform({ y: (firstTrackBounds.y - lastTrackBounds.y) });
         } else {
             $track.transform({ x: (firstTrackBounds.x - lastTrackBounds.x) });
         }
 
-        console.log(`##IAN lastPattenBounds.x ${lastPatternBounds.x}`);
+        //console.log(`##IAN lastPattenBounds.x ${lastPatternBounds.x}`);
         $patternWrapper.transform({ x: firstPatternBounds.x - lastPatternBounds.x, y: '-50%' });
         years.forEach(($year, index) => {
             $year.transform({ x: firstYearBounds[index].x - lastYearBounds[index].x });

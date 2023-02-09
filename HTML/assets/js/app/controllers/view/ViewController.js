@@ -58,13 +58,13 @@ Class(function ViewController() {
         }
 
         if (GlobalStore.get('transitioning')) {
-            return;
+
         }
         await SceneTransition.instance().transition(from, to);
         if (typeof (Analytics) !== 'undefined') Analytics.trackPageView(path, route.name);
     }
 
-    this.navigate = async function(path) {
+    this.navigate = async function (path) {
         if (Hydra.LOCAL && (Config.RESTORE || UIL.loaded)) {
             console.log('Dev navigation disabled');
             return;
@@ -76,6 +76,7 @@ Class(function ViewController() {
             await SceneTransition.instance().promise;
             await _this.wait(100);
         }
+
 
         if (path.startsWith('/')) {
             path = path.substring(1);

@@ -1,4 +1,5 @@
-Class(function TimeArrow({ size = 12, rotate = 0, line = true, name = '' }) {
+//change the size of the arrow
+Class(function TimeArrow({ size = 24, rotate = 0, line = true, name = '' }) {
     Inherit(this, Element);
     const _this = this;
     const $this = _this.element;
@@ -15,7 +16,7 @@ Class(function TimeArrow({ size = 12, rotate = 0, line = true, name = '' }) {
         $wrapper = $this.create('wrapper');
         $container = $wrapper.create('container');
         $container.html(`
-          <svg class="aarrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="aarrow" width="${size}" height="${size}" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="aline" d="M6.00053 2.09917e-05V9.99998" stroke="white" stroke-width="2"/>
             <path class="aleft" d="M1.00002 5.00014L6 10.0001L6.5 9.5" stroke="white" stroke-width="2"/>
             <path class="aright" d="M5.5 9.5L6 10.0001L11 5.00014" stroke="white" stroke-width="2"/>

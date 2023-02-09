@@ -6,27 +6,24 @@ Class(function MouseMilestones(_milestones) {
     let _config;
     let _currentOpenTooltip;
     let _autoExpandMode = true;
-    const _autoExpandCenterLine = 0.02;
+    const _autoExpandCenterLine = 0.015;
     const _autoExpandPauseDuration = 500;
     //*** Constructor
     (function () {
-        console.log("In mouse milestones")
         if (!Tests.mouseMilestones()) {
             return;
         }
 
-        console.log("after return")
-
         initConfig();
         _this.startRender(loop, RenderManager.AFTER_LOOPS);
-        console.log(`##Auto expand mode is ${_autoExpandMode}`)
+        console.log(`##Auto expand mode is ${_autoExpandMode}`);
         if (_autoExpandMode) {
             setInterval(openCenterMostMilestone, _autoExpandPauseDuration);
         }
     })();
 
     function initConfig() {
-        console.log("in init confi")
+        console.log("in init confi");
         _config = InputUIL.create('mousemilestones');
         _config.setLabel('Mouse Milestones');
 
@@ -67,31 +64,24 @@ Class(function MouseMilestones(_milestones) {
     function openCenterMostMilestone() {
         let openMilestones = [];
         _milestones.forEach(m => {
-            if (m.inView) {
+            if (m.inView && m.shouldBeVisible()) {
                 //if (m.tooltip) { openMilestones.push(m); }
                 openMilestones.push(m);
-                 console.log(`## Adding milestone ${m.id}`);
+                // console.log(`## Adding milestone ${m.id} and length= ${openMilestones.length}`);
             }
         });
         // sort based on the distance from center
         openMilestones.sort(sortByDistance);
         if (openMilestones.length > 0) {
             if (_currentOpenTooltip?.id !== openMilestones[0].id) {
-                console.log(`## The ${_currentOpenTooltip?.id} is open. Changing to new milestone ${openMilestones[0].id}`);
                 // close all milestones, even those off screen in case of super fast scrolling.
                 _milestones.forEach(m => {
                     m.AutoClose();
                 });
 
 
-                /*  if (_currentOpenTooltip?.id ?? false) {
-                    _currentOpenTooltip.AutoClose();
-
-    ------------------------------> //IAN NEED TO CLOSE ALL BUT THE ACTIVE TOOL TIP IN CASE OF SPEED SCROLLING
-                    console.log(`Closing ${_currentOpenTooltip.id}`);*/
-                // }
                 _currentOpenTooltip = openMilestones[0];
-                _currentOpenTooltip.AutoExpandAfterDelay(50);
+                _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
             }
         }
     }
@@ -99,8 +89,6 @@ Class(function MouseMilestones(_milestones) {
 
     function loopMilestone(m) {
         if (!m.drawing) return;
-        // if (m.id !== 'pagerank') return;
-
         if (m.cta) {
             return;
         }
