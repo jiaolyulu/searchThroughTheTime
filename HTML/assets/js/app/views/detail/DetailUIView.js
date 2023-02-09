@@ -25,7 +25,6 @@ Class(function DetailUIView() {
     // ### DEEPLOCAL Time to pause at bottom of deepdive in ms
     const _deepDiveClosePause = 3000;
 
-
     //*** Constructor
     (async function () {
         await initHTML();
@@ -154,7 +153,7 @@ Class(function DetailUIView() {
             setTimeout(() => {
                 console.log('### in timeout');
                 $exit.forceExit();
-            }, 1.5 * 1000);
+            }, deepDiveExitPause * 1000);
         }
 
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {

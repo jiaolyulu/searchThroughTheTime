@@ -4,6 +4,7 @@
 .hydrababel
 .es5cache
 .hydra
+.env
 HTML/assets/runtime/bundle.js
 Build
 Electron/node_modules
