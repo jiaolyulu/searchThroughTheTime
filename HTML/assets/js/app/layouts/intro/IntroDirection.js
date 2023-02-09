@@ -17,7 +17,7 @@ Class(function IntroDirection() {
 
     _this.s = {
         scale: 0
-    };
+        };
 
     //*** Constructor
     (function () {
@@ -36,8 +36,8 @@ Class(function IntroDirection() {
     })();
 
     function initHTML() {
-        $spinDial = $this.create('svgSpinDial');
-        $spinDial.html(`<img src = "assets/images/deeplocal/scrollWheelIcon.svg" alt="spin dial"/>`);
+        $spinDial = $this.create('svgSpinDialHolder');
+        $spinDial.html(`<img id="spinDial" src = "assets/images/deeplocal/scrollWheelIcon.svg" alt="spin dial"/>`);
         // $svg = $this.create('svg');
         /* $svg.html(`
           <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,36 +56,12 @@ Class(function IntroDirection() {
               width: 100%;
               height: 100%;
             }
-
-            .svgSpinDial {
-              width: 200%;
-              height: 200%;
-              border: ${Config.DOM3DPx(2)} solid #4285F4;
-              border-radius: 50%;
-              box-sizing: border-box;
-              will-change: transform;
-              left: -50%;
-              ${Styles.smaller('vertical', `
-                border: ${Config.DOM3DPx(3)} solid #4285F4;
-              `)}
-            }
-
-            .spin{
-                color:blue;
-            }
-           /*  .svg, svg {
-              width: 100%;
-              height: 100%;
-              position: static!important;
-            } */
+        
         `);
     }
 
     function loop(time, delta) {
-        _time += delta * _this.sp.speed;
-        //let style =
-        //transform({ rotate: 0.1 * _time });
-        //.transform = 'rotate(90deg)';
+        _time += delta * _this.sp.speed;   
         /*  _lines.forEach((path, index) => {
             const speed = -0.003;
             const offset = index * 1;
@@ -100,7 +76,7 @@ Class(function IntroDirection() {
         _this.sp.speed = 1;
         _this.o.opacity = 0;
         _this.s.scale = 0;
-        $spinDial.transform({ scale: 0 });
+        $spinDial.transform({ scale: 0});
         $this.css({ opacity: 1 });
     }
 

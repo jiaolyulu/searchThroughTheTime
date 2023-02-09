@@ -31,10 +31,10 @@ Class(function IntroWelcome() {
         const text = DataModel.get('landingIntro');
         GLA11y.setPageH1(_this.findParent('MainView'), Milestone.CLEAN_TITLE(text), 'h2');
 
-        _text = _this.initClass(UIText, {
+         _text = _this.initClass(UIText, {
             text,
-            type: 'h2'
-        });
+            type: 'h2',
+        }); 
 
         _text.element.dom3DCustomVisibility = () => $anchor.mesh._drawing;
         DOM3D.add(_text.element, $anchor, { domScale: Config.DOM3DScale });
