@@ -39,7 +39,6 @@ const startExpressServer = () => {
 };
 const setScreenDimensions = () => {
     if (_w === 0 || _h === 0) {
-
         logger.log('ELECTRON', `Screen dimensions not set. Setting screen size to cover all screens.`);
         const allScreens = screen.getAllDisplays();
         allScreens.forEach(screen => {
@@ -76,7 +75,7 @@ const createWindow = () => {
 
 
 const makeFullScreen = () => {
-    // _win.setMinimumSize(_w, _h); //TODO remove this after gb integration
+    _win.setMinimumSize(_w, _h); //TODO remove this after gb integration
     _win.setSize(_w, _h);
 };
 
