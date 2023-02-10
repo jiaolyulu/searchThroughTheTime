@@ -23,7 +23,8 @@ Class(function DetailUIView() {
     // ### DEEPLOCAL bookeeping for scrolling exit in DD
     let scrollExitFlag = false;
     // ### DEEPLOCAL Time to pause at bottom of deepdive in ms
-    const _deepDiveClosePause = 3000;
+    const _deepDiveDownClosePause = 3000;
+    const _deepDiveUpScrollPause = 100;
 
     //*** Constructor
     (async function () {
@@ -153,7 +154,7 @@ Class(function DetailUIView() {
             setTimeout(() => {
                 console.log('### in timeout');
                 $exit.forceExit();
-            }, deepDiveExitPause * 1000);
+            }, _deepDiveUpScrollPause);
         }
 
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
@@ -163,7 +164,7 @@ Class(function DetailUIView() {
                 console.log('### in timeout');
                 scrollExitFlag = false;
                 $exit.forceExit();
-            }, _deepDiveClosePause);
+            }, _deepDiveDownClosePause);
         } else if (scroll < treshold) {
             showDown();
         } else if (scroll > treshold && scroll < (detailCamera.scrollBounds.max - treshold)) {

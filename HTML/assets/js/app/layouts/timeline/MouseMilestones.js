@@ -7,7 +7,7 @@ Class(function MouseMilestones(_milestones) {
     let _currentOpenTooltip;
     let _autoExpandMode = true;
     const _autoExpandCenterLine = 0.015;
-    const _autoExpandPauseDuration = 500;
+    const _autoExpandPauseDuration = 1000;
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -81,7 +81,9 @@ Class(function MouseMilestones(_milestones) {
 
 
                 _currentOpenTooltip = openMilestones[0];
-                _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
+                if (_currentOpenTooltip.shouldBeVisible) {
+                    _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
+                }
             }
         }
     }
