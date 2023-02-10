@@ -366,6 +366,7 @@ Class(function Milestone(_data) {
 
         let onScreen = wireProgress >= progress;
         _screenPosition = wireProgress - progress;
+        console.log(`onScreen for ${_this.id}: ${onScreen}`);
         return onScreen;
     }
 

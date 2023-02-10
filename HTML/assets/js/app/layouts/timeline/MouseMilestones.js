@@ -81,7 +81,9 @@ Class(function MouseMilestones(_milestones) {
 
 
                 _currentOpenTooltip = openMilestones[0];
-                _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
+                if (_currentOpenTooltip.shouldBeVisible) {
+                    _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
+                }
             }
         }
     }
