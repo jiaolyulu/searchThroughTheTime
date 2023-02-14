@@ -37,13 +37,13 @@ Class(function GazeCamera(_input, _group) {
     * @memberof GazeCamera
     * @property
     */
-    this.lerpSpeed = 0.05;
+    this.lerpSpeed = 0.05; //lulu deeplocal change, to make the animation stops faster
    /**
     * @name lerpSpeed2
     * @memberof GazeCamera
     * @property
     */
-    this.lerpSpeed2 = 1;
+    this.lerpSpeed2 = 3;  //lulu deeplocal change, to make the animation stops faster
    /**
     * @name lookAt
     * @memberof GazeCamera
@@ -104,7 +104,7 @@ Class(function GazeCamera(_input, _group) {
             _move.x = _this.position.x + (Math.range(Mobile.Accelerometer.x, -2, 2, -1, 1, true) * _strength.v * _this.moveXY.x * _this.strength);
             _move.y = 0;//_this.position.y + (Math.range(Mobile.Accelerometer.y, -2, 2, -1, 1, true) * _strength.v * _this.moveXY.y * _this.strength);
         } else {
-            _move.x = _this.position.x + (Math.range(Mouse.x, 0, Stage.width, -1, 1, true) * _strength.v * _this.moveXY.x * _this.strength);
+            _move.x = _this.position.x + (Math.range(Mouse.x, 0, Stage.width-720, -1, 1, true) * _strength.v * _this.moveXY.x * _this.strength); //lulu deeplocal change
             _move.y = _this.position.y + (Math.range(Mouse.y, 0, Stage.height, -1, 1, true) * _strength.v * _this.moveXY.y * _this.strength);
 
             let rotateStrength = Math.range(Math.abs(Mouse.delta.x) / Stage.width, 0, 0.02, 0, 1, true);
@@ -145,7 +145,7 @@ Class(function GazeCamera(_input, _group) {
      * @param time
      * @param ease
     */
-    this.orbit = function(time = 1000, ease = 'easeInOutSine') {
+    this.orbit = function(time = 500, ease = 'easeInOutSine') { //lulu deeplocal change, to make the animation stops
         return tween(_strength, {v: 1}, time, ease);
     }
 

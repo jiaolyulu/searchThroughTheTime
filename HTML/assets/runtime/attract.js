@@ -26,6 +26,7 @@ console.log('ATTRACT: attract.js loaded...');
 
 /**Handle User Events */
 
+
 window.onwheel = function (e) {
     console.log('ATTRACT: USER SCROLLED');
     userHasScrolled = true;
@@ -103,8 +104,9 @@ function fireAttractLoopMsg() {
 // function to start the attract animation
 function startIntroAnimation() {
     portalTween = gsap.timeline()
+        .to(document.getElementsByClassName('attractLoopScr'), { opacity: 1, })
         .fromTo('#portal', { scale: 0, rotation: 0 }, { scale: 1, rotation: 360, ease: 'none', duration: 5, paused: false })
-        .from('#portal', { rotation: -360, duration: 10, ease: 'none', repeat: -1 });
+    //.from('#portal', { rotation: -360, duration: 10, ease: 'none', repeat: -1 });
 }
 
 // function to start the exit attract loop animation
@@ -117,9 +119,14 @@ function startExitAnimation() {
             ease: 'none',
             duration: 2,
             paused: false,
-            onComplete: startExitAnimationHelper
 
-        });
+
+        })
+        .to(document.getElementsByClassName('attractLoopScr'), {
+            opacity: 0,
+            duration: 2,
+            onComplete: startExitAnimationHelper,
+        })
 }
 // helper function for exit animation's onComplete callback
 function startExitAnimationHelper() {

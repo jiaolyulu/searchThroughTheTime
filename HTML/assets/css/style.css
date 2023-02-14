@@ -16,12 +16,7 @@ html,
 #Stage {
   background-color: rgb(235, 251, 255);
 }
- .bg-wrapper{
-  scale:2!important;
- }
- .year-text-container{
-  scale:2!important;
- }
+
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
 .YearScroller {
   /* year bar on top of screen*/
@@ -33,17 +28,10 @@ html,
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 720px!important;
+  margin-left: 720px;
   /* lulu's deeplocal change */
   margin-top: 120px;
   /*<---lulu's deeplocal change */
-}
-
-.DOM3D h1:first-of-type .SplitText{/*  <--- Introduction Title Text. Hidden in kiosk mode. */
-  top:150px;
-}
-.DOM3D h2{/*  <--- Introduction Description Text. Hidden in kiosk mode. */
-  visibility:collapse;
 }
 
 .Container canvas {
@@ -81,40 +69,8 @@ html,
   /*<--- width of window*/
   /*LU content might need to be top justified?*/
 }
- .DetailParagraph{ 
-/*   This is the detailed view paragraph width
- */  min-width: 1400px;
- }
 
-.content-container .DetailParagraph .UIText{ /* <--- Deepdive title */
-  font-size: 36pt!important;
-
-}
-
-.content-container .DetailParagraph ~.DetailParagraph .UIText{ /* <------ All text for DeepDive */
-  font-size: 28pt!important;
-}
-.DetailImage { /* <---- detail view image */
-  min-width: 1400px;
- }
-
-
- #spinDial { /* <---- Spin dial icon at start */
-  top:20px;
-  scale:2;
-  will-change: transform;
-  animation-name: spinWheelIcon;
-animation-duration: 3s; 
-animation-iteration-count: infinite;
-}
-
-@keyframes spinWheelIcon { /* <--- animation for spin dial Icon */
-  from {transform:rotate(-90deg);}
-  to {transform:rotate(270deg)}
-}
-
-
- .ios,
+.ios,
 .ios body,
 .ios #Stage {
   overflow: visible;
@@ -231,7 +187,6 @@ body {
   color: #333333;
   margin: 0;
   opacity: 0;
-  margin-bottom: 50px;
 }
 
 #loader .center {
@@ -242,8 +197,6 @@ body {
   /*lulu's deeplocal change */
   transform: translate(-50%, -50%) translateY(-3px);
 }
-
-
 
 @media only screen and (max-width: 768px) {
   #loader .center {
@@ -318,21 +271,55 @@ body {
 
 /* ### Alex Attract Loop */
 .attractLoopScr {
-  background-color: pink;
+  background-color: rgb(255, 255, 255);
   width: 100%;
   height: 100%;
+  position: static;
   display: none;
-  align-items: center;
-  justify-content: center;
   animation: fadeIn 2s;
 }
-
-.animationCont {
-  /* background-color: gray; */
+.attractLoopScr .begin-container {
+  z-index: 10;
+  transform-origin: top left;
+  width: 1920px;
+  height: 720px;
+  resize: none;
+  transform: rotate(90deg) translate(0, -720px);
+  position: relative !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-#animationText {
-  color: purple;
+.attractLoopScr .begin-container .begin-button-container {
+  background-color: #4285F4;
+  width: 1000px;
+  height: 140px;
+  border-radius: 140px;
+  position: relative !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.attractLoopScr .begin-container .begin-button-container h2 {
+  color: white;
+  font-size: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.attractLoopScr .main-screen {
+  margin-left: 720px;
+  top: 0px;
+  width: 3840px;
+  height: 1920px;
+  display: grid;
+  position: absolute;
+  align-items: center;
+  justify-items: center;
+}
+.attractLoopScr .main-screen img {
+  max-width: 700px;
 }
 
 @keyframes fadeIn {
@@ -341,14 +328,6 @@ body {
   }
   100% {
     opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  100% {
-    opacity: 1;
-  }
-  0% {
-    opacity: 0;
   }
 }
 

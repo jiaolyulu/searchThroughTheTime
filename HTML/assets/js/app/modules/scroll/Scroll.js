@@ -48,8 +48,8 @@
 Class(function Scroll(_object, _params) {
     Inherit(this, Component);
     const _this = this;
-const _isKioskMode=true;
-const _kioskScrollSpeed=.025;
+    const _isKioskMode = true;
+    const _kioskScrollSpeed = .025;
     const PROHIBITED_ELEMENTS = ['prevent_interactionScroll'];
 
     // TODO: css transform not scrollLeft/Top
@@ -120,6 +120,7 @@ const _kioskScrollSpeed=.025;
 
     var _lastDelta;
     var _deltaChange = 0;
+    var _scrollDisabled=false;
 
     //*** Constructor
     (function () {
@@ -129,6 +130,25 @@ const _kioskScrollSpeed=.025;
         resize();
         _this.startRender(loop);
     })();
+
+    window.addEventListener("ATTRACT_ENABLED", e => { OnAttractScreenTriggered(e); });
+
+    async function OnAttractScreenTriggered(e) {
+        console.log(`OnAttractScreen triggered in scroll ${e.detail}`)
+        //_this.commit(MainStore, 'setProgress', 0);
+        if (e.detail) {
+            const main = ViewController.instance().views?.main;
+            if (!main) {
+                
+                return;
+            }
+            await ViewController.instance().navigate(`/`);
+            await _this.wait(200);
+            main.camera.scrollToProgress(0);
+        }
+        _scrollDisabled = e.detail;
+        console.log(`OnAttractScreen _scrollDisabled = ${_scrollDisabled}`)
+    }
 
     function checkIfProhibited(element) {
         let el = element;
@@ -179,7 +199,7 @@ const _kioskScrollSpeed=.025;
          * @name this.drag
          * @memberof Scroll
          */
-        _this.drag = (function() {
+        _this.drag = (function () {
             if (typeof _params.drag !== 'undefined') return _params.drag;
             return !!Device.mobile;
         })();
@@ -216,6 +236,8 @@ const _kioskScrollSpeed=.025;
 
     function loop() {
 
+        //if (_scrollDisabled) { return; }
+        
         // Check if user using scroll bar
         if (_this.object) {
             if (Math.round(_this.object.div.scrollLeft) !== Math.round(_this.x) || Math.round(_this.object.div.scrollTop) !== Math.round(_this.y)) {
@@ -274,12 +296,12 @@ const _kioskScrollSpeed=.025;
             let edgeWithPointerEvent = Device.system.browser === 'ie' && Device.system.browserVersion >= 17;
 
             if (edgeWithPointerEvent) {
-                document.body.addEventListener('pointermove', edgeScroll, true );
-                document.body.addEventListener('pointerup', edgeScrollEnd, true );
+                document.body.addEventListener('pointermove', edgeScroll, true);
+                document.body.addEventListener('pointerup', edgeScrollEnd, true);
             }
 
             if (Device.system.browser == 'ie') {
-                document.body.addEventListener( 'wheel', scroll, true );
+                document.body.addEventListener('wheel', scroll, true);
             } else {
                 __window.bind('wheel', scroll);
             }
@@ -336,7 +358,7 @@ const _kioskScrollSpeed=.025;
         if ((element && checkIfProhibited(element))) return;
         if (_params.lockMouseX && Mouse.x > Stage.width) return;
         if (!_this.enabled) return;
-        if(!checkBounds(e)) return;
+        if (!checkBounds(e)) return;
         if (_this.object && _this.limit && e.preventDefault) e.preventDefault();
         if (!_this.mouseWheel) return;
         stopInertia();
@@ -372,7 +394,7 @@ const _kioskScrollSpeed=.025;
                     _scrollTarget[axis] += e[delta];
                     return;
                 }
-                
+
 
                 if (Device.system.browser.includes(['chrome', 'safari'])) {
 
@@ -400,7 +422,7 @@ const _kioskScrollSpeed=.025;
                     // TODO: test touchpad
                 }
 
-                if (Device.system.browser.includes([ 'chrome' ])) {
+                if (Device.system.browser.includes(['chrome'])) {
                     let s = 0.25;
                     _scrollTarget[axis] += e[delta] * s;
                     _scrollInertia[axis] = e[delta] * s;
@@ -417,7 +439,7 @@ const _kioskScrollSpeed=.025;
                     return;
                 }
             }
-          
+
 
             _scrollTarget[axis] += e[delta];
             newDelta = _scrollInertia[axis];
@@ -446,7 +468,7 @@ const _kioskScrollSpeed=.025;
 
     function down(e) {
         if (!_this.enabled) return;
-        if(!checkBounds(e)) return;
+        if (!checkBounds(e)) return;
         let element = document.elementFromPoint(Math.clamp(e.x || 0, 0, Stage.width), Math.clamp(e.y || 0, 0, Stage.height));
         if ((element && checkIfProhibited(element))) return;
         stopInertia();
@@ -454,7 +476,7 @@ const _kioskScrollSpeed=.025;
 
     function drag(e) {
         if (!_this.enabled) return;
-        if(!checkBounds(e)) return;
+        if (!checkBounds(e)) return;
 
         let element = document.elementFromPoint(Math.clamp(e.x || 0, 0, Stage.width), Math.clamp(e.y || 0, 0, Stage.height));
         if ((element && checkIfProhibited(element))) return;
@@ -474,10 +496,10 @@ const _kioskScrollSpeed=.025;
 
     function up(e) {
         if (!_this.enabled || _this.preventInertia) return;
-        if(!checkBounds(e)) return;
+        if (!checkBounds(e)) return;
         let element = document.elementFromPoint(Math.clamp(e.x || 0, 0, Stage.width), Math.clamp(e.y || 0, 0, Stage.height));
         if ((element && checkIfProhibited(element))) return;
-        const m = (function() {
+        const m = (function () {
             if (Device.system.os == 'android') return 35;
             return 25;
         })();
@@ -507,15 +529,15 @@ const _kioskScrollSpeed=.025;
     }
 
     function checkBounds(e) {
-        if(_this.bounds && (((e.x/Stage.width > _this.bounds.x.y) || (e.x/Stage.width < _this.bounds.x.x))  || ((e.y/Stage.height > _this.bounds.y.y) || (e.y/Stage.height < _this.bounds.y.x)))){
+        if (_this.bounds && (((e.x / Stage.width > _this.bounds.x.y) || (e.x / Stage.width < _this.bounds.x.x)) || ((e.y / Stage.height > _this.bounds.y.y) || (e.y / Stage.height < _this.bounds.y.x)))) {
             return false;
         }
         return true;
     }
 
     //*** Public methods
-    this.reset = function() {
-        if ( _this.object && _this.object.div ) {
+    this.reset = function () {
+        if (_this.object && _this.object.div) {
             _this.object.div.scrollLeft = _this.x = 0;
             _this.object.div.scrollTop = _this.y = 0;
         }
@@ -526,23 +548,23 @@ const _kioskScrollSpeed=.025;
         return this;
     };
 
-    this.onDestroy = function() {
+    this.onDestroy = function () {
         __window.unbind('wheel', scroll);
     };
 
     this.resize = resize;
 
-    this.scrollTo = function(value, axis = 'y') {
+    this.scrollTo = function (value, axis = 'y') {
         let values = {};
         values[axis] = value;
         tween(_scrollTarget, values, 800, 'easeInOutCubic');
     };
 
-    this.setTarget = function(value, axis = 'y') {
+    this.setTarget = function (value, axis = 'y') {
         _scrollTarget[axis] = value;
     };
 
-    this.blockUntilNewScroll = function() {
+    this.blockUntilNewScroll = function () {
         _this.reset();
         _this.flag('block', true);
         _this.flag('hardBlock', true, 200);
@@ -554,8 +576,8 @@ const _kioskScrollSpeed=.025;
 }, _ => {
     var _scroll;
     Scroll.EVENT = 'scroll_event';
-    Scroll.createUnlimited = Scroll.getUnlimited = function(options) {
-        if (!_scroll) _scroll = new Scroll({limit: false, drag: Device.mobile});
+    Scroll.createUnlimited = Scroll.getUnlimited = function (options) {
+        if (!_scroll) _scroll = new Scroll({ limit: false, drag: Device.mobile });
         return _scroll;
     }
 });

@@ -13,6 +13,9 @@ Class(function MilestoneTooltip({
     let $anchor;
     let $container, $box, $layer, $copy, $content, $close;
 
+    let _shown = false;
+    let _blurState = "clear";
+    let _preBlurState = "clear";
     let _open = false;
     let _idlePosition = new Vector3();
     let _plus = null;
@@ -84,6 +87,33 @@ Class(function MilestoneTooltip({
         } else {
             DOM3D.add($container, $anchor, { domScale: Config.DOM3DScale });
         }
+    }
+
+    function loop() {
+        if (_shown) {
+            const velocity = MainStore.get("velocity");
+            //console.log("Milestone tooltip:", velocity);
+
+            //first approach to map blur to velocity
+            //$content.div.style.filter=`blur(${Math.abs(velocity)*100}px)`;
+
+            //second approach to have a threshold for velocity
+            if (Math.abs(velocity) < 0.005) {
+                _blurState = "clear";
+            }
+            else {
+                _blurState = "blur";
+            }
+            if (_preBlurState !== _blurState) {
+                if (_blurState === "blur") {
+                    gsap.to($content.div, { filter: "blur(2px)", duration: 0.2 });
+                } else {
+                    gsap.to($content.div, { filter: "blur(0px)", duration: 0.2 });
+                }
+            }
+            _preBlurState = _blurState;
+        }
+
     }
 
     function isDrawing() {
@@ -288,6 +318,7 @@ Class(function MilestoneTooltip({
                 }
             }
         `);
+        _this.startRender(loop);
     }
 
     function enableTouch() {
@@ -305,8 +336,8 @@ Class(function MilestoneTooltip({
     function elaborateOffset() {
         _this.group.updateMatrixWorld(true);
         let screenPos = ScreenProjection.project(_this.group.getWorldPosition(), Stage);
-
-        screenPos.x = Math.map(screenPos.x, 0, Stage.width, 0, 1, true);
+        //console.log("Lu Showing Screen Position",screenPos);
+        screenPos.x = Math.map(screenPos.x, 0, Stage.width - 720, 0, 1, true); //Lulu's deeplocal change
         screenPos.y = Math.map(screenPos.y, 0, Stage.height, 0, 1, true);
 
         if (screenPos.y > 0.5) {
@@ -378,7 +409,7 @@ Class(function MilestoneTooltip({
         if (GlobalStore.get('transitioning')) {
             return;
         }
-
+        _shown = true;
         _this.clearTimers();
         normalizeCopySize();
         _checkMouseOut = false;
@@ -468,7 +499,8 @@ Class(function MilestoneTooltip({
         }
 
         if (!_open) return;
-
+        if (_blurState === "blur") { _this.wait(500) }; //if the text is still blured delay the hide, lu
+        _shown = false;
         _this.clearTimers();
         _checkMouseOut = false;
         _this.commit(MainStore, 'setTooltip', false);

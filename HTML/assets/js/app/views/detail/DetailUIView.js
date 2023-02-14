@@ -29,6 +29,7 @@ Class(function DetailUIView() {
     //*** Constructor
     (async function () {
         await initHTML();
+        
         initStyles();
 
         _this.startRender(loop, 10);
@@ -37,6 +38,7 @@ Class(function DetailUIView() {
 
     async function initHTML() {
         $exit = _this.initClass(ExitButton, { pulse: false }, [$this]);
+        
 
         _this.bind(DetailStore, 'showBottomClose', show => {
             if (!$exit.showed) return;
