@@ -33,8 +33,13 @@ Class(function Intro() {
 
         addListeners();
     })();
+    window.addEventListener("INTRO_ANIMATION", e => { playIntro(); });
+
+
 
     async function playIntro() {
+
+        console.log("Lu this is where all the animation starts")
         _introTween.seek(0);
         await _this.wait(300);
         _introTween.play();

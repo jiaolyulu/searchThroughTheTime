@@ -21,7 +21,7 @@ Class(function MainView() {
         _projector = _this.initClass(ScreenProjection, _camera.gaze.camera);
 
         await _timeline.ready();
-
+       
         if (Global.PLAYGROUND) {
             _this.onShow();
         }

@@ -4,7 +4,7 @@
   "description": "First test of multiscreen electron app",
   "main": "electronMain.js",
   "scripts": {
-    "start": "electron ."
+    "start": "cd HTML | npm start | electron ."
   },
   "keywords": [],
   "author": "iholtum",

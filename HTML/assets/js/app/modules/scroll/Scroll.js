@@ -145,10 +145,15 @@ Class(function Scroll(_object, _params) {
             await ViewController.instance().navigate(`/`);
             await _this.wait(200);
             main.camera.scrollToProgress(0);
+            
+            
         }
         _scrollDisabled = e.detail;
         console.log(`OnAttractScreen _scrollDisabled = ${_scrollDisabled}`)
     }
+
+
+ 
 
     function checkIfProhibited(element) {
         let el = element;

@@ -101,6 +101,11 @@ function fireAttractLoopMsg() {
     window.dispatchEvent(attractEvent);
 }
 
+function fireIntroAnimationMsg() {
+    let introEvent = new CustomEvent('INTRO_ANIMATION');
+    window.dispatchEvent(introEvent);
+}
+
 /** ANIMATIONS */
 
 // function to start the attract animation
@@ -132,6 +137,7 @@ function startExitAnimation() {
 }
 // helper function for exit animation's onComplete callback
 function startExitAnimationHelper() {
+    fireIntroAnimationMsg();
     // portalTween = gsap.fromTo('.attractLoopScr', {opacity:1 }, {opacity: 0, duration: 3, })
     toggleAttractLoop(); // hide attract loop
     // fire attract loop message for other components

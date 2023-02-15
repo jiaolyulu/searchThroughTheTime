@@ -17,6 +17,14 @@ html,
   background-color: rgb(235, 251, 255);
 }
 
+.bg-wrapper {
+  scale: 2 !important;
+}
+
+.year-text-container {
+  scale: 2 !important;
+}
+
 /* DEEPLOCAL to adjust position of main screen change .YearScroller, DOM3D and Container. There are multiple layers to the file so all of these layers need to be adjusted. Bigger numbers are down or right*/
 .YearScroller {
   /* year bar on top of screen*/
@@ -32,6 +40,16 @@ html,
   /* lulu's deeplocal change */
   margin-top: 120px;
   /*<---lulu's deeplocal change */
+}
+
+.DOM3D h1:first-of-type .SplitText {
+  /*  <--- Introduction Title Text. Hidden in kiosk mode. */
+  top: 150px;
+}
+
+.DOM3D h2 {
+  /*  <--- Introduction Description Text. Hidden in kiosk mode. */
+  visibility: collapse;
 }
 
 .Container canvas {
@@ -70,6 +88,46 @@ html,
   /*LU content might need to be top justified?*/
 }
 
+.DetailParagraph {
+  /*   This is the detailed view paragraph width
+   */
+  min-width: 1400px;
+}
+
+.content-container .DetailParagraph .UIText {
+  /* <--- Deepdive title */
+  font-size: 36pt !important;
+}
+
+.content-container .DetailParagraph ~ .DetailParagraph .UIText {
+  /* <------ All text for DeepDive */
+  font-size: 28pt !important;
+}
+
+.DetailImage {
+  /* <---- detail view image */
+  min-width: 1400px;
+}
+
+#spinDial {
+  /* <---- Spin dial icon at start */
+  top: 20px;
+  scale: 2;
+  will-change: transform;
+  animation-name: spinWheelIcon;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spinWheelIcon {
+  /* <--- animation for spin dial Icon */
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}
 .ios,
 .ios body,
 .ios #Stage {
@@ -187,6 +245,7 @@ body {
   color: #333333;
   margin: 0;
   opacity: 0;
+  margin-bottom: 50px;
 }
 
 #loader .center {
