@@ -10,7 +10,7 @@
 /**Variables */
 
 
-const activityTimer = 90; // seconds to test for inactivity
+const activityTimer = 10; // seconds to test for inactivity
 
 // state management
 let userHasScrolled = false;
@@ -80,7 +80,9 @@ function toggleAttractLoop() {
     console.log('ATTRACT: toggleAttractLoop');
     // toggle the attract loop div
     const el = document.getElementsByClassName('attractLoopScr');
+    const stage = document.getElementById("Stage");
     !attractLoopVisible ? el[0].style.display = 'flex' : el[0].style.display = 'none';
+    attractLoopVisible ? stage.style.display = 'flex' : stage.style.display = 'none';
     resetUserInteractedStates();
     attractLoopVisible = !attractLoopVisible;
     // console.log(`TOGGLE: ATTRACT: userhasclicked:${userHasClicked}, userhasscrolled:${userHasScrolled}, attractloopvisible:${attractLoopVisible} `);
