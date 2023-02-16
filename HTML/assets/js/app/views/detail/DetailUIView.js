@@ -83,6 +83,7 @@ Class(function DetailUIView() {
             }
             .scroll-container {
                 position: relative!important;
+                margin-bottom: 100px;
             }
     `);
     }
@@ -136,7 +137,7 @@ Class(function DetailUIView() {
         $scroll.hit.css('display', 'block');
         if (_revealed) clearArrowTweens();
         $scroll.clearTween();
-        $scroll.tween({ y: 0 }, 500, 'easeOutCubic');
+        $scroll.tween({ y: -100 }, 500, 'easeOutCubic');
         showArrow({ duration: 300 });
         _rotate = false;
     }

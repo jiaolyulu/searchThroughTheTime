@@ -92,14 +92,15 @@ html,
 
 .DetailView {
 	/*This is the content popup. The Deepdive content background */
-	background: rgba(255, 255, 255, 0.83);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	// background: rgba(255, 255, 255, 0.83);
+	// border-radius: 16px;
+	// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	// backdrop-filter: blur(5px);
+	// -webkit-backdrop-filter: blur(5px);
+	// border: 1px solid rgba(255, 255, 255, 0.3);
 	/*<---lulu's deeplocal change */
 	margin-left: $detailview-margin-left;
+	margin-top: $webUI-margin-top;\
 	/*<--- position of window on screen */
 	/*<---lulu's deeplocal change */
 	width: $detailview-width !important;
