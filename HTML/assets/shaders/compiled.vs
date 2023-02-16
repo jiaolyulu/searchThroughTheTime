@@ -1373,7 +1373,7 @@ void main() {
     vec3 origin = texture2D(tOrigin, position.xy).xyz;
     float blur = 0.0;
 
-    float size = 0.04;
+    float size = 0.08; //Lu Make change to the size of the particles
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_PointSize = size * DPR * (1000.0 / length(mvPosition.xyz));

@@ -355,7 +355,7 @@ Class(function TimeDesktop() {
         if ((p >= START_PROGRESS || _kioskMode) && !_show && !transitioning) {
             show();
         } else if (p < START_PROGRESS && _show) {
-           // hide();
+            // hide();
         }
     }
 
@@ -365,7 +365,7 @@ Class(function TimeDesktop() {
             console.log("onViewChange should bec visible")
             show();
         } else {
-             hide();
+            hide();
         }
 
         // if (view === 'DetailView') {
@@ -383,7 +383,7 @@ Class(function TimeDesktop() {
 
     function onEndChange(isEnd) {
         if (isEnd) {
-           // hide();
+            // hide();
         } else if (MainStore.get('progress') >= START_PROGRESS && !isEnd) {
             // show();
         }
@@ -428,7 +428,6 @@ Class(function TimeDesktop() {
     function loop() {
         const view = GlobalStore.get('view');
         const scroll = OverviewStore.get('px');
-
         // Update thumb progress
         _progress = Math.lerp(MainStore.get('progress'), _progress, THUMB_LERP);
         let x = Math.range(_progress, START_PROGRESS, 1, _thumbRange[0], _thumbRange[1], true);
@@ -477,7 +476,7 @@ Class(function TimeDesktop() {
         _show = true;
 
         $timeContainer.clearTween();
-        $timeContainer.tween({ y: 0, spring: 1.0, damping: 0.7 }, 1200, 'easeOutElastic',700);
+        $timeContainer.tween({ y: 0, spring: 1.0, damping: 0.7 }, 1200, 'easeOutElastic', 700);
 
         arrows.forEach((arrow, index) => {
             const delay = 200 + (index * 100);
@@ -650,7 +649,7 @@ Class(function TimeDesktop() {
         // Thumbs range x
         const offset = 30;
         _thumbRange[0] = offset;
-        _thumbRange[1] = trackWidth - (30 + offset); //lulu's deeplocal change
+        _thumbRange[1] = trackWidth - (96 + offset); //lulu's deeplocal change, 96 is the width of the thumb
 
         // Keep track in the center
         let centerWidth = trackWidth;
