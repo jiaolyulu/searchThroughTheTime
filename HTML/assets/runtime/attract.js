@@ -55,16 +55,22 @@ const checkForInactivity = () => {
     if (!attractLoopVisible && (!userHasClicked && !userHasScrolled)) {
         // if user hasn't engaged the main timeline screen for {activityTimer} time, turn on the attract loop
         console.log(`ATTRACT: No user activity in ${activityTimer} seconds reported on timeline view`);
-        // toggle the attract loop div
-        toggleAttractLoop();
         // start attract loop animation
         startIntroAnimation();
-        // fire event for attract loop toggled
-        fireAttractLoopMsg();
-        // clear interval
-        clearInterval(userTimeout);
-        // update state to allow user clicks to be recorded again (turned off during attract loop exit animation execution)
-        ignoreUserInput = false;
+        gsap.timeline().to(document.getElementById('Stage'), {
+            opacity: 0,
+            duration: 1.5,
+            onComplete: () => {
+                // toggle the attract loop div
+                toggleAttractLoop();
+                // fire event for attract loop toggled
+                fireAttractLoopMsg();
+                // clear interval
+                clearInterval(userTimeout);
+                // update state to allow user clicks to be recorded again (turned off during attract loop exit animation execution)
+                ignoreUserInput = false;
+            }
+        });
     } else {
         console.log('ATTRACT: no state change required');
         resetUserInteractedStates();
@@ -81,8 +87,13 @@ function toggleAttractLoop() {
     // toggle the attract loop div
     const el = document.getElementsByClassName('attractLoopScr');
     const stage = document.getElementById("Stage");
-    !attractLoopVisible ? el[0].style.display = 'flex' : el[0].style.display = 'none';
-    attractLoopVisible ? stage.style.display = 'flex' : stage.style.display = 'none';
+    if (attractLoopVisible) {
+        el[0].style.display = 'none';
+        stage.style.display = 'flex';
+    } else {
+        el[0].style.display = 'flex';
+        stage.style.display = 'none';
+    }
     resetUserInteractedStates();
     attractLoopVisible = !attractLoopVisible;
     // console.log(`TOGGLE: ATTRACT: userhasclicked:${userHasClicked}, userhasscrolled:${userHasScrolled}, attractloopvisible:${attractLoopVisible} `);
@@ -124,16 +135,18 @@ function startExitAnimation() {
             scale: 0,
             rotation: 360,
             ease: 'none',
-            duration: 2,
-            paused: false,
-
-
+            duration: 1,
+            paused: false
         })
         .to(document.getElementsByClassName('attractLoopScr'), {
             opacity: 0,
-            duration: 2,
+            duration: 1,
             onComplete: startExitAnimationHelper,
         })
+        .to(document.getElementById('Stage'), {
+            opacity: 1,
+            duration: 2
+        });
 }
 // helper function for exit animation's onComplete callback
 function startExitAnimationHelper() {

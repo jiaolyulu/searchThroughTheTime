@@ -49,7 +49,7 @@ Class(function Scroll(_object, _params) {
     Inherit(this, Component);
     const _this = this;
     const _isKioskMode = true;
-    const _kioskScrollSpeed = .025;
+    const _kioskScrollSpeed = .1;
     const PROHIBITED_ELEMENTS = ['prevent_interactionScroll'];
 
     // TODO: css transform not scrollLeft/Top
@@ -145,7 +145,8 @@ Class(function Scroll(_object, _params) {
             await ViewController.instance().navigate(`/`);
             await _this.wait(200);
             main.camera.scrollToProgress(0);
-            
+            main.camera.lock(); //this would disable the scroll, deeplocal change
+            main.camera.active = false; //this would disable the scroll, deeplocal change
             
         }
         _scrollDisabled = e.detail;
