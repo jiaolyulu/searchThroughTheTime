@@ -365,7 +365,6 @@ Class(function Milestone(_data) {
         const progress = MilestoneAppearing.get(_this.id);
         const global = ViewController.instance().views.global;
         const wireProgress = global.wire.progress;
-
         let onScreen = wireProgress >= progress;
         _screenPosition = wireProgress - progress;
         //console.log(`onScreen for ${_this.id}: ${onScreen}`);
