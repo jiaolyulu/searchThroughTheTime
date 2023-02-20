@@ -48,6 +48,7 @@ Class(function Milestone(_data) {
 
     //*** Constructor
     (function () {
+        console.log("initialize milestone")
         _container = new Group();
         _this.add(_container);
 
