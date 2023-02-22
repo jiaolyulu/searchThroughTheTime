@@ -57,9 +57,33 @@ Class(function Wire() {
       console.log(`Missing ${asset} line.`);
     }
     let curve = data.curves[0];
-    if (data.curves[1]) {
-      curve = [...data.curves[0], ...data.curves[1]];
-    } 
+
+    const resetCurveStartingPoint = (curve1, curve2) => {
+      let lastEntryPointCurve0_x = curve1[curve1.length - 3];
+      let lastEntryPointCurve0_y = curve1[curve1.length - 2];
+      let newEntryPointCurve1_x = curve2[0];
+      let newEntryPointCurve1_y = curve2[1];
+      return curve2.map((el, index) => {
+        if (index % 3 === 0) {
+          return el - newEntryPointCurve1_x + lastEntryPointCurve0_x;
+        } else if (index % 3 === 1) {
+          return el - newEntryPointCurve1_y + lastEntryPointCurve0_y;
+        } else {
+          return el;
+        }
+      });
+    };
+    const resetCurves = (curves) => {
+      let curvesArrayWrapper=[...curves[0]];
+      for (let i = 0;i<curves.length-1;i++){
+        curvesArrayWrapper.push(...resetCurveStartingPoint(curves[i], curves[i+1]));
+      }
+      return curvesArrayWrapper;
+    };
+
+    if (data.curves.length>1) {
+      curve = resetCurves(data.curves);
+    }
     const points = [];
     const full = [];
 
