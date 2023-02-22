@@ -48,7 +48,7 @@ Class(function Milestone(_data) {
 
     //*** Constructor
     (function () {
-        console.log("initialize milestone")
+        //console.log("initialize milestone")
         _container = new Group();
         _this.add(_container);
 
@@ -367,7 +367,7 @@ Class(function Milestone(_data) {
         const wireProgress = global.wire.progress;
         let onScreen = wireProgress >= progress;
         _screenPosition = wireProgress - progress;
-        //console.log(`onScreen for ${_this.id}: ${onScreen}`);
+        //console.log(`onScreen for ${_this.id}: ${onScreen}  wireprogress${wireProgress} and progress${progress}`);
         return onScreen;
     }
 
@@ -412,9 +412,11 @@ Class(function Milestone(_data) {
         if (!_tooltip ?? false) {
             return;
         }
+        
         cancelAutoExpandTimer();
         if (_tooltip.open && _tooltipAutoOpened) {
             _tooltip.hide();
+            console.log(`CLOSING CTA: ${_this.id}}`);
             // animateOut();
             _tooltipAutoOpened = false;
         }
@@ -561,8 +563,9 @@ Class(function Milestone(_data) {
     }
 
     async function animateOut({ immediate = false } = {}) {
+        
         const milestone = DetailStore.get('milestone');
-
+        console.log("milestone id", milestone.id, "is animating out")
         if (milestone && milestone.id === _this.id) {
             _this.flag('animateIn', true);
             return;
