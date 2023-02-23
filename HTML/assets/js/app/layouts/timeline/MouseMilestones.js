@@ -79,9 +79,9 @@ Class(function MouseMilestones(_milestones) {
       let progress = MilestoneAppearing.get(milestoneInstance.id);
     let global = ViewController.instance().views.global;
     let wireProgress = global.wire.progress;
-      console.log(
-       ` id is: ${milestoneInstance.id} ScreenPos=${milestoneInstance.screenPosition.toFixed(2)} = ${(wireProgress).toFixed(2)} - ${progress} compared to centerline ${_autoExpandCenterLine}`
-      );
+      // console.log(
+      //  ` id is: ${milestoneInstance.id} ScreenPos=${milestoneInstance.screenPosition.toFixed(2)} = ${(wireProgress).toFixed(2)} - ${progress} compared to centerline ${_autoExpandCenterLine}`
+      // );
     }
     if (openMilestones.length > 0) {
       
@@ -90,8 +90,8 @@ Class(function MouseMilestones(_milestones) {
       const widthCamera = MainStore.get("widthCamera");
       const bounds = MainStore.get("bounds");
       const scroll = MainStore.get("scroll");
-      console.log(`bound[1] is ${bounds.horizontal[1]}`)
-      let trigger = bounds.horizontal[1] + widthCamera / 2;
+      //console.log(`bound[1] is ${bounds.horizontal[1]}`)
+      let trigger = bounds.horizontal[1] + widthCamera / 2 + End.HORIZONTAL_WIDTH/2;
       //console.log(`is end: ${scroll-trigger<0} , is scroll ${scroll} trigger ${trigger} `)
       if (scroll>trigger){
         _milestones.forEach((m) => {
