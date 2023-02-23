@@ -380,11 +380,15 @@ Class(function Milestone(_data) {
 
 
     function startAutoExpandTimer(duration = _autoExpandTimerDuration) {
-        _autoExpandTimerId = setTimeout(
-            () => {
-                autoOpenToolTip();
-            }, duration
-        );
+        if (_this.flag('animateIn')){
+            _autoExpandTimerId = setTimeout(
+                () => {
+                    autoOpenToolTip();
+                }, duration
+            );
+
+        }
+        
     }
 
     function cancelAutoExpandTimer() {

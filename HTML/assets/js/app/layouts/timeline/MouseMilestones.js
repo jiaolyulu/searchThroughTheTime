@@ -83,7 +83,7 @@ Class(function MouseMilestones(_milestones) {
       //  ` id is: ${milestoneInstance.id} ScreenPos=${milestoneInstance.screenPosition.toFixed(2)} = ${(wireProgress).toFixed(2)} - ${progress} compared to centerline ${_autoExpandCenterLine}`
       // );
     }
-    if (openMilestones.length > 0) {
+    if (openMilestones.length > 1) {
       
       debugMileStone(openMilestones[0])
       debugMileStone(openMilestones[1])
