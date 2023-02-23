@@ -528,7 +528,7 @@ Class(function CameraScroll(_input, _group) {
         _this.commit(MainStore, 'setWidthCamera', _widthCamera);
 
         // _horizontal.y -= (_widthCamera / 2.0);
-        _horizontal.y += 0.5; // extra offset
+        _horizontal.y += 0.5; // extra offset by deeplocal
 
         // _vertical.y -= (_heightCamera / 2.0);
         _vertical.y += 0.5;
