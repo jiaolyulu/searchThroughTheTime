@@ -512,7 +512,6 @@ Class(function CameraScroll(_input, _group) {
 
         const main = _this.findParent('MainView');
         const timeline = main.timeline;
-
         if (!timeline.milestones.length) return;
 
         const last = timeline.milestones.last();
@@ -544,7 +543,6 @@ Class(function CameraScroll(_input, _group) {
         _horizontal.y = Math.clamp(_horizontal.y, 0, 999999);
         _vertical.x = Math.clamp(_vertical.x, 0, 999999);
         _vertical.y = Math.clamp(_vertical.y, 0, 999999);
-
         _this.commit(MainStore, 'setBounds', {
             horizontal: [_horizontal.x, _horizontal.y],
             vertical: [_vertical.x, _vertical.y]

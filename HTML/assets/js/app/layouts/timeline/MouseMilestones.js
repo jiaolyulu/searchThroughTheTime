@@ -6,7 +6,7 @@ Class(function MouseMilestones(_milestones) {
   let _config;
   let _currentOpenTooltip;
   let _autoExpandMode = true;
-  const _autoExpandCenterLine = 0.015;
+  const _autoExpandCenterLine = 0.375;
   const _autoExpandPauseDuration = 1000;
   //*** Constructor
   (function () {
@@ -74,32 +74,34 @@ Class(function MouseMilestones(_milestones) {
     });
     // sort based on the distance from center
     openMilestones.sort(sortByDistance);
-
+   
+    const debugMileStone = (milestoneInstance) =>{
+      let progress = MilestoneAppearing.get(milestoneInstance.id);
+    let global = ViewController.instance().views.global;
+    let wireProgress = global.wire.progress;
+      console.log(
+       ` id is: ${milestoneInstance.id} ScreenPos=${milestoneInstance.screenPosition.toFixed(2)} = ${(wireProgress).toFixed(2)} - ${progress} compared to centerline ${_autoExpandCenterLine}`
+      );
+    }
     if (openMilestones.length > 0) {
-      console.log(
-        openMilestones[0].id,
-        openMilestones[0].screenPosition,
-        _autoExpandCenterLine
-      );
-      console.log(
-        openMilestones[1].id,
-        openMilestones[1].screenPosition,
-        _autoExpandCenterLine
-      );
-      console.log(
-        openMilestones[2].id,
-        openMilestones[2].screenPosition,
-        _autoExpandCenterLine
-      );
+      
+      debugMileStone(openMilestones[0])
+      debugMileStone(openMilestones[1])
       const widthCamera = MainStore.get("widthCamera");
       const bounds = MainStore.get("bounds");
       const scroll = MainStore.get("scroll");
+      console.log(`bound[1] is ${bounds.horizontal[1]}`)
       let trigger = bounds.horizontal[1] + widthCamera / 2;
-      console.log(`is end: ${scroll-trigger<0} , is scroll ${scroll} trigger ${trigger}`)
+      //console.log(`is end: ${scroll-trigger<0} , is scroll ${scroll} trigger ${trigger} `)
+      if (scroll>trigger){
+        _milestones.forEach((m) => {
+            m.AutoClose();
+          });
+      }
       if (
-        _currentOpenTooltip?.id !== openMilestones[0].id ||
-        scroll-trigger>0
+        _currentOpenTooltip?.id !== openMilestones[0].id 
       ) {
+
         // close all milestones, even those off screen in case of super fast scrolling.
         _milestones.forEach((m) => {
           m.AutoClose();
@@ -111,6 +113,7 @@ Class(function MouseMilestones(_milestones) {
           _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
         }
       }
+
     }
   }
 

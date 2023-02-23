@@ -362,11 +362,18 @@ Class(function Milestone(_data) {
     //call it should be visible
     //Return true or false
     function shouldBeVisible() {
+        
+        
         const progress = MilestoneAppearing.get(_this.id);
+        // if (_this.id ==="pagerank"){
+        //     console.log(`${_this.id}bbox.x is ${_bbox.x} ${progress} ${_layoutPosition.x}and scroll is ${MainStore.get('scroll')}`)
+        // }
         const global = ViewController.instance().views.global;
         const wireProgress = global.wire.progress;
         let onScreen = wireProgress >= progress;
-        _screenPosition = wireProgress - progress;
+        //_screenPosition = wireProgress - progress;
+        // all of these are getting the true screen position. it is also adding the offset from the gazecamera(not sure why there is a gaze camera also offset accumulates with the progress)
+        _screenPosition =_layoutPosition.x-MainStore.get('scroll')+(MainStore.get("widthCamera") / 2.0) * progress;  
         //console.log(`onScreen for ${_this.id}: ${onScreen}  wireprogress${wireProgress} and progress${progress}`);
         return onScreen;
     }

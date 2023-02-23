@@ -221,7 +221,7 @@ Class(function Timeline() {
                 if (json && json?.width) bbox.x += parseFloat(json.width);
                 if (json && json?.height) bbox.y += parseFloat(json.height);
             }
-
+            console.log(milestone,index,position.x,position.y);
             milestone.setPosition(position);
             milestone.setBBox(bbox);
         });

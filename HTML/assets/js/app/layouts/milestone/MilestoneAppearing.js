@@ -106,7 +106,7 @@ Class(function MilestoneAppearing() {
         'multi-modal-search-with-mum': 0.957,
         'multisearch': 0.97,
         'results-about-you': 0.984,
-        'google-bard': 0.994
+        'google-bard': 0.999
     };
 
     this.vertical = {
@@ -189,8 +189,7 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.95,
         'multi-modal-search-with-mum': 0.964,
         'multisearch': 0.982,
-        'results-about-you': 0.99,
-        'google-bard': 1.16
+        'results-about-you': 0.99
 
     };
 
@@ -206,6 +205,6 @@ Class(function MilestoneAppearing() {
             return 0;
         }
 
-        return pool[id]/1.03;
+        return pool[id];
     };
 }, 'static');
