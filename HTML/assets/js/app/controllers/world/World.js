@@ -78,8 +78,8 @@ Class(function World() {
     }
 
     function resize() {
-        _renderer.setSize(Stage.width, Stage.height);
-        _camera.aspect = Stage.width / (Stage.height);
+        _renderer.setSize(Stage.width-720-120, Stage.height-120);
+        _camera.aspect = (Stage.width-720-120)/ (Stage.height-120);
         _camera.updateProjectionMatrix();
     }
 

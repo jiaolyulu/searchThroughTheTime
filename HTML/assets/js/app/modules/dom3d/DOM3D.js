@@ -60,8 +60,8 @@ Class(function DOM3D () {
             display: 'none',
             overflow: 'hidden',
             pointerEvents: 'none',
-            width: Stage.width,
-            height: Stage.height,
+            width: Stage.width-240,
+            height: Stage.height-240,
             zIndex: 20
         });
 
@@ -312,12 +312,12 @@ Class(function DOM3D () {
     }
 
     function onResize() {
-        _widthHalf = Stage.width / 2;
-        _heightHalf = Stage.height / 2;
+        _widthHalf = Stage.width / 2 -120;
+        _heightHalf = Stage.height / 2-120;
 
         $stage.css({
-            width: Stage.width,
-            height: Stage.height
+            width: Stage.width-240,
+            height: Stage.height-240
         });
     }
 
