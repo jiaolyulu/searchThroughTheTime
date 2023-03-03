@@ -32,7 +32,7 @@ html,
 
 
 #Stage {
-	background-color: rgb(235, 251, 255);
+	background-color: rgb(252, 255, 235);
 }
 
 .bg-wrapper {
@@ -100,7 +100,7 @@ html,
 	// border: 1px solid rgba(255, 255, 255, 0.3);
 	/*<---lulu's deeplocal change */
 	margin-left: $detailview-margin-left;
-	margin-top: $webUI-margin-top;\
+	margin-top: $webUI-margin-top;
 	/*<--- position of window on screen */
 	/*<---lulu's deeplocal change */
 	width: $detailview-width !important;
@@ -248,7 +248,7 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background-color: #fff;
+	background-color: #FCFCF5;
 }
 
 #loaderbg {
@@ -257,7 +257,7 @@ body {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: #fff;
+	background-color: #FCFCF5;
 	background-repeat: repeat;
 }
 

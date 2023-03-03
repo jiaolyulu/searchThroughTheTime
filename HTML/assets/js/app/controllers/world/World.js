@@ -41,7 +41,8 @@ Class(function World() {
         World.ELEMENT = $(_renderer.domElement);
         World.CAMERA = _camera;
         World.NUKE = _nuke;
-        World.RENDERER.setClearColor(new Color(0xffffff), 1);
+        //lulu's deeplocal change
+        World.RENDERER.setClearColor(new Color(0xFCFCF5), 1);
         World.SCENE.disableAutoSort = true;
         DOM3D.useCamera(World.CAMERA);
     }
