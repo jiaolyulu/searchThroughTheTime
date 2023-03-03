@@ -98,7 +98,7 @@ Class(function IntroScroll() {
                 margin: 0;
                 margin-right: ${Config.DOM3DPx(10)};
                 white-space: nowrap;
-                background: white;
+                
             }
 
             .IntroDirection {

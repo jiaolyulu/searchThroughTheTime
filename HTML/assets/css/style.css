@@ -14,7 +14,7 @@ html,
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
 /*!! THE WIDTH OF THE TIMELINE IS SET IN Hydra-core.js*/
 #Stage {
-  background-color: rgb(252, 255, 235);
+  background-color: rgb(74, 155, 255);
 }
 
 .bg-wrapper {
@@ -217,7 +217,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background-color: #FCFCF0;
+  background-color: #fff6ea;
 }
 
 #loaderbg {
@@ -226,7 +226,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #FCFCF0;
+  background-color: #fff6ea;
   background-repeat: repeat;
 }
 

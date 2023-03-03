@@ -42,7 +42,7 @@ Class(function World() {
         World.CAMERA = _camera;
         World.NUKE = _nuke;
         //lulu's deeplocal change
-        World.RENDERER.setClearColor(new Color(0xFCFCF0), 1);
+        World.RENDERER.setClearColor(new Color(0xfff6ea), 1);
         World.SCENE.disableAutoSort = true;
         DOM3D.useCamera(World.CAMERA);
     }
