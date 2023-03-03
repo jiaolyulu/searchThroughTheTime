@@ -124,7 +124,7 @@ Class(function ScrollMore() {
         $this.goob(`
           & {
             position: fixed!important;
-            right: 40px;
+            right: 120px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 100;

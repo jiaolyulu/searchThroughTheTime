@@ -2,11 +2,12 @@ $touchscreen-width: 720px;
 $touchscreen-height: 1920px;
 $mainscreen-width: 3840px;
 $mainscreen-height: 2160px;
+$mainscreen-margin: 20px;
 $scrollbar-margin-top: 100px;
 $arrow-size: 120px;
-$webUI-margin-left: calc($mainscreen-width/2 + $touchscreen-width );
+$webUI-margin-left: calc($mainscreen-width/2 + $touchscreen-width + $mainscreen-margin);
 @debug calc($mainscreen-width/2 + $touchscreen-width );
-$webUI-margin-top: calc(($mainscreen-height - $touchscreen-height)/2);
+$webUI-margin-top: calc(($mainscreen-height - $touchscreen-height)/2 + $mainscreen-margin);
 @debug calc(($mainscreen-height - $touchscreen-height)/2);
 $detailview-width: 1600px;
 $detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
@@ -57,6 +58,7 @@ html,
 	margin-left: $touchscreen-width;
 	/* lulu's deeplocal change */
 	margin-top: $webUI-margin-top;
+	margin-bottom: $mainscreen-margin;
 	/*<---lulu's deeplocal change */
 }
 
@@ -75,6 +77,8 @@ html,
 	/*line drawing */
 	margin-left: $touchscreen-width;
 	margin-top: $webUI-margin-top;
+	margin-right: $mainscreen-margin;
+	margin-bottom: $mainscreen-margin;
 	/* lulu's deeplocal change */
 }
 
@@ -82,7 +86,7 @@ html,
 	/* scroll more icon on right side. disapears after first scroll*/
 	margin-top: $webUI-margin-top;
 	/* lulu's deeplocal change */
-	right: 100px;
+	right: 120px;
 }
 
 .expand-container {

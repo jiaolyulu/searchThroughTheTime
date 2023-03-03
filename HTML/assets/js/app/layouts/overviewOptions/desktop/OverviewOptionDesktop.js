@@ -11,6 +11,7 @@ Class(function OverviewOptionDesktop({
     Inherit(this, StateComponent);
     const _this = this;
     const $this = _this.element;
+    console.log(metaData)
 
     var $titleWrapper, $iconContainer, $iconBgTransformWrapper, $iconBg, $icon, $title;
     var _filtered = false;

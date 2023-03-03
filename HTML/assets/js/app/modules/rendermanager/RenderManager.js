@@ -100,7 +100,7 @@ Class(function RenderManager() {
         }
 
         if (!_this.gl) {
-            let camera = new PerspectiveCamera(45, Stage.width / Stage.height, 0.01, 200);
+            let camera = new PerspectiveCamera(45, 3760 / 1860, 0.01, 200);
 
             _this.gl = (function() {
                 if (Device.system.browser == 'safari' && Device.system.browserVersion < 13) delete params.powerPreference;

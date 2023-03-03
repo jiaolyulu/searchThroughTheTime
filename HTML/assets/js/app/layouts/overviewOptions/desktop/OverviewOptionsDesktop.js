@@ -60,11 +60,10 @@ Class(function OverviewOptionsDesktop({ milestoneMetaData }) {
         _years = [];
 
         const milestoneCount = milestoneMetaData.length;
-
         //gather years
         milestoneMetaData.forEach(milestone => {
             const y = parseInt(milestone.year);
-
+            
             if (!_years.includes(y)) {
                 _years.push(y);
             }

@@ -16,7 +16,6 @@ Class(function OverviewUIView() {
     //*** Constructor
     (async function () {
         await DataModel.ready();
-
         _milestoneMetaData = DataModel.MILESTONES.filter(option => option.metadata.eyeview);
         _milestoneMetaData = _milestoneMetaData.map(option => option.metadata);
 
