@@ -14,6 +14,8 @@ $detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detail
 $begin-button-width: 1000px;
 $begin-button-height: 140px;
 
+$color-white: #fff6ea;
+
 body,
 html,
 #Stage {
@@ -32,7 +34,7 @@ html,
 
 
 #Stage {
-	background-color: rgb(74, 155, 255);
+	background-color: $color-white;
 }
 
 .bg-wrapper {
@@ -251,7 +253,7 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background-color: #fff6ea;
+	background-color: $color-white;
 }
 
 #loaderbg {
@@ -260,7 +262,7 @@ body {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: #fff6ea;
+	background-color: $color-white;
 	background-repeat: repeat;
 }
 
