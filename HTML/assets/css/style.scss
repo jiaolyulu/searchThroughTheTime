@@ -7,7 +7,7 @@ $scrollbar-margin-top: 250px;
 $arrow-size: 120px;
 $webUI-margin-left: calc($mainscreen-width/2 + $touchscreen-width );
 // $webUI-margin-top: calc(($mainscreen-height - $touchscreen-height)/2 );
-$webUI-margin-top: 0px;
+$webUI-margin-top: 90px;
 $detailview-width: 1600px;
 $detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
 $begin-button-width: 1000px;
@@ -57,7 +57,7 @@ html,
 	/*elements and content*/
 	margin-left: calc($touchscreen-width + 120px);
 	/* lulu's deeplocal change */
-	margin-top: 120px;
+	margin-top: 210px;
 	margin-bottom: 120px;
 	/*<---lulu's deeplocal change */
 }
@@ -76,7 +76,7 @@ html,
 .Container canvas {
 	/*line drawing */
 	margin-left: calc($touchscreen-width + 120px);
-	margin-top: 120px;
+	margin-top: 210px;
 	margin-right: $mainscreen-margin;
 	margin-bottom: 120px;
 	/* lulu's deeplocal change */
