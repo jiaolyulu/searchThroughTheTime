@@ -89,7 +89,7 @@ Class(function LoaderView() {
 
     function handleResize() {
         let sizeCircle = 0.52; // size circle in unit 3d world
-        let size = (sizeCircle / cameraHeight()) * Stage.height;
+        let size = (sizeCircle / cameraHeight()) * (Stage.height);
 
         setCircleSize(size);
     }

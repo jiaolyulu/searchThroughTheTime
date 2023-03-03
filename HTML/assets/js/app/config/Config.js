@@ -129,7 +129,9 @@ Class(function Config() {
     // - Tooltip click instead of hover
     // - Scroll lerping...
     _this.TOUCH = (Device.touchCapable && !_kioskMode); // When in kiosk mode, items will auto expand so touch should generally be treated as off
-
+    _this.margin = {
+        canvas: 200
+    };
 
     _this.DOM3DRatio = 1;
 
