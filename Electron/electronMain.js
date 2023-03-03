@@ -60,7 +60,7 @@ const setScreenDimensions = () => {
 const createWindow = () => {
     console.log("x:", _x, "    y:", _y);
     _win = new BrowserWindow({
-        x: _x, // was -720
+        x: -720, // was -720
         y: _y,
         frame: !_hideFrame,
         backgroundColor: _backgroundColor,
