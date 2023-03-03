@@ -2,16 +2,16 @@ $touchscreen-width: 720px;
 $touchscreen-height: 1920px;
 $mainscreen-width: 3840px;
 $mainscreen-height: 2160px;
-$mainscreen-margin: 20px;
-$scrollbar-margin-top: 250px;
+$scrollbar-margin-top: 300px;
 $arrow-size: 120px;
+$margin-canvas:200px;
 $webUI-margin-left: calc($mainscreen-width/2 + $touchscreen-width );
-// $webUI-margin-top: calc(($mainscreen-height - $touchscreen-height)/2 );
-$webUI-margin-top: 90px;
+$webUI-margin-top: calc(($mainscreen-height - $touchscreen-height)/2 - 30px );
 $detailview-width: 1600px;
 $detailview-margin-left: calc($touchscreen-width + $mainscreen-width/2 - $detailview-width/2);
 $begin-button-width: 1000px;
 $begin-button-height: 140px;
+
 
 $color-white: #fff6ea;
 
@@ -55,10 +55,10 @@ html,
 
 .DOM3D {
 	/*elements and content*/
-	margin-left: calc($touchscreen-width + 120px);
+	margin-left: calc($touchscreen-width + $margin-canvas);
 	/* lulu's deeplocal change */
-	margin-top: 210px;
-	margin-bottom: 120px;
+	margin-top: calc($webUI-margin-top + $margin-canvas);
+
 	/*<---lulu's deeplocal change */
 }
 
@@ -75,10 +75,10 @@ html,
 
 .Container canvas {
 	/*line drawing */
-	margin-left: calc($touchscreen-width + 120px);
-	margin-top: 210px;
-	margin-right: $mainscreen-margin;
-	margin-bottom: 120px;
+	margin-left: calc($touchscreen-width + $margin-canvas);
+	margin-top: calc($webUI-margin-top + $margin-canvas);
+	margin-right:  $margin-canvas;
+	margin-bottom:  $margin-canvas;
 	/* lulu's deeplocal change */
 }
 

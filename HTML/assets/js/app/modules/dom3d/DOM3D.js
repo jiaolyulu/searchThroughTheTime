@@ -1,7 +1,7 @@
 Class(function DOM3D () {
     Inherit(this, Component);
     const _this = this;
-
+    const marginCanvas=200;
     var _visible = false;
 
     var $stage;
@@ -60,8 +60,8 @@ Class(function DOM3D () {
             display: 'none',
             overflow: 'hidden',
             pointerEvents: 'none',
-            width: Stage.width-240,
-            height: Stage.height-240,
+            width: Stage.width-2*marginCanvas,
+            height: Stage.height-2*marginCanvas,
             zIndex: 20
         });
 
@@ -312,12 +312,12 @@ Class(function DOM3D () {
     }
 
     function onResize() {
-        _widthHalf = Stage.width / 2 -120;
-        _heightHalf = Stage.height / 2-120;
+        _widthHalf = Stage.width / 2 -marginCanvas;
+        _heightHalf = Stage.height / 2-marginCanvas;
 
         $stage.css({
-            width: Stage.width-240,
-            height: Stage.height-240
+            width: Stage.width-2*marginCanvas,
+            height: Stage.height-2*marginCanvas
         });
     }
 

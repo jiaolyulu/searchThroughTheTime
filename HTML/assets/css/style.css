@@ -30,16 +30,15 @@ html,
   /* year bar on top of screen*/
   margin-left: 720px;
   /*<---lulu's deeplocal change */
-  margin-top: 250px;
+  margin-top: 300px;
   /*<---lulu's deeplocal change */
 }
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 840px;
+  margin-left: 920px;
   /* lulu's deeplocal change */
-  margin-top: 210px;
-  margin-bottom: 120px;
+  margin-top: 290px;
   /*<---lulu's deeplocal change */
 }
 
@@ -55,10 +54,10 @@ html,
 
 .Container canvas {
   /*line drawing */
-  margin-left: 840px;
-  margin-top: 210px;
-  margin-right: 20px;
-  margin-bottom: 120px;
+  margin-left: 920px;
+  margin-top: 290px;
+  margin-right: 200px;
+  margin-bottom: 200px;
   /* lulu's deeplocal change */
 }
 
@@ -78,7 +77,7 @@ html,
   /*This is the content popup. The Deepdive content background */
   /*<---lulu's deeplocal change */
   margin-left: 1840px;
-  margin-top: 250px;
+  margin-top: 300px;
   /*<--- position of window on screen */
   /*<---lulu's deeplocal change */
   width: 1600px !important;

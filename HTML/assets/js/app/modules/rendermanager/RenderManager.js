@@ -3,7 +3,7 @@ Class(function RenderManager() {
     const _this = this;
     const _evt = {stage: null, camera: null};
     var _hasGLUI, _hasMetal;
-
+    const marginCanvas=200;
     var _dpr = null;
     var _schedules = new Map();
     var _firingEvt;
@@ -100,14 +100,14 @@ Class(function RenderManager() {
         }
 
         if (!_this.gl) {
-            let camera = new PerspectiveCamera(45, (Stage.width-120) / (Stage.height-120), 0.01, 200);
+            let camera = new PerspectiveCamera(45, (Stage.width-marginCanvas*2) / (Stage.height-marginCanvas*2), 0.01, 200);
 
             _this.gl = (function() {
                 if (Device.system.browser == 'safari' && Device.system.browserVersion < 13) delete params.powerPreference;
                 if (Utils.query('compat')) params.forceWebGL1 = true;
                 const RendererClass = window.Metal ? MetalRenderer : Renderer;
                 let renderer = new RendererClass(params);
-                renderer.setSize(Stage.width-240, Stage.height-240);
+                renderer.setSize(Stage.width-marginCanvas*2, Stage.height-marginCanvas*2);
                 renderer.setPixelRatio(getDPR());
                 return renderer;
             })();
