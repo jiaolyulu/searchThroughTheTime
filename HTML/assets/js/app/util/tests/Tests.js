@@ -40,8 +40,8 @@ Class(function Tests() {
     };
 
     this.capFPS = function() {
-        if (GPU.lt(0)) return 30.001;
-        if (GPU.mobileLT(1)) return 30.001;
+        if (GPU.lt(0)) return 60.001;
+        if (GPU.mobileLT(1)) return 60.001;
         if (GPU.lt(3)) return Render.REFRESH_RATE > 60 ? 60.001 : null;
         if (Device.mobile) return Render.REFRESH_RATE > 100 ? 100.001 : null;
         return null;
