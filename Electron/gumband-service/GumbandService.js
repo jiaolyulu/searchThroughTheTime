@@ -5,7 +5,6 @@ const { Gumband, Sockets } = require('@deeplocal/gumband-node-sdk');
 const EventEmitter = require('events');
 const logger = require('hagen').default;
 
-
 /** UTILITIES */
 
 

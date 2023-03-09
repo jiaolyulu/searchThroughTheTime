@@ -113,7 +113,6 @@ Class(function MilestoneTooltip({
             }
             _preBlurState = _blurState;
         }
-
     }
 
     function isDrawing() {
