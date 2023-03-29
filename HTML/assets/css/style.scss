@@ -404,15 +404,12 @@ body {
 	}
 
 	.main-screen {
-		margin-left: 720px;
+		left: 720px;
 		top: 0px;
 		width: 3840px;
 		height: 1920px;
-		display: grid;
 		position: absolute;
-		align-items: center;
-		justify-items: center;
-
+		
 		img {
 			max-width: 700px;
 		}

@@ -90,8 +90,12 @@ function toggleAttractLoop() {
     if (attractLoopVisible) {
         el[0].style.display = 'none';
         stage.style.display = 'flex';
+        let unmountEvent = new CustomEvent('UNMOUNT');
+        window.dispatchEvent(unmountEvent);
     } else {
         el[0].style.display = 'flex';
+        let renderEvent = new CustomEvent('RENDER');
+        window.dispatchEvent(renderEvent);
         stage.style.display = 'none';
     }
     resetUserInteractedStates();
@@ -122,26 +126,24 @@ function fireIntroAnimationMsg() {
 // function to start the attract animation
 function startIntroAnimation() {
     portalTween = gsap.timeline()
-        .to(document.getElementsByClassName('attractLoopScr'), { opacity: 1, })
-        .fromTo('#portal', { scale: 0, rotation: 0 }, { scale: 1, rotation: 360, ease: 'none', duration: 5, paused: false })
-    //.from('#portal', { rotation: -360, duration: 10, ease: 'none', repeat: -1 });
+        .to(document.getElementsByClassName('attractLoopScr'), { opacity: 1 });
 }
 
 // function to start the exit attract loop animation
 function startExitAnimation() {
     //console.log('ATTRACT: starting startExitAnimation');
-    portalTween = gsap.timeline()
-        .to('#portal', {
-            scale: 0,
-            rotation: 360,
-            ease: 'none',
-            duration: 1,
-            paused: false
-        })
+    portalTween = gsap.timeline(
+        {
+            onStart: () => {
+                let exitEvent = new CustomEvent('EXIT_ANIMATION');
+                window.dispatchEvent(exitEvent);
+            }
+        }
+    )
         .to(document.getElementsByClassName('attractLoopScr'), {
             opacity: 0,
             duration: 1,
-            onComplete: startExitAnimationHelper,
+            onComplete: startExitAnimationHelper
         })
         .to(document.getElementById('Stage'), {
             opacity: 1,
@@ -151,7 +153,6 @@ function startExitAnimation() {
 // helper function for exit animation's onComplete callback
 function startExitAnimationHelper() {
     fireIntroAnimationMsg();
-    // portalTween = gsap.fromTo('.attractLoopScr', {opacity:1 }, {opacity: 0, duration: 3, })
     toggleAttractLoop(); // hide attract loop
     // fire attract loop message for other components
     fireAttractLoopMsg();
