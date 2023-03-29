@@ -36,9 +36,9 @@ html,
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 920px;
+  margin-left: 820px;
   /* lulu's deeplocal change */
-  margin-top: 290px;
+  margin-top: 190px;
   /*<---lulu's deeplocal change */
 }
 
@@ -54,10 +54,10 @@ html,
 
 .Container canvas {
   /*line drawing */
-  margin-left: 920px;
-  margin-top: 290px;
-  margin-right: 200px;
-  margin-bottom: 200px;
+  margin-left: 820px;
+  margin-top: 190px;
+  margin-right: 100px;
+  margin-bottom: 100px;
   /* lulu's deeplocal change */
 }
 
