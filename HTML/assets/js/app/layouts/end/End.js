@@ -179,7 +179,6 @@ Class(function End() {
         let trigger = bounds.horizontal[1] + widthCamera / 2;
 
         if (scroll >= trigger && !_enter) {
-            console.log(`scroll is ${scroll} and trigger is ${trigger}`)
             animateIn();
         } else if (scroll < trigger && _enter) {
             // animateOut();
@@ -229,6 +228,6 @@ Class(function End() {
         return _this.wait('isReady');
     };
 }, _ => {
-    End.HORIZONTAL_WIDTH = 0.95; // screenwidth *
+    End.HORIZONTAL_WIDTH = 0.65; // screenwidth *
     End.HORIZONTAL_HEIGHT = 1.0; // screenwidth *
 });
