@@ -5,7 +5,7 @@ Class(function TimeDesktopDetailView() {
     const _this = this;
     const $this = _this.element;
     let $TDDContainer, $TDDContentContainer, $TDDContent;
-    const buttonWidth = 1000;
+    const buttonWidth = 1200;
     const buttonHeight = 140;
 
 
