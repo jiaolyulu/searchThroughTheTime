@@ -39,9 +39,8 @@ Class(function Intro() {
 
     async function playIntro() {
         console.log("Lu this is where all the animation starts")
-        _introTween.seek(0);
         _scroll.immediateHide();
-        await _this.wait(300);
+        _introTween.seek(0);
         _introTween.play();
         _line.animateIn();
         
