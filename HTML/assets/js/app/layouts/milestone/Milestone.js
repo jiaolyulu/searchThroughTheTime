@@ -361,12 +361,7 @@ Class(function Milestone(_data) {
     //call it should be visible
     //Return true or false
     function shouldBeVisible() {
-        
-        
         const progress = MilestoneAppearing.get(_this.id);
-        // if (_this.id ==="pagerank"){
-        //     console.log(`${_this.id}bbox.x is ${_bbox.x} ${progress} ${_layoutPosition.x}and scroll is ${MainStore.get('scroll')}`)
-        // }
         const global = ViewController.instance().views.global;
         const wireProgress = global.wire.progress;
 

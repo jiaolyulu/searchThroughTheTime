@@ -113,7 +113,6 @@ Class(function End() {
             x += (widthCamera / 2);
             x -= widthCamera * (1.0 - End.HORIZONTAL_WIDTH);
         }
-        //console.log(`camera position debug: bound x =${bounds.horizontal[1]} + cameraWidth/2(${widthCamera/2})-${widthCamera} * (1.0 - ${End.HORIZONTAL_WIDTH})`)
 
         _this.group.position.set(x, y, 0);
     }

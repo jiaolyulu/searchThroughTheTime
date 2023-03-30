@@ -188,7 +188,8 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.95,
         'multi-modal-search-with-mum': 0.964,
         'multisearch': 0.982,
-        'results-about-you': 0.99
+        'results-about-you': 0.99,
+        'google-bard': 1.16
 
     };
 
@@ -204,6 +205,6 @@ Class(function MilestoneAppearing() {
             return 0;
         }
 
-        return pool[id];
+        return pool[id]/1.03;
     };
 }, 'static');

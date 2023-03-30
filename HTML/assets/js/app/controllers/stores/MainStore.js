@@ -23,7 +23,7 @@ Class(function MainStore() {
                 heightCamera: 0,
                 end: false,
                 bounds: {
-                    horizontal: [0, 7],
+                    horizontal: [0, 8],
                     vertical: [0, 7]
                 }
             },
