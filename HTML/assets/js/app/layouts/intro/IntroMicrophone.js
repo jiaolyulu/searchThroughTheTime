@@ -64,7 +64,7 @@ Class(function IntroMicrophone() {
         tween($obj, { scaleX, scaleY }, 800, 'easeOutExpo', delay);
     }
 
-    function imemdiateHide({ applyFade = false } = {}) {
+    function immediateHide() {
         $obj.css({ alpha: 0 });
     }
 
