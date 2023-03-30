@@ -68,6 +68,7 @@ Class(function MainView() {
             }
 
             tween(m, { opacity: 1 }, 800, 'easeInOutCubic');
+
             tween(m.group.position, {
                 z: m.layoutPosition.z
             }, 1000, 'easeInOutCubic');
