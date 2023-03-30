@@ -148,7 +148,7 @@ Class(function DetailUIView() {
         const treshold = 0.4;
         const detailCamera = ViewController.instance().views.detail.camera;
 
-        //console.log(`### ALEX SCROLL: ${scroll.toFixed(4)}`);
+        console.log(`### ALEX SCROLL: ${scroll.toFixed(4)}`);
         if (scroll > 0 && scroll < 1) scrollExitFlag = true; //### Alex check if we've started to scroll, then check for going back to top and add timer exit
         // console.log(`### ALEX ${scrollExitFlag}`);
         if (scrollExitFlag && scroll.toFixed(4) == 0) { // if user has scrolled and we come back to top / truncate huge e numbers

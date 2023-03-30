@@ -204,6 +204,6 @@ Class(function MilestoneAppearing() {
             return 0;
         }
 
-        return pool[id]/0.999*0.98;
+        return pool[id];
     };
 }, 'static');

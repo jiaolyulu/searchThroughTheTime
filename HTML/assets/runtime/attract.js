@@ -22,13 +22,13 @@ let portalTween;
 // events
 let attractEvent; // fired to alert other components to experience state (used for disabling timeline scrolling, etc)
 
-//console.log('ATTRACT: attract.js loaded...');
+console.log('ATTRACT: attract.js loaded...');
 
 /**Handle User Events */
 
 
 window.onwheel = function (e) {
-    //console.log('ATTRACT: USER SCROLLED');
+    console.log('ATTRACT: USER SCROLLED');
     userHasScrolled = true;
     if (attractLoopVisible && !ignoreUserInput) {
         ignoreUserInput = true;
@@ -72,7 +72,7 @@ const checkForInactivity = () => {
             }
         });
     } else {
-        //console.log('ATTRACT: no state change required');
+        console.log('ATTRACT: no state change required');
         resetUserInteractedStates();
     }
 };

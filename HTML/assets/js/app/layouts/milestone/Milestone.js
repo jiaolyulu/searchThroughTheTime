@@ -373,8 +373,10 @@ Class(function Milestone(_data) {
         let onScreen = wireProgress >= progress;
         //_screenPosition = wireProgress - progress;
         // all of these are getting the true screen position. it is also adding the offset from the gazecamera(not sure why there is a gaze camera also offset accumulates with the progress)
-        _screenPosition =_layoutPosition.x-MainStore.get('scroll')+(MainStore.get("widthCamera") / 2.0) * progress;  
+        //_screenPosition =_layoutPosition.x-MainStore.get('scroll')+(MainStore.get("widthCamera") / 2.0) * progress;  
         //console.log(`onScreen for ${_this.id}: ${onScreen}  wireprogress${wireProgress} and progress${progress}`);
+        _screenPosition = wireProgress - progress;
+        //console.log(`onScreen for ${_this.id}: ${onScreen}`);
         return onScreen;
     }
 
@@ -423,11 +425,9 @@ Class(function Milestone(_data) {
         if (!_tooltip ?? false) {
             return;
         }
-        
         cancelAutoExpandTimer();
         if (_tooltip.open && _tooltipAutoOpened) {
             _tooltip.hide();
-            console.log(`CLOSING CTA: ${_this.id}}`);
             // animateOut();
             _tooltipAutoOpened = false;
         }
@@ -574,9 +574,8 @@ Class(function Milestone(_data) {
     }
 
     async function animateOut({ immediate = false } = {}) {
-        
         const milestone = DetailStore.get('milestone');
-        console.log("milestone id", milestone.id, "is animating out")
+
         if (milestone && milestone.id === _this.id) {
             _this.flag('animateIn', true);
             return;
