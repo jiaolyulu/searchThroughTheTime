@@ -40,10 +40,11 @@ Class(function Intro() {
     async function playIntro() {
         console.log("Lu this is where all the animation starts")
         _introTween.seek(0);
+        _scroll.immediateHide();
         await _this.wait(300);
         _introTween.play();
         _line.animateIn();
-        _scroll.immediateHide();
+        
         // const global = ViewController.instance().views.global;
         // await global.ready();
         // global.background.shader.tween('uAppear', 1, 5000, 'easeInOutCubic');
