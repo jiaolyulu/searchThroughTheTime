@@ -43,7 +43,7 @@ Class(function Intro() {
         await _this.wait(300);
         _introTween.play();
         _line.animateIn();
-
+        _scroll.immediateHide();
         // const global = ViewController.instance().views.global;
         // await global.ready();
         // global.background.shader.tween('uAppear', 1, 5000, 'easeInOutCubic');

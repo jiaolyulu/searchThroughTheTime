@@ -97,6 +97,7 @@ Class(function IntroDirection() {
         tween(_this.sp, { speed: enter ? 3.0 : 1.0 }, 800, 'easeOutCubic');
     };
 
+    
     this.animateIn = async function() {
         prepareAnimationIn();
 

@@ -148,7 +148,6 @@ Class(function IntroScroll() {
     this.makeClickable = function() {
         $wrapper.interact(onHover, onClick, '#', DataModel.get('landingScrollIndicator'));
     };
-
     this.show = function({ immediate = false, applyFade = falsedelay = 0 } = {}) {
         if (immediate) {
             $wrapper.transform({ y: 0 });
@@ -172,6 +171,9 @@ Class(function IntroScroll() {
         if (_directiongl) {
             tween(_directiongl, { alpha: 1 }, 500, 'easeOutCubic', 400);
         }
+    };
+    this.immediateHide = function() {
+        $wrapper.css({ opacity: 0.0 });
     };
 
     this.hide = function({ immediate = false, delay = 0, applyFade = false } = {}) {
