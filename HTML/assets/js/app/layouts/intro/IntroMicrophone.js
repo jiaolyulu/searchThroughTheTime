@@ -81,5 +81,5 @@ Class(function IntroMicrophone() {
     //*** Public methods
     this.show = show;
     this.hide = hide;
-    this.imemdiateHide = imemdiateHide;
+    this.immediateHide = immediateHide;
 });
