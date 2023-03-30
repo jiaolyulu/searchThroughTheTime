@@ -48,7 +48,7 @@ Class(function DetailImage({
         & {
           box-sizing: border-box;
           position: relative ! important;
-          ${Styles.setContentWidth({ paddingLR: 20, maxWidth: 480 })}
+          ${Styles.setContentWidth({ paddingLR: 20, maxWidth: 680 })}
           ${Styles.spacing('margin-bottom', 'xl')}
           ${Styles.smaller('vertical', `
             ${Styles.setContentWidth({ paddingLR: 80 })}
