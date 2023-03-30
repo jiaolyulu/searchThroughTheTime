@@ -224,7 +224,6 @@ Class(function Milestone(_data) {
 
         if (_image && !_isCustom) {
             _image.group.scale.set(_bbox.x * 2, _bbox.y * 2, 1);
-
             if (_image.shader.uniforms.uSize) {
                 _image.shader.uniforms.uSize.value.set(_bbox.x, _bbox.y);
             }

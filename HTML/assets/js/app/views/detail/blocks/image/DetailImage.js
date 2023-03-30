@@ -74,8 +74,9 @@ Class(function DetailImage({
         }
 
         .detail-img {
-          /*object-fit: contain;*/
+          object-fit: contain;
           max-width: 100%;
+          min-width: 99%;
           max-height: 100%;
           margin: auto;
           top: 0;
