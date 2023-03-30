@@ -369,6 +369,7 @@ Class(function Milestone(_data) {
         // }
         const global = ViewController.instance().views.global;
         const wireProgress = global.wire.progress;
+
         let onScreen = wireProgress >= progress;
         //_screenPosition = wireProgress - progress;
         // all of these are getting the true screen position. it is also adding the offset from the gazecamera(not sure why there is a gaze camera also offset accumulates with the progress)
