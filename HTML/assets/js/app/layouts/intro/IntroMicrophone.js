@@ -64,6 +64,10 @@ Class(function IntroMicrophone() {
         tween($obj, { scaleX, scaleY }, 800, 'easeOutExpo', delay);
     }
 
+    function imemdiateHide({ applyFade = false } = {}) {
+        $obj.css({ alpha: 0 });
+    }
+
     function hide({ applyFade = false } = {}) {
         if (applyFade) {
             $obj.tween({ alpha: 0 }, 500, 'easeOutCubic');
@@ -77,4 +81,5 @@ Class(function IntroMicrophone() {
     //*** Public methods
     this.show = show;
     this.hide = hide;
+    this.imemdiateHide = imemdiateHide;
 });

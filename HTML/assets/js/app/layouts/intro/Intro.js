@@ -39,7 +39,7 @@ Class(function Intro() {
 
     async function playIntro() {
         console.log("Lu this is where all the animation starts");
-        
+        _microphone.immediateHide();
         _scroll.immediateHide();
         _introTween.seek(0);
         _introTween.play();
