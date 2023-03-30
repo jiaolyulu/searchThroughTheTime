@@ -113,6 +113,7 @@ Class(function MilestoneAppearing() {
         'googlecom-domain': 0.033,
         'first-google-doodle': 0.047,
         'google-inc-launches': 0.058,
+
         'google-expands-to-10-new-languages': 0.065,
         'googles-index-reaches-1-billion-urls': 0.075,
         'first-international-doodle': 0.085,
@@ -188,8 +189,7 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.95,
         'multi-modal-search-with-mum': 0.964,
         'multisearch': 0.982,
-        'results-about-you': 0.99,
-        'google-bard': 1.16
+        'results-about-you': 0.99
 
     };
 
