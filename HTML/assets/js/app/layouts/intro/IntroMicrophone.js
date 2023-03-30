@@ -58,14 +58,14 @@ Class(function IntroMicrophone() {
             $obj.tween({ alpha: 1 }, 500, 'easeOutCubic');
             return;
         }
-
+        $obj.alpha=1;
         $obj.scaleX = 0;
         $obj.scaleY = 0;
         tween($obj, { scaleX, scaleY }, 800, 'easeOutExpo', delay);
     }
 
     function immediateHide() {
-        $obj.css({ alpha: 0 });
+        $obj.alpha=0;
     }
 
     function hide({ applyFade = false } = {}) {
