@@ -59,7 +59,6 @@ Class(function Wire() {
       let lastEntryPointCurve0_y = curve1[curve1.length - 2];
       let newEntryPointCurve1_x = curve2[0];
       let newEntryPointCurve1_y = curve2[1];
-      console.log(lastEntryPointCurve0_x,lastEntryPointCurve0_y,newEntryPointCurve1_x,newEntryPointCurve1_y)
       return curve2.map((el, index) => {
         if (index % 3 === 0) {
           return el - newEntryPointCurve1_x + lastEntryPointCurve0_x;
@@ -73,11 +72,8 @@ Class(function Wire() {
     const resetCurves = (curves) => {
       let curvesArrayWrapper=[...curves[0]];
       for (let i = 0;i<curves.length-1;i++){
-        curves[i+1]=resetCurveStartingPoint(curves[i], curves[i+1])
-       
-        curvesArrayWrapper.push(...curves[i+1]);
+        curvesArrayWrapper.push(...resetCurveStartingPoint(curves[i], curves[i+1]));
       }
-      
       return curvesArrayWrapper;
     };
 
