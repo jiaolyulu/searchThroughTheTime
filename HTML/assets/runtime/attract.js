@@ -142,9 +142,9 @@ function startExitAnimation() {
     )
         .to(document.getElementsByClassName('attractLoopScr'), {
             opacity: 0,
-            duration: 1,
+            duration: 2,
             onComplete: startExitAnimationHelper
-        })
+        }, 1)
         .to(document.getElementById('Stage'), {
             opacity: 1,
             duration: 2
