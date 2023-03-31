@@ -113,10 +113,9 @@ Class(function IntroTitle() {
 
     //*** Public methods
     this.show = function({ applyFade = false } = {}) {
-        if (applyFade) {
-            _text.element.tween({ opacity: 1.0 }, 500, 'easeOutCubic');
-            return;
-        }
+
+        _text.element.tween({ opacity: 1.0 }, 500, 'easeOutCubic');
+
         _text.animateIn();
     };
 
@@ -126,5 +125,9 @@ Class(function IntroTitle() {
             return;
         }
         _text.animateOut();
+    };
+    this.immediateHide = function({ applyFade = false } = {}) {
+
+        _text.element.css({ opacity: 0.0 });
     };
 });

@@ -54,11 +54,10 @@ Class(function IntroMicrophone() {
             return;
         }
 
-        if (applyFade) {
-            $obj.tween({ alpha: 1 }, 500, 'easeOutCubic');
-            return;
-        }
-        $obj.alpha=1;
+
+        $obj.tween({ alpha: 1 }, 500, 'easeOutCubic');
+
+        //$obj.alpha=1;
         $obj.scaleX = 0;
         $obj.scaleY = 0;
         tween($obj, { scaleX, scaleY }, 800, 'easeOutExpo', delay);

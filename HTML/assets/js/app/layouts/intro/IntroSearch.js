@@ -129,12 +129,21 @@ Class(function IntroSearch() {
             return;
         }
 
+
         tween(animPhaseGlass, { value: 0 }, 1100, 'easeOutExpo', delay).onUpdate(_ => {
             $lookingGlassGlass.css({ 'stroke-dashoffset': `${animPhaseGlass.value}` });
         });
         tween(animPhaseHandle, { value: 0 }, 1200, 'easeOutExpo', delay + 150).onUpdate(_ => {
             $lookingGlassHandle.css({ 'stroke-dashoffset': `${animPhaseHandle.value}` });
         });
+    }
+    function immediateHide() {
+
+        $lookingGlassGlass.css({ 'stroke-dasharray': `${_lookingGlassGlassPathLen}` });
+        $lookingGlassGlass.css({ 'stroke-dashoffset': `${_lookingGlassGlassPathLen}` });
+
+        $lookingGlassHandle.css({ 'stroke-dasharray': `${_lookingGlassHandlePathLen}` });
+        $lookingGlassHandle.css({ 'stroke-dashoffset': `${_lookingGlassHandlePathLen}` });
     }
 
     function hide({ immediate = false, applyFade = false } = {}) {
@@ -148,7 +157,7 @@ Class(function IntroSearch() {
         if (applyFade) {
             $lookingGlassGlass.tween({ opacity: 0.0 }, 500, 'easeOutCubic');
             $lookingGlassHandle.tween({ opacity: 0.0 }, 500, 'easeOutCubic');
-            return;
+
         }
 
         const animPhaseGlass = { value: 0 };
@@ -166,6 +175,7 @@ Class(function IntroSearch() {
     //*** Public methods
     this.show = show;
     this.hide = hide;
+    this.immediateHide = immediateHide;
 }, _ => {
     IntroSearch.icon = `
         <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">

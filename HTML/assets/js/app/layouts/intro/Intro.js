@@ -44,7 +44,8 @@ Class(function Intro() {
         _introTween.seek(0);
         _introTween.play();
         _line.animateIn();
-        
+        _title.immediateHide();
+        _search.immediateHide();
         // const global = ViewController.instance().views.global;
         // await global.ready();
         // global.background.shader.tween('uAppear', 1, 5000, 'easeInOutCubic');

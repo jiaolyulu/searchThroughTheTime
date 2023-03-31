@@ -10,7 +10,7 @@
 /**Variables */
 
 
-const activityTimer = 190; // seconds to test for inactivity
+const activityTimer = 10; // seconds to test for inactivity
 
 // state management
 let userHasScrolled = false;
