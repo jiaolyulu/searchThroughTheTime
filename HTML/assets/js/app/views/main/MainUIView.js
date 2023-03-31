@@ -10,7 +10,7 @@ Class(function MainUIView() {
     //*** Constructor
     (function () {
         initYear();
-        initScrollMore();
+        //initScrollMore();
 
         _this.bind(GlobalStore, 'vertical', onVerticalUpdate);
         // _this.bind(GlobalStore, 'mobileLandscape', onLandscapeMobile);
@@ -34,8 +34,6 @@ Class(function MainUIView() {
     }
 
     function initScrollMore() {
-        console.log('### IAN initScrollMore');
-
         _scrollMore = _this.initClass(ScrollMore);
     }
 
