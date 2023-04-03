@@ -1,1 +1,78 @@
-{"sheetsById":{"Shader":{"staticOverrides":{"byObject":{"introLineShader":{"uDrawing":{"value":0}}}},"sequence":{"subUnitsPerUnit":30,"length":10,"type":"PositionalSequence","tracksByObject":{"introLineShader":{"trackData":{"idjI3KMxDJ":{"type":"BasicKeyframedTrack","keyframes":[{"id":"uhltKum91_","position":0,"connectedRight":true,"handles":[0.5,1,0.5,0],"value":0.126},{"id":"5RoGl1ho51","position":3,"connectedRight":true,"handles":[0.5,1,0.5,0],"value":1}]},"r-f-H1d_Py":{"type":"BasicKeyframedTrack","keyframes":[{"id":"xbW13A1tte","position":0,"connectedRight":true,"handles":[0.5,1,0.5,0],"value":0},{"id":"aYuWQvpVX9","position":1.033,"connectedRight":true,"handles":[0.729625842817485,0.4421648835777011,0.29689851336058704,0.7184052441017295],"value":0.16940489621033555},{"id":"tF1A4y4osS","position":3,"connectedRight":true,"handles":[0.5,1,0.5,0],"value":0.413}]}},"trackIdByPropPath":{"[\"uDrawing\",\"value\"]":"idjI3KMxDJ","[\"uErasing\",\"value\"]":"r-f-H1d_Py"}}}}}},"definitionVersion":"0.4.0","revisionHistory":["tvYj_DLvJG8TSAC-"]}
+{
+    "sheetsById": {
+        "Shader": {
+            "staticOverrides": {
+                "byObject": {
+                    "introLineShader": { "uDrawing": { "value": 0 } }
+                }
+            },
+            "sequence": {
+                "subUnitsPerUnit": 30,
+                "length": 10,
+                "type": "PositionalSequence",
+                "tracksByObject": {
+                    "introLineShader": {
+                        "trackData": {
+                            "idjI3KMxDJ": {
+                                "type": "BasicKeyframedTrack",
+                                "keyframes": [
+                                    {
+                                        "id": "uhltKum91_",
+                                        "position": 0,
+                                        "connectedRight": true,
+                                        "handles": [0.5, 1, 0.5, 0],
+                                        "value": 0.126
+                                    },
+                                    {
+                                        "id": "5RoGl1ho51",
+                                        "position": 3,
+                                        "connectedRight": true,
+                                        "handles": [0.5, 1, 0.5, 0],
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            "r-f-H1d_Py": {
+                                "type": "BasicKeyframedTrack",
+                                "keyframes": [
+                                    {
+                                        "id": "xbW13A1tte",
+                                        "position": 0,
+                                        "connectedRight": true,
+                                        "handles": [0.5, 1, 0.5, 0],
+                                        "value": 0
+                                    },
+                                    {
+                                        "id": "aYuWQvpVX9",
+                                        "position": 1.033,
+                                        "connectedRight": true,
+                                        "handles": [
+                                            0.729625842817485,
+                                            0.4421648835777011,
+                                            0.29689851336058704,
+                                            0.7184052441017295
+                                        ],
+                                        "value": 0.16940489621033555
+                                    },
+                                    {
+                                        "id": "tF1A4y4osS",
+                                        "position": 3,
+                                        "connectedRight": true,
+                                        "handles": [0.5, 1, 0.5, 0],
+                                        "value": 0.413
+                                    }
+                                ]
+                            }
+                        },
+                        "trackIdByPropPath": {
+                            "[\"uDrawing\",\"value\"]": "idjI3KMxDJ",
+                            "[\"uErasing\",\"value\"]": "r-f-H1d_Py"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitionVersion": "0.4.0",
+    "revisionHistory": ["tvYj_DLvJG8TSAC-"]
+}
