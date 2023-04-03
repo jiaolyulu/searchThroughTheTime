@@ -126,7 +126,7 @@ function fireIntroAnimationMsg() {
 // function to start the attract animation
 function startIntroAnimation() {
     portalTween = gsap.timeline()
-        .to(document.getElementsByClassName('attractLoopScr'), { opacity: 1, duration: 1 });
+        .to(document.getElementsByClassName('attractLoopScr'), { opacity: 1, duration: 1.5 });
 }
 
 // function to start the exit attract loop animation
