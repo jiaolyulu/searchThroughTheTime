@@ -20,7 +20,7 @@ const _hideFrame = true;
 
 
 //private vars
-let _contentPath = _path.join(__dirname, '..') + _contentFolder;
+let _contentPath = _path.join(__dirname) + _contentFolder;
 let _win;
 
 let _w = 720 + 3840; // touch screen + widescreen. If _w or _h is set to 0, the app will dynamically scale to fill all screens.
