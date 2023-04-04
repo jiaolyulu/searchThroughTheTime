@@ -39,11 +39,14 @@ Class(function Intro() {
 
 
     async function playIntro() {
-        console.log("Lu this is where all the animation starts");
+
+        if (!isInitialized) {
+            _introTween.seek(0);
+            _introTween.play();
+        }
         _microphone.immediateHide();
         _scroll.immediateHide();
-        _introTween.seek(0);
-        _introTween.play();
+        
         
         //_line.animateIn();
         _title.immediateHide();
@@ -66,6 +69,10 @@ Class(function Intro() {
         _scroll.show();
         _swipe.show();
         enableScroll();
+        if (!isInitialized) { 
+            _line.startErasing();
+        }
+
         _line.startErasing();
         // _searchText.enableTyping = true;
         // _searchText.animateLetters();
