@@ -56,7 +56,7 @@ html,
 
 .DOM3D {
 	/*elements and content*/
-	margin-left: calc($touchscreen-width + $margin-canvas);
+	margin-left: calc($touchscreen-width );
 	/* lulu's deeplocal change */
 	margin-top: calc($webUI-margin-top + $margin-canvas);
 
@@ -76,9 +76,9 @@ html,
 
 .Container canvas {
 	/*line drawing */
-	margin-left: calc($touchscreen-width + $margin-canvas);
+	margin-left: calc($touchscreen-width );
 	margin-top: calc($webUI-margin-top + $margin-canvas);
-	margin-right:  $margin-canvas;
+	margin-right:  0;
 	margin-bottom:  $margin-canvas;
 	/* lulu's deeplocal change */
 }
