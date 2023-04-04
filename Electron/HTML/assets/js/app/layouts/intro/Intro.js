@@ -39,9 +39,9 @@ Class(function Intro() {
 
 
     async function playIntro() {
-
+        _introTween.seek(0);
         if (!isInitialized) {
-            _introTween.seek(0);
+            
             _introTween.play();
         }
         _microphone.immediateHide();
