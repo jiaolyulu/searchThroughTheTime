@@ -31,7 +31,7 @@ Class(function Styles() {
         emperor: '#4F4F4F',
         mineShaft: '#333333',
         // silver: '#BDBDBD',
-        colorWhite:"#fff8e9",
+        colorWhite:"#FFFAF1",
         concrete: '#E0E0E0',
         royalBlue: '#1A73E8',
         malibu: '#4DC3FF',
