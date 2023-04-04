@@ -49,7 +49,7 @@ Class(function Intro() {
         _scroll.immediateHide();
         
         
-        _line.animateIn();
+        //_line.animateIn();
         _title.immediateHide();
         _search.immediateHide();
         // const global = ViewController.instance().views.global;
