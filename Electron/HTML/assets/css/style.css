@@ -9,7 +9,6 @@ html,
   -ms-content-zooming: none;
   -ms-touch-action: none;
   touch-action: none;
-  cursor: none;
 }
 
 /* if you ar looking for css to adjust the scroll nav, it is set in TimeDesktop.js*/
@@ -37,7 +36,7 @@ html,
 
 .DOM3D {
   /*elements and content*/
-  margin-left: 820px;
+  margin-left: 720px;
   /* lulu's deeplocal change */
   margin-top: 190px;
   /*<---lulu's deeplocal change */
@@ -55,9 +54,9 @@ html,
 
 .Container canvas {
   /*line drawing */
-  margin-left: 820px;
+  margin-left: 720px;
   margin-top: 190px;
-  margin-right: 100px;
+  margin-right: 0;
   margin-bottom: 100px;
   /* lulu's deeplocal change */
 }
