@@ -41,8 +41,10 @@ Class(function World() {
         World.ELEMENT = $(_renderer.domElement);
         World.CAMERA = _camera;
         World.NUKE = _nuke;
-        //lulu's deeplocal change
-        World.RENDERER.setClearColor(new Color(0xfff6ea), 1);
+        
+        // *lulu's deeplocal change to change the background color of the canvas
+
+        World.RENDERER.setClearColor(new Color(0xfffaf1), 1);
         World.SCENE.disableAutoSort = true;
         DOM3D.useCamera(World.CAMERA);
     }
