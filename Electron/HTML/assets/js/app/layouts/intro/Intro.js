@@ -40,9 +40,10 @@ Class(function Intro() {
 
     async function playIntro() {
         _introTween.seek(0);
+        _introTween.play();
         if (!isInitialized) {
             
-            _introTween.play();
+           
         }
         _microphone.immediateHide();
         _scroll.immediateHide();
