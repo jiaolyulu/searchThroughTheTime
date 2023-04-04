@@ -5,7 +5,7 @@ Class(function Intro() {
     let _line, _title, _welcome, _searchText, _search, _microphone, _scroll, _swipe;
     let _introTween;
     let _hitBar;
-
+    let isInitialized = false;
     const isPlayground = Global.PLAYGROUND === Utils.getConstructorName(_this);
 
     //*** Constructor
@@ -33,7 +33,8 @@ Class(function Intro() {
 
         addListeners();
     })();
-    window.addEventListener("INTRO_ANIMATION", e => { playIntro(); });
+
+    window.addEventListener("INTRO_ANIMATION", e => { isInitialized = true; playIntro(); });
 
 
 
