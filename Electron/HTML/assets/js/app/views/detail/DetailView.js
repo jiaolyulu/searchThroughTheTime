@@ -177,7 +177,7 @@ Class(function DetailView() {
     };
 
     this.onHide = async function () {
-        console.log('### ALEX ONHIDE!!!');
+        //console.log('### ALEX ONHIDE!!!');
         await reset();
         // animateOut();
     };

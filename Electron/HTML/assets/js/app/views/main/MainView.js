@@ -8,7 +8,7 @@ Class(function MainView() {
 
     //*** Constructor
     (async function () {
-        console.log('### IAN main view constructor');
+        // console.log('### IAN main view constructor');
         _this.layout = _this.initClass(SceneLayout, 'MainView');
         _this.registerUI(MainUIView);
 

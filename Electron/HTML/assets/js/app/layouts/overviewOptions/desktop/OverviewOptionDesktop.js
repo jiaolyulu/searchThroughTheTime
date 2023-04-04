@@ -11,7 +11,6 @@ Class(function OverviewOptionDesktop({
     Inherit(this, StateComponent);
     const _this = this;
     const $this = _this.element;
-    console.log(metaData)
 
     var $titleWrapper, $iconContainer, $iconBgTransformWrapper, $iconBg, $icon, $title;
     var _filtered = false;
@@ -269,7 +268,6 @@ Class(function OverviewOptionDesktop({
 
 
     function show() {
-        console.log(`### IAN show()`);
         _transitioning = true;
 
         _milestoneRef.dot.applyOpacityException = true;
@@ -307,7 +305,6 @@ Class(function OverviewOptionDesktop({
     }
 
     function hide() {
-        console.log(`### IAN hide()`);
 
         _transitioning = true;
         _enabled = false;

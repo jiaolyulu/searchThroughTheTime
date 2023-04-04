@@ -367,9 +367,8 @@ Class(function Milestone(_data) {
         let onScreen = wireProgress >= progress;
         //_screenPosition = wireProgress - progress;
         // all of these are getting the true screen position. it is also adding the offset from the gazecamera(not sure why there is a gaze camera also offset accumulates with the progress)
-        //_screenPosition =_layoutPosition.x-MainStore.get('scroll')+(MainStore.get("widthCamera") / 2.0) * progress;  
+        _screenPosition =_layoutPosition.x-MainStore.get('scroll')+(MainStore.get("widthCamera") / 2.0) * progress;  
         //console.log(`onScreen for ${_this.id}: ${onScreen}  wireprogress${wireProgress} and progress${progress}`);
-        _screenPosition = wireProgress - progress;
         //console.log(`onScreen for ${_this.id}: ${onScreen}`);
         return onScreen;
     }

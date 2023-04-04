@@ -28,7 +28,7 @@ console.log('ATTRACT: attract.js loaded...');
 
 
 window.onwheel = function (e) {
-    console.log('ATTRACT: USER SCROLLED');
+    //console.log('ATTRACT: USER SCROLLED');
     userHasScrolled = true;
     if (attractLoopVisible && !ignoreUserInput) {
         ignoreUserInput = true;
@@ -36,7 +36,7 @@ window.onwheel = function (e) {
     }
 };
 window.onclick = function (e) {
-    console.log('ATTRACT: USER CLICKED');
+    //console.log('ATTRACT: USER CLICKED');
     userHasClicked = true;
     if (attractLoopVisible && !ignoreUserInput) {
         ignoreUserInput = true;
