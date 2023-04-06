@@ -38,17 +38,17 @@ Class(function DetailUIView() {
 
     async function initHTML() {
         $exit = _this.initClass(ExitButton, { pulse: false }, [$this]);
+        $exit.hide();
 
+        // _this.bind(DetailStore, 'showBottomClose', show => {
+        //     if (!$exit.showed) return;
 
-        _this.bind(DetailStore, 'showBottomClose', show => {
-            if (!$exit.showed) return;
-
-            if (show) {
-                $exit.hide();
-            } else {
-                $exit.show();
-            }
-        });
+        //     if (show) {
+        //         $exit.hide();
+        //     } else {
+        //         $exit.show();
+        //     }
+        // });
 
         $scroll = $this.create('scroll');
         $scroll.html(`<div class="scroll-container"><svg class="intro-arrow" width="52" height="53" viewBox="0 0 52 53" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -226,7 +226,7 @@ Class(function DetailUIView() {
         prepareArrow();
         await _this.wait(50);
         _content?.show();
-        $exit.show();
+        $exit.hide();
         $exit.showed = true;
 
         showArrow({ delay: 1000 });

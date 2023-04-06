@@ -13,15 +13,18 @@ Class(function EndBlock() {
     })();
 
     function initHTML() {
+        let $wheelWrapper = $this.create("wheel-svg");
+        $wheelWrapper.div.innerHTML = `<p class="text" style="justify-content:center; display: flex;">Scroll to Exit</p><div class="svgSpinDialHolder" style="transform: scale(0.6);display: flex; justify-content:center; top: 50px; "><img id="spinDial" src="assets/images/deeplocal/scrollWheelIcon.svg" alt="spin dial"></div>`;
+        $wheelWrapper.css({ "justify-content": "center", "display": "flex","width":"200px" })
         _exit = _this.initClass(ExitButton, { big: true }, [$this]);
-
-        _this.bind(DetailStore, 'showBottomClose', show => {
-            if (show) {
-                _exit.show();
-            } else {
-                _exit.hide();
-            }
-        });
+        _exit.hide();
+        // _this.bind(DetailStore, 'showBottomClose', show => {
+        //     if (show) {
+        //         _exit.show();
+        //     } else {
+        //         _exit.hide();
+        //     }
+        // });
     }
 
     function initStyles() {
