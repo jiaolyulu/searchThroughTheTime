@@ -18,13 +18,13 @@ Class(function EndBlock() {
         $wheelWrapper.css({ "justify-content": "center", "display": "flex","width":"200px" })
         _exit = _this.initClass(ExitButton, { big: true }, [$this]);
         _exit.hide();
-        // _this.bind(DetailStore, 'showBottomClose', show => {
-        //     if (show) {
-        //         _exit.show();
-        //     } else {
-        //         _exit.hide();
-        //     }
-        // });
+        _this.bind(DetailStore, 'showBottomClose', show => {
+            if (show) {
+                $wheelWrapper.tween({ scale: 1 }, 500, 'easeInOutCubic');
+            } else {
+                $wheelWrapper.tween({ scale: 0 }, 500, 'easeInOutCubic');
+            }
+        });
     }
 
     function initStyles() {
