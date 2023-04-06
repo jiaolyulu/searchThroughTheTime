@@ -29,7 +29,7 @@ Class(function DetailUIView() {
     //*** Constructor
     (async function () {
         await initHTML();
-        
+
         initStyles();
 
         _this.startRender(loop, 10);
@@ -38,7 +38,7 @@ Class(function DetailUIView() {
 
     async function initHTML() {
         $exit = _this.initClass(ExitButton, { pulse: false }, [$this]);
-        
+
 
         _this.bind(DetailStore, 'showBottomClose', show => {
             if (!$exit.showed) return;
@@ -145,29 +145,21 @@ Class(function DetailUIView() {
     function loop() {
         if (GlobalStore.get('transitioning')) return;
         const scroll = Math.abs(DetailStore.get('scroll'));
-        const treshold = 0.4;
+        const scrollSpeed = DetailStore.get('scrollSpeed');
+        const treshold = 0.1;
         const detailCamera = ViewController.instance().views.detail.camera;
-
-        //console.log(`### ALEX SCROLL: ${scroll.toFixed(4)}`);
-        if (scroll > 0 && scroll < 1) scrollExitFlag = true; //### Alex check if we've started to scroll, then check for going back to top and add timer exit
-        // console.log(`### ALEX ${scrollExitFlag}`);
-        if (scrollExitFlag && scroll.toFixed(4) == 0) { // if user has scrolled and we come back to top / truncate huge e numbers
+        if (scroll.toFixed(4) < treshold) { // if user has scrolled and we come back to top / truncate huge e numbers
             console.log('### ALEX exiting after user scrolled up to the top....');
-            scrollExitFlag = false; // reset scroll flag
-            setTimeout(() => {
-                console.log('### in timeout');
+            if (scrollSpeed < -10) {
                 $exit.forceExit();
-            }, _deepDiveUpScrollPause);
+            }
         }
-
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
             showUp();
             // ### ALEX close detailed view after 1.5s when user scrolls to the bottom
-            setTimeout(() => {
-                console.log('### in timeout');
-                scrollExitFlag = false;
+            if (scrollSpeed > 10) {
                 $exit.forceExit();
-            }, _deepDiveDownClosePause);
+            }
         } else if (scroll < treshold) {
             showDown();
         } else if (scroll > treshold && scroll < (detailCamera.scrollBounds.max - treshold)) {

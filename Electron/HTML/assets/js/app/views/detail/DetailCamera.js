@@ -52,9 +52,10 @@ Class(function DetailCamera() {
     function loop() {
         const transitioning = GlobalStore.get('transitioning');
         const isVertical = GlobalStore.get('vertical');
-
+        
         if (_active && !transitioning) {
             _target.y += _scroll.delta.y * _lerpSpeed * Render.HZ_MULTIPLIER;
+            _this.commit(DetailStore, 'setScrollSpeed', _scroll.delta.y);
         }
 
         let maxScroll = 5;

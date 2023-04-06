@@ -10,6 +10,7 @@ Class(function DetailStore() {
         _this.createAppStore({
             state: {
                 scroll: 0, // Detail Scroll camera 3D .y position
+                scrollSpeed: 0,
                 progress: 0, // Scroll progress
                 fakeHeight: 0, // Fake height in px
                 heightContent: 0, // px height of the DOM content
@@ -26,6 +27,9 @@ Class(function DetailStore() {
                     const TRESHOLD = 0.35;
                     const bottom = (state.get('max') + value) < TRESHOLD;
                     state.set('showBottomClose', bottom);
+                },
+                setScrollSpeed(state, value) {
+                    state.set('scrollSpeed', value);
                 },
                 setProgress(state, value) {
                     state.set('progress', value);
