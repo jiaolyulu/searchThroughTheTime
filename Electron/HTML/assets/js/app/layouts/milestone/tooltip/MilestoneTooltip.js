@@ -106,7 +106,7 @@ Class(function MilestoneTooltip({
             }
             if (_preBlurState !== _blurState) {
                 if (_blurState === "blur") {
-                    gsap.to($content.div, { filter: "blur(2px)", duration: 0.2 });
+                    gsap.to($content.div, { filter: "blur(1px)", duration: 0.2 });
                 } else {
                     gsap.to($content.div, { filter: "blur(0px)", duration: 0.2 });
                 }
