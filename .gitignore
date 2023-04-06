@@ -5,7 +5,7 @@
 .es5cache
 .hydra
 .env
-
+Electron/out
 Build
 Electron/node_modules
 Android/app/src/main/assets/assets
