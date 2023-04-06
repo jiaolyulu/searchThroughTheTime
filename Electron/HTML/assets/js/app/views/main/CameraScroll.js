@@ -477,15 +477,15 @@ Class(function CameraScroll(_input, _group) {
         //     }
         // });
 
-        if (MilestoneTooltip.TOUCH) {
-            _this.events.sub(MilestoneTooltip.OPEN, () => {
-                _active = false;
-            });
+        // if (MilestoneTooltip.TOUCH) {
+        //     _this.events.sub(MilestoneTooltip.OPEN, () => {
+        //         _active = false;
+        //     });
 
-            _this.events.sub(MilestoneTooltip.CLOSING, () => {
-                _active = true;
-            });
-        }
+        //     _this.events.sub(MilestoneTooltip.CLOSING, () => {
+        //         _active = true;
+        //     });
+        // }
 
         _this.bind(MainStore, 'tooltip', onTooltipChange);
         _this.bind(MainStore, 'hoverCTA', onHoverCTAChange);
