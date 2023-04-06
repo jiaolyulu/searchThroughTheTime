@@ -72,9 +72,9 @@ Class(function MilestoneCTA({
         // if (ff) {
         //     $container.classList().add('ff');
         // }
-
-        $bg.css({ backgroundColor: color.normal });
-        $linkWrapper.css({ color: color.inverse });
+        let colorOpacity = color.normal.concat('50');
+        $bg.css({ backgroundColor: "none", borderStyle: "solid", borderColor: colorOpacity, borderWidth: '4px'});
+        $linkWrapper.css({ color: color.normal });
 
         GoobCache.apply('MilestoneCTA', $container, /* scss */ `
           & {
@@ -116,6 +116,8 @@ Class(function MilestoneCTA({
               right: 0;
               bottom: 0;
               left: 0;
+              border-style: solid;
+              border-color: ${color.normal};
           }
 
           /*&.ff .bg {
@@ -130,7 +132,7 @@ Class(function MilestoneCTA({
 
           .link {
               grid-area: 1 / 1;
-              ${Styles.googleSansBold}
+              ${Styles.googleSansRegular}
               display: inline!important;
               position: relative!important;
               z-index: 10;
@@ -150,7 +152,7 @@ Class(function MilestoneCTA({
         // _this.clearTimers();
         console.log('### IAN milestone cta enter');
         $bg.clearTween();
-        $bg.css({ background: color.dark });
+        //$bg.css({ background: color.dark });
         $bg.tween({ scale: 1.15, spring: 2.5, damping: 0.6 }, 1300, 'easeOutElastic');
 
         // $linkWrapper.clearTween();
@@ -172,7 +174,7 @@ Class(function MilestoneCTA({
         // _this.clearTimers();
 
         $bg.clearTween();
-        $bg.css({ background: color.normal });
+        //$bg.css({ background: color.normal });
         $bg.tween({ scale: 1.0, spring: 1, damping: 0.3 }, 1300, 'easeOutElastic');
 
 
