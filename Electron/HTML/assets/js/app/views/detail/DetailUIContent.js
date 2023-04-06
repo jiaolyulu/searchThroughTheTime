@@ -88,7 +88,7 @@ Class(function DetailUIContent({ id, data, milestone }) {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                padding: 50px 0 92px 0;
+                padding: 50px 0 350px 0;
             }
             
             .content-transform-wrapper {
