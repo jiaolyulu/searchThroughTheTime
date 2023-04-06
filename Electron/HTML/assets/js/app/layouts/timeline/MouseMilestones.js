@@ -7,7 +7,7 @@ Class(function MouseMilestones(_milestones) {
     let _currentOpenTooltip;
     let _autoExpandMode = true;
     const _autoExpandCenterLine = 0.015;
-    const _autoExpandPauseDuration = 1000;
+    const _autoExpandPauseDuration = 500;
     //*** Constructor
     (function () {
         if (!Tests.mouseMilestones()) {
@@ -65,8 +65,14 @@ Class(function MouseMilestones(_milestones) {
         let openMilestones = [];
         _milestones.forEach(m => {
             if (m.inView && m.shouldBeVisible()) {
+                //check to close all tool tip not in current year
+                if (m.data.metadata.year === MainStore.get("year").toString()){
+                    openMilestones.push(m);
+                }
+                else {
+                    m.AutoClose();
+                }
                 //if (m.tooltip) { openMilestones.push(m); }
-                openMilestones.push(m);
                 // console.log(`## Adding milestone ${m.id} and length= ${openMilestones.length}`);
             }
         });
