@@ -75,6 +75,12 @@ Class(function MouseMilestones(_milestones) {
                 //if (m.tooltip) { openMilestones.push(m); }
                 // console.log(`## Adding milestone ${m.id} and length= ${openMilestones.length}`);
             }
+            else {
+                m.AutoClose();
+                if (_currentOpenTooltip && m.id === _currentOpenTooltip.id) {
+                    _currentOpenTooltip = null;
+                }
+            }
         });
         // sort based on the distance from center
         openMilestones.sort(sortByDistance);
@@ -87,6 +93,7 @@ Class(function MouseMilestones(_milestones) {
 
 
                 _currentOpenTooltip = openMilestones[0];
+                
                 if (_currentOpenTooltip.shouldBeVisible) {
                     _currentOpenTooltip.AutoExpandAfterDelay(_autoExpandPauseDuration);
                 }
