@@ -678,7 +678,7 @@ Class(function TimeDesktop() {
 
         $thumbContainer.transform({ x: left, y: up });
 
-        $instructionContainer.transform({ x: left, y: up - 90 }); //lulu's deeplocal change, pretty hard code css for the instruction div
+        $instructionContainer.transform({ x: left, y: up - 50 }); //lulu's deeplocal change, pretty hard code css for the instruction div
         $instructionContainer.css({
             width: trackWidth
         });
