@@ -92,7 +92,7 @@ Class(function TimeDesktopCSS($obj) {
             /*width: 100%;*/
             width: ${2150}px;
             height: 100%;
-            background-color: ${Styles.colors.colorWhite};
+            /* background-color: ${Styles.colors.colorWhite}; */
             border-radius: 90px; //deeplocal change
             padding: 0 30px;
             will-change: transform, width;
@@ -103,7 +103,7 @@ Class(function TimeDesktopCSS($obj) {
             border-radius: 50px;
             height: 100%;
             width: 30px;
-            background-color: ${Styles.colors.colorWhite};
+            // background-color: ${Styles.colors.colorWhite};
           }
 
           .expand {

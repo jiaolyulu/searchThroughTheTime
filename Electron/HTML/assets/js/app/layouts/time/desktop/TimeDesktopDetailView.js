@@ -17,9 +17,9 @@ Class(function TimeDesktopDetailView() {
         $TDDContainer = $this.create('detail-container');
         $TDDContainer.css({ "transform-origin": "top left", "display": "none", "width": "1920px", "height": "720px", "transform": "rotate(90deg) translate(0,-720px)", "position": "relative !important", "align-items": "center" });
         $TDDTitle = $TDDContainer.create('detail-content-container');
-        $TDDTitle.css({ "width": `${textWidth}px`, "height": `${buttonHeight - 20}px`, "position": "absolute", "transform": "translate(-50%,0)", "left": `${textWidth / 2 +margin}px`});
+        $TDDTitle.css({ "width": `${textWidth}px`, "height": `${buttonHeight - 30}px`, "position": "absolute", "transform": "translate(-50%,0)", "left": `${textWidth / 2 +margin}px`});
         $TDDTitleSub = $TDDTitle.create('title-sub');
-        $TDDTitleSub.css({ "font-size": "2rem", "color": "#808080", "top": "0px" });
+        $TDDTitleSub.css({ "font-size": "2rem", "color": "#c0c0c0", "top": "0px" });
         $TDDTitleSub.div.innerHTML = 'Exploring';
         $TDDTitleMain = $TDDTitle.create('title-main');
         $TDDTitleMain.css({ "font-size": "3rem", "color": "black", "bottom": "0px" });
