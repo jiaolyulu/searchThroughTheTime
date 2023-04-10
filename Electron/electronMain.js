@@ -71,6 +71,11 @@ const createWindow = () => {
         param += Math.random();
     }
     _win.loadURL(`http://127.0.0.1:${_port}/${param}`);
+    _win.on('show', () => {
+        setTimeout(() => {
+            _win.focus();
+        }, 7000);
+    });
 };
 
 
