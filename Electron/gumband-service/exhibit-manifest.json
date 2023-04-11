@@ -10,8 +10,8 @@
             {
                 "id": "serverIP",
                 "type": "String",
-                "display": "ServerIP Dev",
-                "default": "127.0.0.1:8080"
+                "display": "IP Address",
+                "default": "Unknown"
             }
         ],
         "settings": [
@@ -20,30 +20,6 @@
                 "type": "TextInput",
                 "display": "Attract Screen Wait (s)",
                 "default": "9"
-            },
-            {
-                "id": "scrollSpeed",
-                "type": "TextInput",
-                "display": "Scroll Speed (s)",
-                "default": "0.025"
-            },
-            {
-                "id": "autoOpenPauseDelay",
-                "type": "TextInput",
-                "display": "Auto Open Pause Delay (s)",
-                "default": "0.5"
-            },
-            {
-                "id": "autoCloseDeepDiveDelay",
-                "type": "TextInput",
-                "display": "Auto Close DeepDive Delay (s)",
-                "default": "0.75"
-            },
-            {
-                "id": "autoOpenCenterLine",
-                "type": "TextInput",
-                "display": "Auto Open Center Line (s)",
-                "default": "0.02"
             }
         ],
         "controls": [
@@ -54,12 +30,12 @@
                 "items": [
                     {
                         "id": "APP_RESET",
-                        "display": "Reset Exhibit",
+                        "display": "Reset Hardware",
                         "order": 0
                     },
                     {
                         "id": "KILL_EXHIBIT",
-                        "display": "Terminate App",
+                        "display": "Restart Software",
                         "order": 1
                     }
                 ],
