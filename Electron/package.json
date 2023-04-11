@@ -1,5 +1,5 @@
 {
-  "name": "electron_learning",
+  "name": "search-through-the-timeline",
   "version": "1.0.0",
   "description": "First test of multiscreen electron app",
   "main": "electronMain.js",
