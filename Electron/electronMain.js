@@ -7,6 +7,8 @@ const JSONdb = require('simple-json-db');
 const FS = require('fs');
 const PATH = require('path');
 const { setgroups } = require('process');
+const { exec } = require("child_process");
+const { networkInterfaces } = require("os");
 const LocalLogger = require('@deeplocal/gumband-node-sdk/lib/localLogger');
 const logger = require('hagen').default;
 const LOC_STOR_FILENAME = process.env.LOC_STOR_FILENAME; // for local json db to preserve op/config values
@@ -123,11 +125,32 @@ app.whenReady().then(async () => {
     gbWrapper.on('READY', () => {
         // add the rest of the gbwrapper listeners
         logger.log('ELECTRON', 'GB READY REC FROM GB WRAPPER');
+        const ips = [];
+        const interfaces = networkInterfaces();
+        Object.keys(interfaces).forEach((ifName) => {
+            interfaces[ifName].forEach((data) => {
+                if (data.family === "IPv4" && data.address.indexOf("127.") !== 0) {
+                    ips.push(data.address);
+                }
+            });
+        });
+        gbWrapper.setStatus("serverIP", ips?.[0]);
         gbWrapper.on('CONTROL_RECEIVED', (payload) => {
             logger.log('ELECTRON', `CONT MSG FROM GB: ${payload}`);
-            switch (payload.id) {
+            switch (payload) {
                 case 'APP_RESET':
                     // TODO reset app
+                    exec("shutdown /r -t 5", (error, stdout, stderr) => {
+                        if (error) {
+                            logger.log('ELECTRON', `error: ${error.message}`);
+                            return;
+                        }
+                        if (stderr) {
+                            logger.log('ELECTRON', `stderr: ${stderr}`);
+                            return;
+                        }
+                        logger.log('ELECTRON', `stdout: ${stdout}`);
+                    });
                     break;
                 case 'KILL_EXHIBIT':
                     // terminate running app
