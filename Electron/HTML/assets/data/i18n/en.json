@@ -505,7 +505,7 @@
             "_title": "End",
             "_type": "generictext",
             "key": "endText",
-            "value": "Google Search is constantly innovating to be more useful."
+            "value": ""
         },
         "generictext_n1bo0": {
             "_title": "Tooltip",
