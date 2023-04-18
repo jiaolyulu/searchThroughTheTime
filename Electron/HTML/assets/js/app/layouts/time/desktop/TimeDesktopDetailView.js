@@ -17,7 +17,7 @@ Class(function TimeDesktopDetailView() {
         $TDDContainer = $this.create('detail-container');
         $TDDContainer.css({ "transform-origin": "top left", "display": "none", "width": "1920px", "height": "720px", "transform": "rotate(90deg) translate(0,-720px)", "position": "relative !important", "align-items": "center" });
         $TDDTitle = $TDDContainer.create('detail-content-container');
-        $TDDTitle.css({ "width": `${textWidth}px`, "height": `${buttonHeight - 30}px`, "position": "absolute", "transform": "translate(-50%,0)", "left": `${textWidth / 2 +margin}px`});
+        $TDDTitle.css({ "width": `${textWidth}px`, "height": `${buttonHeight - 30}px`, "position": "absolute", "transform": "translate(-50%,0)", "left": `${textWidth / 2 + margin}px` });
         $TDDTitleSub = $TDDTitle.create('title-sub');
         $TDDTitleSub.css({ "font-size": "2rem", "color": "#c0c0c0", "top": "0px" });
         $TDDTitleSub.div.innerHTML = 'Exploring';
@@ -61,7 +61,10 @@ Class(function TimeDesktopDetailView() {
         //28:=> 300 margin, 5=> 500, so it is roughly 200 to 20 580-10*length
         margin = 580 - 10 * stringCombined.length;
         $TDDContentContainer.css({ "right": `${margin}px` });
-        $TDDTitle.css({"left": `${textWidth / 2 + margin}px`});
+        $TDDTitle.css({ "left": `${textWidth / 2 + margin}px` });
+
+        // Make sure "MUM is always all caps"
+        stringCombined = stringCombined.replace("Mum", "MUM");
         return stringCombined;
     }
 
