@@ -106,9 +106,9 @@ Class(function MilestoneAppearing() {
         'multi-modal-search-with-mum': 0.957,
         'multisearch': 0.97,
         'results-about-you': 0.984,
-        'about-this-image': 0.999,
+        'perspectives': 0.999,
         'search-labs': 1.05,
-        'perspectives': 1.15
+        'about-this-image': 1.15
     };
 
     this.vertical = {
