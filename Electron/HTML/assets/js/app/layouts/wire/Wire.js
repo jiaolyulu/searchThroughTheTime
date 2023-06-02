@@ -70,9 +70,9 @@ Class(function Wire() {
       });
     };
     const resetCurves = (curves) => {
-      let curvesArrayWrapper=[...curves[0]];
+        let curvesArrayWrapper = [...curves[0]];
       for (let i = 0;i<curves.length-1;i++){
-        curvesArrayWrapper.push(...resetCurveStartingPoint(curves[i], curves[i+1]));
+        curvesArrayWrapper.push(...resetCurveStartingPoint(curvesArrayWrapper, curves[i+1]));
       }
       return curvesArrayWrapper;
     };

@@ -105,7 +105,10 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.943,
         'multi-modal-search-with-mum': 0.957,
         'multisearch': 0.97,
-        'results-about-you': 0.984
+        'results-about-you': 0.984,
+        'about-this-image': 0.999,
+        'search-labs': 1.05,
+        'perspectives': 1.15
     };
 
     this.vertical = {
@@ -189,7 +192,7 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.95,
         'multi-modal-search-with-mum': 0.964,
         'multisearch': 0.982,
-        'results-about-you': 0.99
+        'results-about-you': 0.99,
 
     };
 
@@ -205,6 +208,6 @@ Class(function MilestoneAppearing() {
             return 0;
         }
 
-        return pool[id];
+        return pool[id]*0.92;
     };
 }, 'static');

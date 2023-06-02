@@ -518,6 +518,7 @@ Class(function CameraScroll(_input, _group) {
         const last = timeline.milestones.last();
 
         _box.setFromObject(last.group);
+        console.warn(last.group);
         _horizontal.y = _box.max.x;
         _vertical.y = Math.abs(_box.min.y);
 
