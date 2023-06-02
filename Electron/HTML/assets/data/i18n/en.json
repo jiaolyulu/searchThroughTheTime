@@ -4029,15 +4029,6 @@
                 "perma": "timelinemetadata",
                 "_originalAsset": "assets/uploads/SearchLabs-TimelineIcon.png"
             },
-            "timelinetooltip": [
-                {
-                    "_title": "Tooltip",
-                    "_type": "timelinetooltip",
-                    "content": "Experimentation is part of Google's DNA. Every year in Search, we do hundreds of thousands of experiments to figure out how to make Google more helpful for you. Many of these ideas don’t pan out, but some do,  and it's through experimentation that Search gets better. <br><br>That's why we introduced Search Labs, a new way to sign up to test bold new products and ideas. You can test early-stage experiments and share feedback directly with the teams working on them. Search Labs introduced new, fun and creative ways to engage with Search and explore information. <br><br>The first experiment, SGE, brought the power of generative AI directly into Search. Now when you search, you can get the gist of a topic with AI-powered overviews, pointers to explore more, and natural ways to ask follow ups. Search Labs and GSE first launched in the US (English only)",
-                    "title": "",
-                    "perma": "timelinetooltip_7mrku"
-                }
-            ],
             "order": 82
         },
         "perspectives": {
