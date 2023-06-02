@@ -105,7 +105,8 @@ Class(function MilestoneAppearing() {
         'content-advisories': 0.943,
         'multi-modal-search-with-mum': 0.957,
         'multisearch': 0.97,
-        'results-about-you': 0.984
+        'results-about-you': 0.984,
+        'results-about-you2': 0.999
     };
 
     this.vertical = {
@@ -196,7 +197,7 @@ Class(function MilestoneAppearing() {
     //*** Event handlers
 
     //*** Public methods
-    this.get = function(id) {
+    this.get = function (id) {
         const isVertical = GlobalStore.get('vertical');
         const pool = isVertical ? _this.vertical : _this.horizontal;
 
