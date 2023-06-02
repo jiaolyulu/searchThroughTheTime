@@ -151,15 +151,15 @@ Class(function TimeDesktop() {
             minSize: 2000,
             trackWidth: scrollBarLength, // <----- FOR DEEPLOCAL KIOSK MODE. This is "height" since it's rotated sideway
             fullCenter: false, //lulu's deeplocal change
-            years: { 'year_2000': -30, 'year_2005': -42, 'year_2010': -66, 'year_2015': -102, 'year_2020': -15 },
-            disabledDots: [4, 5, 6, 7, 18, 19, 20, 21, 32, 33, 34, 35, 45, 46, 47, 48, 63, 64, 65, 66],
+            years: { 'year_2000': -30, 'year_2005': -68, 'year_2010': -136, 'year_2015': -200, 'year_2020': -65 },
+            disabledDots: [3, 4, 5, 6, 7, 16, 17, 18, 19, 28, 29, 30, 39, 40, 41, 42, 59, 60, 61],
             higlightDots: {
                 'default': [0, 1, 2],
-                '2000': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
-                '2005': [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-                '2010': [33, 34, 35, 36, 37, 38, 39, 40, 41, 42],
-                '2015': [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63],
-                '2020': [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+                '2000': [ 8, 9, 10, 11, 12, 13, 14, 15],
+                '2005': [20, 21, 22, 23, 24, 25, 26, 27],
+                '2010': [31, 32, 33, 34, 35, 36, 37, 38],
+                '2015': [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58],
+                '2020': [62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
             }
         }
         // trackLeft
@@ -589,9 +589,10 @@ Class(function TimeDesktop() {
         if (GlobalStore.get('transitioning')) return;
         if (!_show) return;
         $dots.forEach(($dot, index) => {
+            //console.warn(thumbPos , $dot.pos.x);
             // lulu's deeplocal change, still dont know why I need to *0.095 to make the mapping right, cause pos.x is supposed to be the location of the period position
-            const dist = Math.abs(thumbPos - $dot.pos.x * 0.095);
-            const distRange = Math.range(dist, 0, 70, 1, 0, true);
+            const dist = Math.abs(thumbPos - $dot.pos.x);
+            const distRange = Math.range(dist, 0, 100, 1, 0, true);
             let targetScale = Math.min(_velocity * 6.0, 2.0) * distRange;
             targetScale = Math.min(1 + targetScale, 3);
 
@@ -648,8 +649,8 @@ Class(function TimeDesktop() {
 
         // Thumbs range x
         const offset = 30;
-        _thumbRange[0] = offset;
-        _thumbRange[1] = trackWidth - (96 + offset); //lulu's deeplocal change, 96 is the width of the thumb
+        _thumbRange[0] = 0;
+        _thumbRange[1] = trackWidth-96; //lulu's deeplocal change, 96 is the width of the thumb
 
         // Keep track in the center
         let centerWidth = trackWidth;
@@ -722,7 +723,8 @@ Class(function TimeDesktop() {
     async function updateDotPositionsAndVisibility() {
         //console.log(`##IAN Dots update position`);
         await _this.wait(1);
-        const containerWidth = $pattern.div.getBoundingClientRect().width;
+        //!! instead of width it is now height
+        const containerWidth = $pattern.div.getBoundingClientRect().height;
         const sizeObj = getCurrentSizeObj();
         $dots.forEach(($dot, index) => {
             const offsetLeft = $dot.el.div.offsetLeft;
@@ -778,14 +780,12 @@ Class(function TimeDesktop() {
         if (_isExpand) return;
 
         const sizeObj = getCurrentSizeObj();
-
-        const trackStart = sizeObj.trackLeft;
-
-
-
-
-        const trackEnd = sizeObj.trackLeft + sizeObj.trackWidth;// _verticalScrollBarHeight;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
-        _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd - 35, START_PROGRESS, 1, true); // uses y
+        //!! 96 is thumb height and the progress need -48 and +48 to fit the thumb
+        const trackStart = sizeObj.trackLeft+48;
+        const trackEnd = sizeObj.trackLeft + sizeObj.trackWidth-48;// _verticalScrollBarHeight;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
+        
+        console.warn(trackStart, trackEnd, e.y)
+        _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd , START_PROGRESS, 1, true); // uses y
 
         //_desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true); IAN OLD
         //_desiredCameraScrollProgress = Math.range(e.y, trackStart - 50, trackEnd, START_PROGRESS, 1, true); // uses y
