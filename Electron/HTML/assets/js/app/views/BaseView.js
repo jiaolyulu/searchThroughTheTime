@@ -41,7 +41,6 @@ Class(function BaseView() {
 
     _this.registerUI = function(instance) {
         _this.ui = _this.initClass(instance);
-        console.log("### Registering UI");
     };
 
     _this.onVisible = function() {

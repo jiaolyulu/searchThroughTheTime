@@ -99,7 +99,6 @@ Class(function DetailView() {
     // }
 
     function onPositionChange(p) {
-        console.log('### IAN onPositionChange DetailView');
 
         const isVertical = GlobalStore.get('vertical');
 
