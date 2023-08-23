@@ -117,7 +117,7 @@ Class(function DataModel() {
         const timelineOrderArr = Object.values(timelineOrder);
 
         _this.FILTERS = Object.keys(filter).map(key => filter[key]);
-console.log(timelineOrderArr);
+
         _this.MILESTONES = timelineOrderArr.filter(a => timeline[a.key].timelinemetadata.active)
             .map((v) => {
                 let _timeline = timeline[v.key];
