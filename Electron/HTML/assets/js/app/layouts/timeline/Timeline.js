@@ -38,14 +38,15 @@ Class(function Timeline() {
             'universal-search': UniversalSearchCustom,
             'voice-search': VoiceSearchCustom,
             'search-by-image': SearchByImageCustom,
-            // 'knowledge-graph': KnowledgeGraphCustom,
+            'knowledge-graph': KnowledgeGraphCustom,
             'google-my-business': GoogleMyBusinessCustom,
             'discover': DiscoverCustom,
             'google-lens': GoogleLensCustom,
             'flood-forecasting': FloodForecastingCustom,
             'bert': BertCustom,
-            'wildfire-information': WildfireInformationCustom
-            // 'multi-modal-search-with-mum': MumCustom
+            'wildfire-information': WildfireInformationCustom,
+            'multi-modal-search-with-mum': MumCustom,
+            'lens-ar-translate': LensARCustom
         };
 
         DataModel.MILESTONES.forEach((data, index) => {
