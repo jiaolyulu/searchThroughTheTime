@@ -32,12 +32,8 @@ Class(function MouseMilestones(_milestones) {
         _config.addNumber('maxDistance', 2, 0.1);
         _config.addNumber('force', 1, 0.1);
         _config.addNumber('rotation', 1, 0.1);
-        window.addEventListener("ToolTipOpenEvent", e => { onToolTipOpen(e); });
     }
 
-    function onToolTipOpen(e) {
-        console.log(`MOUSE TOOLTIP EVENT RECIEVED:${e.detail?._this.id}`);
-    }
 
 
     function loop() {

@@ -5,6 +5,7 @@ Class(function DetailUIView() {
 
     const _this = this;
     const $this = _this.element;
+    let _data;
 
     let _content, $exit, $scroll;
 
@@ -147,17 +148,19 @@ Class(function DetailUIView() {
         const scroll = Math.abs(DetailStore.get('scroll'));
         const scrollSpeed = DetailStore.get('scrollSpeed');
         const treshold = 0.1;
-        const detailCamera = ViewController.instance().views.detail.camera;
+      const detailCamera = ViewController.instance().views.detail.camera;
+      const title=Milestone.CLEAN_TITLE(_data.metadata.birdseyetitle)
         if (scroll.toFixed(4) < treshold) { // if user has scrolled and we come back to top / truncate huge e numbers
-            console.log('### ALEX exiting after user scrolled up to the top....');
-            if (scrollSpeed < -10) {
+          if (scrollSpeed < -10) {              
+                console.log(`closing ${_data.id} ${title}`)
                 $exit.forceExit();
             }
         }
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
             showUp();
-            // ### ALEX close detailed view after 1.5s when user scrolls to the bottom
-            if (scrollSpeed > 10) {
+          if (scrollSpeed > 10) {
+              
+                console.log(`closing ${_data.id} ${title} `)
                 $exit.forceExit();
             }
         } else if (scroll < treshold) {
@@ -207,6 +210,7 @@ Class(function DetailUIView() {
     function onMilestoneChange(milestone) {
         if (!milestone?.data) return;
         if (_content) _content.destroy();
+        _data = milestone.data;
 
         _content = _this.initClass(DetailUIContent, { id: milestone.data.id, data: milestone.data.deepDive, milestone }, [$this]);
 
@@ -222,7 +226,8 @@ Class(function DetailUIView() {
     this.get('exit', _ => $exit);
     this.get('content', _ => $content);
 
-    this.animateIn = async function () {
+  this.animateIn = async function () {
+    
         prepareArrow();
         await _this.wait(50);
         _content?.show();

@@ -41,6 +41,8 @@ Class(function Milestone(_data) {
 
     // events
     const toolTipOpenEvent = new CustomEvent('ToolTipOpenEvent', { detail: { _this } });
+    // events
+    const toolTipCloseEvent = new CustomEvent('ToolTipCloseEvent', { detail: { _this } });
     // timer
     let _alreadyAutoOpened = false;
     let _autoExpandTimerId = 0;
@@ -389,7 +391,6 @@ Class(function Milestone(_data) {
 
     async function autoOpenToolTip() {
         if (_cta) {
-            console.log(`OPENING CTA: ${_this.id}}`);
             ctaExpand();
             return;
         }
@@ -406,7 +407,8 @@ Class(function Milestone(_data) {
             await _this.wait(50); // neccessary so the layer can finish becomeing visible first.
             _tooltip.show();
             _tooltipAutoOpened = true;
-            dispatchEvent(toolTipOpenEvent);
+          dispatchEvent(toolTipOpenEvent);
+          console.log(`opening ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
         }
     }
 
@@ -416,7 +418,9 @@ Class(function Milestone(_data) {
         }
         cancelAutoExpandTimer();
         if (_tooltip.open && _tooltipAutoOpened) {
-            _tooltip.hide();
+          _tooltip.hide();
+          dispatchEvent(toolTipCloseEvent);
+          console.log(`closing ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
             // animateOut();
             _tooltipAutoOpened = false;
         }
@@ -697,8 +701,11 @@ Class(function Milestone(_data) {
 
     function ctaExpand() {
         if (Global.PLAYGROUND === 'MainView') return;
-        if (!_this.flag('animateIn')) return;
-        MainStore.commit('setSelectedMileStone', _this.id);
+      if (!_this.flag('animateIn')) return;
+      
+      
+      MainStore.commit('setSelectedMileStone', _this.id);
+      console.log(`opening ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
         ViewController.instance().navigate(`/detail/${_this.id}`);
 
         /* if (typeof (Analytics) !== 'undefined') {
