@@ -150,7 +150,6 @@ Class(function MilestoneCTA({
 
     function enter() {
         // _this.clearTimers();
-        console.log('### IAN milestone cta enter');
         $bg.clearTween();
         //$bg.css({ background: color.dark });
         $bg.tween({ scale: 1.15, spring: 2.5, damping: 0.6 }, 1300, 'easeOutElastic');

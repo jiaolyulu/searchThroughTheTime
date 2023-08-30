@@ -16,14 +16,12 @@ Class(function MouseMilestones(_milestones) {
 
         initConfig();
         _this.startRender(loop, RenderManager.AFTER_LOOPS);
-        console.log(`##Auto expand mode is ${_autoExpandMode}`);
         if (_autoExpandMode) {
             setInterval(openCenterMostMilestone, _autoExpandPauseDuration);
         }
     })();
 
     function initConfig() {
-        console.log("in init confi");
         _config = InputUIL.create('mousemilestones');
         _config.setLabel('Mouse Milestones');
 

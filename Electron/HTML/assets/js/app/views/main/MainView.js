@@ -38,7 +38,6 @@ Class(function MainView() {
     //*** Public methods
     this.onShow = async function() {
         await _this.ready();
-        console.log('### IAN mainView OnShow');
 
         _camera.lock();
     };

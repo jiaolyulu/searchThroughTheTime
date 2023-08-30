@@ -360,7 +360,6 @@ Class(function TimeDesktop() {
     }
 
     function onViewChange(view) {
-        console.log("onViewChange")
         if (shouldBeVisible()) {
             console.log("onViewChange should bec visible")
             show();
@@ -784,7 +783,6 @@ Class(function TimeDesktop() {
         const trackStart = sizeObj.trackLeft+48;
         const trackEnd = sizeObj.trackLeft + sizeObj.trackWidth-48;// _verticalScrollBarHeight;// DeepLocal, this is the total length of the bar to track. It needs to match the scroll bar length
         
-        console.warn(trackStart, trackEnd, e.y)
         _desiredCameraScrollProgress = Math.range(e.y, trackStart, trackEnd , START_PROGRESS, 1, true); // uses y
 
         //_desiredCameraScrollProgress = Math.range(e.x, trackStart + 55, trackEnd - 35, START_PROGRESS, 1, true); IAN OLD

@@ -134,7 +134,6 @@ Class(function Scroll(_object, _params) {
     window.addEventListener("ATTRACT_ENABLED", e => { OnAttractScreenTriggered(e); });
 
     async function OnAttractScreenTriggered(e) {
-        console.log(`OnAttractScreen triggered in scroll ${e.detail}`)
         //_this.commit(MainStore, 'setProgress', 0);
         if (e.detail) {
             const main = ViewController.instance().views?.main;

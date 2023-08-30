@@ -39,7 +39,6 @@ Class(function DetailStore() {
                 },
                 setHeightContent(state, value) {
                     state.set('heightContent', value);
-                    console.log('### height content');
                 },
                 setMax(state, value) {
                     state.set('max', value);
