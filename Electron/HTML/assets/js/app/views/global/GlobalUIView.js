@@ -86,7 +86,6 @@ Class(function GlobalUIView() {
     //*** Event handlers
 
     function onVerticalUpdate(isVertical) {
-        console.log('### IAN onVerticalUpdate GlobalUIView');
         // const isMobileLandscape = GlobalStore.get('mobileLandscape');
         // if (!isVertical && !_timeDesktop && !isMobileLandscape) {
         if (!isVertical && !_timeDesktop) {

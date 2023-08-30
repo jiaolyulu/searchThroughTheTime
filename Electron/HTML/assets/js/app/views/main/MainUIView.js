@@ -47,7 +47,9 @@ Class(function MainUIView() {
     }
 
     //*** Event handlers
-    function onVerticalUpdate(isVertical) {
+  function onVerticalUpdate(isVertical) {
+    /* --------------------------- here is the change --------------------------- */
+    /* ------------------------------------ * ----------------------------------- */
         console.log('### IAN onVerticalUpdate MainUIView');
         if (isVertical && !_timeMobile) {
             initTimeMobile();

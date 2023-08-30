@@ -150,7 +150,6 @@ Class(function Scroll(_object, _params) {
             
         }
         _scrollDisabled = e.detail;
-        console.log(`OnAttractScreen _scrollDisabled = ${_scrollDisabled}`)
     }
 
 
