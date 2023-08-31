@@ -13,6 +13,7 @@ const EXHIBIT_TOKEN = process.env.GB_EXHIBIT_TOKEN;
 const EXHIBIT_ID = process.env.GB_EXHIBIT_ID;
 const GB_ENV = process.env.GB_ENV;
 const EXHIBIT_MANIFEST = process.env.GB_MANIFEST_PATH;
+console.log(EXHIBIT_TOKEN,EXHIBIT_ID,GB_ENV,EXHIBIT_MANIFEST)
 
 //** HELPERS */
 const wait = (ms) => new Promise((resolve) => {
@@ -55,12 +56,8 @@ class GumbandService extends EventEmitter {
         this.gb.on(Sockets.SETTING_RECEIVED, (payload) => {
             logger.log('GUMBAND', `${payload.id} setting changed from gumband dashboard`);
             logger.log('GUMBAND', `updated setting: ${JSON.stringify(payload)}`); // payload.value
-            // emit message
-            this.emit('SETTINGS_CHANGE', payload);
-            // TODO update value in local json db
-
-            // TODO read the file and turn into object
-            // TODO emit settings object
+            const { id, value } = payload;
+          if (id?.startsWith("attractScreenWaitDuration")) { this.emit("attractTime", value); }
         });
         this.gb.on(Sockets.HARDWARE_ONLINE, (payload) => {
             logger.log('GUMBAND', `Hardware Online Received: {payload.value}`);

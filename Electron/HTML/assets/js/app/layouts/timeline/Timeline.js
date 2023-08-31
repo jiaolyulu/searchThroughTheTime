@@ -48,8 +48,18 @@ Class(function Timeline() {
             'multi-modal-search-with-mum': MumCustom,
             'lens-ar-translate': LensARCustom
         };
-
-        DataModel.MILESTONES.forEach((data, index) => {
+      let yearAndTitle=[]
+      DataModel.MILESTONES.forEach((data, index) => {
+        
+        if (data.deepdive || data.tooltip) {
+          let _metadata = data.metadata;
+          let _convertedID = data.id.replaceAll('-', " ");
+          const words = _convertedID.split(" ");
+          _convertedID=words.map((word) => { 
+              return word[0].toUpperCase() + word.substring(1); 
+          }).join(" ");
+          yearAndTitle.push({ year:_metadata.year, name:Milestone.CLEAN_TITLE(_metadata.title),id:data.id, convertedID:_convertedID })
+        }
             let instance;
             let classInstance = Milestone;
             const customClassName = `${data.metadata.id}Custom`;
@@ -64,7 +74,8 @@ Class(function Timeline() {
 
             instance = _this.initClass(classInstance, data);
             _milestones.push(instance);
-        });
+      });
+      console.log(yearAndTitle)
     }
 
     function initDetectYear() {
