@@ -35,6 +35,9 @@ class WebService extends EventEmitter {
             websocketData.console
           );
         }
+        //!! ====================================================== //
+        //!! =================== Gumband Metrics ================== //
+        //!! ====================================================== //
         if (websocketData.metrics) {
           this.emit('metrics', websocketData.metrics)
         }

@@ -1,3 +1,4 @@
+const { Gumband } = require("@deeplocal/gumband-node-sdk");
 
 
 const socket = new WebSocket("ws://localhost:8080/state");
@@ -30,21 +31,25 @@ socket.addEventListener("close", (event) => {
   consoleService("WebSocket connection closed");
 });
 
+
+//!! ====================================================== //
+//!! =================== Gumband Metrics ================== //
+//!! ====================================================== //
 window.addEventListener('END_INTERACTION', () => {
   let websocketMsg = JSON.stringify({ "metrics": { eventName: 'EndInteraction', value: {} } })
   socket.send(websocketMsg)
 })
+
 window.addEventListener('START_INTERACTION', () => {
   let websocketMsg = JSON.stringify({ "metrics": { eventName: 'StartInteraction', value: {} } })
   socket.send(websocketMsg)
 })
 
 window.addEventListener('CARD_EVENT', (payload) => {
-  
   const { card_name, action } = payload.detail;
   console.log(payload, card_name,action);
   let currentEventName = card_name
-  let websocketMsg = JSON.stringify({ "metrics": { eventName: currentEventName, value: {action:action} } })
+  let websocketMsg = JSON.stringify({ "metrics": { eventName: currentEventName, value: {action} } })
   socket.send(websocketMsg)
   
 })
