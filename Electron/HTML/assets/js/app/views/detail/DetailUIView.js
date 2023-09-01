@@ -20,6 +20,8 @@ Class(function DetailUIView() {
     let _atBottom = false;
     let _hidden = false;
     let _revealed = false;
+    let isCardOpened = false;
+    let isCardOpenedFired = false;
 
     // ### DEEPLOCAL bookeeping for scrolling exit in DD
     let scrollExitFlag = false;
@@ -143,24 +145,46 @@ Class(function DetailUIView() {
         _rotate = false;
     }
 
+    function fireCardEvent(actionType) {
+        let currentCardName = Milestone.CLEAN_TITLE(_data.metadata.birdseyetitle);
+        let cardEvent = new CustomEvent('CARD_EVENT', { detail: { card_name: currentCardName, action: actionType } });
+        window.dispatchEvent(cardEvent);
+    }
+    function fireMilestoneMsg(actionType) {
+        if (actionType === "OPEN") {
+            isCardOpened = true;
+            openingTimeout = setTimeout(() => {
+                if (isCardOpened) {
+                    fireCardEvent("OPEN")
+                    isCardOpenedFired = true;
+                }
+            }, 2000); 
+        }
+        if (actionType === "CLOSE") {
+            isCardOpened = false;
+            clearTimeout(openingTimeout)
+            if (isCardOpenedFired) {
+                fireCardEvent("CLOSE")
+            }
+        }
+    }
+    
     function loop() {
         if (GlobalStore.get('transitioning')) return;
         const scroll = Math.abs(DetailStore.get('scroll'));
         const scrollSpeed = DetailStore.get('scrollSpeed');
         const treshold = 0.1;
-      const detailCamera = ViewController.instance().views.detail.camera;
-      const title=Milestone.CLEAN_TITLE(_data.metadata.birdseyetitle)
+        const detailCamera = ViewController.instance().views.detail.camera;
         if (scroll.toFixed(4) < treshold) { // if user has scrolled and we come back to top / truncate huge e numbers
-          if (scrollSpeed < -10) {              
-                console.log(`closing ${_data.id} ${title}`)
+            if (scrollSpeed < -10) {     
+                fireMilestoneMsg('CLOSE')
                 $exit.forceExit();
             }
         }
         if (scroll >= (detailCamera.scrollBounds.max - treshold)) {
             showUp();
-          if (scrollSpeed > 10) {
-              
-                console.log(`closing ${_data.id} ${title} `)
+            if (scrollSpeed > 10) {
+                fireMilestoneMsg('CLOSE');
                 $exit.forceExit();
             }
         } else if (scroll < treshold) {
@@ -211,6 +235,7 @@ Class(function DetailUIView() {
         if (!milestone?.data) return;
         if (_content) _content.destroy();
         _data = milestone.data;
+        fireMilestoneMsg('OPEN')
 
         _content = _this.initClass(DetailUIContent, { id: milestone.data.id, data: milestone.data.deepDive, milestone }, [$this]);
 

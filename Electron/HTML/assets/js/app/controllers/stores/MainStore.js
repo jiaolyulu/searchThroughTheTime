@@ -25,7 +25,7 @@ Class(function MainStore() {
                 bounds: {
                     horizontal: [0, 7],
                     vertical: [0, 7]
-                }
+                },
             },
             mutations: {
                 setScroll(state, value) {

@@ -1,3 +1,6 @@
+
+
+
 Class(function Milestone(_data) {
     Inherit(this, Object3D);
     const _this = this;
@@ -8,6 +11,8 @@ Class(function Milestone(_data) {
 
     _data.metadata.image = _data.metadata.image.trim();
     const _metadata = _data.metadata;
+    let isCardOpened = false;
+    let isCardOpenedFired = false;
 
     _this.data = _data;
     _this.id = _data.id;
@@ -19,6 +24,8 @@ Class(function Milestone(_data) {
     const _isBottom = _display.match(/bottom/);
     const _isDive = _data.deepDive;
     let _opacity = 1;
+    let openingTimeout;
+    
 
 
     let _boxImageDirty = true;
@@ -39,10 +46,7 @@ Class(function Milestone(_data) {
     //let _rightAutoOpenThreshold = 0.015; // 0 is the far right side
     //let _leftAutoOpenThreshold = 0.025; // higher value is further left
 
-    // events
-    const toolTipOpenEvent = new CustomEvent('ToolTipOpenEvent', { detail: { _this } });
-    // events
-    const toolTipCloseEvent = new CustomEvent('ToolTipCloseEvent', { detail: { _this } });
+
     // timer
     let _alreadyAutoOpened = false;
     let _autoExpandTimerId = 0;
@@ -111,7 +115,29 @@ Class(function Milestone(_data) {
         }
         addListeners();
     })();
-
+    function fireCardEvent(actionType) {
+        let currentCardName = Milestone.CLEAN_TITLE(_metadata.title);
+        let cardEvent = new CustomEvent('CARD_EVENT', { detail: { card_name: currentCardName, action: actionType } });
+        window.dispatchEvent(cardEvent);
+    }
+    function fireToolTipMsg(actionType) {
+        if (actionType === "OPEN") {
+            isCardOpened = true;
+            openingTimeout = setTimeout(() => {
+                if (isCardOpened) {
+                    fireCardEvent("OPEN")
+                    isCardOpenedFired = true;
+                }
+            }, 2000); 
+        }
+        if (actionType === "CLOSE") {
+            isCardOpened = false;
+            clearTimeout(openingTimeout)
+            if (isCardOpenedFired) {
+                fireCardEvent("CLOSE")
+            }
+        }
+    }
     function initHitArea() {
         const geometry = new PlaneGeometry(1, 1);
         geometry.applyMatrix(new Matrix4().makeTranslation(0, -0.5, 0));
@@ -401,14 +427,16 @@ Class(function Milestone(_data) {
         if (!_this.flag('animateIn')) {
             return;
         }
+        if (GlobalStore.get('view') === 'DetailView') {
+            return;
+        }
 
         if (!_tooltip?.open && !_tooltipAutoOpened) {
             _autoExpandTimerId = 0;
             await _this.wait(50); // neccessary so the layer can finish becomeing visible first.
             _tooltip.show();
             _tooltipAutoOpened = true;
-          dispatchEvent(toolTipOpenEvent);
-          console.log(`opening ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
+            fireToolTipMsg('OPEN')
         }
     }
 
@@ -418,9 +446,8 @@ Class(function Milestone(_data) {
         }
         cancelAutoExpandTimer();
         if (_tooltip.open && _tooltipAutoOpened) {
-          _tooltip.hide();
-          dispatchEvent(toolTipCloseEvent);
-          console.log(`closing ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
+            _tooltip.hide();
+            fireToolTipMsg('CLOSE')
             // animateOut();
             _tooltipAutoOpened = false;
         }
@@ -682,6 +709,7 @@ Class(function Milestone(_data) {
             _cta.leave();
         }
     }
+  
 
     function onCTAClick(e) {
         ctaExpand();
@@ -701,11 +729,10 @@ Class(function Milestone(_data) {
 
     function ctaExpand() {
         if (Global.PLAYGROUND === 'MainView') return;
-      if (!_this.flag('animateIn')) return;
-      
-      
-      MainStore.commit('setSelectedMileStone', _this.id);
-      console.log(`opening ${_this.id} ${Milestone.CLEAN_TITLE(_metadata.title)}`)
+        if (!_this.flag('animateIn')) return;
+        
+        
+        MainStore.commit('setSelectedMileStone', _this.id);
         ViewController.instance().navigate(`/detail/${_this.id}`);
 
         /* if (typeof (Analytics) !== 'undefined') {
