@@ -1,29 +1,29 @@
 const EventEmitter = require("events");
 
 class StateService extends EventEmitter {
-  constructor() {
-    super();
-    this.attractTime = 60;
-  }
-
-  setAttractTime(newAttractTime) {
-    if (this.attractTime !== newAttractTime) {
-      this.attractTime = parseInt(newAttractTime);
-      this.publishState();
+    constructor() {
+        super();
+        this.attractTime = 60;
     }
-  }
 
-  publishState() {
-    this.emit("state", this.getState());
-  }
+    setAttractTime(newAttractTime) {
+        if (this.attractTime !== newAttractTime) {
+            this.attractTime = parseInt(newAttractTime);
+            this.publishState();
+        }
+    }
 
-  getState() {
-    return { attractTime: this.attractTime };
-  }
+    publishState() {
+        this.emit("state", this.getState());
+    }
 
-  start() {
-    this.publishState();
-  }
+    getState() {
+        return { attractTime: this.attractTime };
+    }
+
+    start() {
+        this.publishState();
+    }
 }
 
 exports.StateService = StateService;

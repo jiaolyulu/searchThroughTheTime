@@ -6,53 +6,48 @@ const EventEmitter = require("events");
 const logger = require("hagen").default;
 
 class WebService extends EventEmitter {
-  constructor(port) {
-    super();
-    this.port = port;
-    this.setupWebserver();
-  }
+    constructor(port) {
+        super();
+        this.port = port;
+        this.setupWebserver();
+    }
 
-  setupWebserver() {
-    this.app = express();
-    this.wsServer = expressWS(this.app);
+    setupWebserver() {
+        this.app = express();
+        this.wsServer = expressWS(this.app);
 
-    this.app.use(cors());
+        this.app.use(cors());
 
-    this.app.use("/", express.static(path.join(__dirname, "../HTML")));
-    this.app.listen(this.port, () => {
-      logger.log("EXPRESS",`GwG Server listening on ${this.port}`);
-    });
+        this.app.use("/", express.static(path.join(__dirname, "../HTML")));
+        this.app.listen(this.port, () => {
+            logger.log("EXPRESS", `GwG Server listening on ${this.port}`);
+        });
 
-    this.app.ws("/state", (ws) => {
-      logger.log("EXPRESS","Socket Connected");
-      this.emit('socket_connected')
-      ws.on('message', (message) => {
-        let websocketData = JSON.parse(message)
-        
-        if (websocketData.console) {
-          logger.log(
-            "WEB_APP",
-            websocketData.console
-          );
-        }
-        //!! ====================================================== //
-        //!! =================== Gumband Metrics ================== //
-        //!! ====================================================== //
-        if (websocketData.metrics) {
-          this.emit('metrics', websocketData.metrics)
-        }
-        
-      })
-      
-    });
-  }
+        this.app.ws("/state", (ws) => {
+            logger.log("EXPRESS", "Socket Connected");
+            this.emit("socket_connected");
+            ws.on("message", (message) => {
+                let websocketData = JSON.parse(message);
 
-  publishState(newState) {
-    logger.log("EXPRESS","Publishing state to websockets", newState);
-    this.wsServer.getWss().clients.forEach((client) => {
-      client.send(JSON.stringify({ state: newState }));
-    });
-  }
+                if (websocketData.console) {
+                    logger.log("WEB_APP", websocketData.console);
+                }
+                //!! ====================================================== //
+                //!! =================== Gumband Metrics ================== //
+                //!! ====================================================== //
+                if (websocketData.metrics) {
+                    this.emit("metrics", websocketData.metrics);
+                }
+            });
+        });
+    }
+
+    publishState(newState) {
+        logger.log("EXPRESS", "Publishing state to websockets", newState);
+        this.wsServer.getWss().clients.forEach((client) => {
+            client.send(JSON.stringify({ state: newState }));
+        });
+    }
 }
 
 exports.WebService = WebService;
