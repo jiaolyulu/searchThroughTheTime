@@ -60,21 +60,6 @@ class GumbandService extends EventEmitter {
         }
     }
 
-    //!! ====================================================== //
-    //!! ================== Gumband Metrics =================== //
-    //!! ====================================================== //
-    async metrics(msg) {
-        const { eventName, value } = msg;
-        if (this.connected)
-            await this.gb.event.create(eventName.toString(), value);
-        logger.log(
-            "GUMBAND",
-            `Metrics Event: ${eventName} with payload value ${JSON.stringify(
-                value
-            )}`
-        );
-    }
-
     /** Define GB listeners */
     addListeners() {
         this.gb.on(Sockets.CONTROL_RECEIVED, (payload) => {

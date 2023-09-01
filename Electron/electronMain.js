@@ -84,13 +84,7 @@ app.whenReady().then(async () => {
     setScreenDimensions();
     createWindow();
     makeFullScreen();
-    
-    //!! ====================================================== //
-    //!! ================== Gumband Metrics =================== //
-    //!! ====================================================== //
-    webService.on("metrics", (metricMsg) => {
-        gbService.metrics(metricMsg);
-    });
+
     stateService.on("state", (newState) => {
         webService.publishState(newState);
     });
