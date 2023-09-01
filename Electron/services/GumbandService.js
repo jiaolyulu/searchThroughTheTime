@@ -57,6 +57,7 @@ class GumbandService extends EventEmitter {
       this.emit("attractTime", parseInt(this.settings.attractScreenWaitDuration.value));
     }
   }
+  
 
   async metrics(msg) {
     const { eventName,value}=msg
@@ -86,8 +87,6 @@ class GumbandService extends EventEmitter {
     });
   }
 
-  /** SetState */
-  setStateFromGumband() {}
 
   /**
    * Set status in Gumband
