@@ -8,7 +8,6 @@ class StateService extends EventEmitter {
 
   setAttractTime(newAttractTime) {
     if (this.attractTime !== newAttractTime) {
-      console.log("New Attract Time:", newAttractTime);
       this.attractTime = parseInt(newAttractTime);
       this.publishState();
     }

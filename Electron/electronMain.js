@@ -1,35 +1,27 @@
 // Import required resources
 const { app, BrowserWindow, screen } = require("electron");
-const _path = require("path");
 const { GumbandService } = require("./services/GumbandService");
-const JSONdb = require("simple-json-db");
-const PATH = require("path");
 const { exec } = require("child_process");
 const { networkInterfaces } = require("os");
 const logger = require("hagen").default;
-const LOC_STOR_FILENAME = process.env.LOC_STOR_FILENAME; // for local json db to preserve op/config values
 const { WebService } = require("./services/webService");
 const { StateService } = require("./services/stateService");
 // configuration
-const _port = 8080;
-const _useCacheBuster = true;
-const _backgroundColor = "2e2c29";
-const _hideFrame = true;
+const _port = process.env.PORT;
 
 let _win;
-
-let _w = 720 + 3840; // touch screen + widescreen. If _w or _h is set to 0, the app will dynamically scale to fill all screens.
+// touch screen + widescreen. If _w or _h is set to 0, the app will dynamically scale to fill all screens.
+let _w = 720 + 3840; 
 let _h = 1920;
 let _x = 0;
 let _y = 0;
-let db = null;
 const gbSettings = [
   "attractScreenWaitDuration",
-  "scrollSpeed",
-  "autoOpenPauseDelay",
-  "autoCloseDeepDiveDelay",
-  "autoOpenCenterLine",
 ];
+
+// ====================================================== //
+// ============= Config Electron Window Size ============ //
+// ====================================================== //
 
 const setScreenDimensions = () => {
   if (_w === 0 || _h === 0) {
@@ -60,13 +52,14 @@ const setScreenDimensions = () => {
   console.log(`Total resolution = ${_w}+${_h}`);
 };
 
+
+
 const createWindow = () => {
   console.log("x:", _x, "    y:", _y);
   _win = new BrowserWindow({
     x: -720, // was -720
     y: _y,
-    frame: !_hideFrame,
-    backgroundColor: _backgroundColor,
+    frame: false,
     alwaysOnTop: true,
   });
   _win.loadURL(`http://127.0.0.1:${_port}`);
@@ -82,18 +75,10 @@ const makeFullScreen = () => {
   _win.setSize(_w, _h);
 };
 
-//** HELPERS */
-const wait = (ms) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 
 app.whenReady().then(async () => {
   logger.log("ELECTRON", `PIZZA APP.getPath(): ${app.getPath("appData")}`);
   // set up local json db
-  db = new JSONdb(
-    PATH.join(app.getPath("appData"), app.getName(), LOC_STOR_FILENAME)
-  ); // used in executable due to constraints with reading file system in production
   // electron start up
 
   const webService = new WebService(_port);
@@ -104,7 +89,9 @@ app.whenReady().then(async () => {
   setScreenDimensions();
   createWindow();
   makeFullScreen();
-
+  webService.on('metrics', (metricMsg) => {
+    gbService.metrics(metricMsg);
+  })
   stateService.on("state", (newState) => {
     webService.publishState(newState);
   });
@@ -124,6 +111,11 @@ app.whenReady().then(async () => {
       });
     });
     gbService.setStatus("serverIP", ips?.[0]);
+
+    // ====================================================== //
+    // ============== APP RESET & KILL EXHIBIT ============== //
+    // ====================================================== //
+
     gbService.on("CONTROL_RECEIVED", (payload) => {
       logger.log("ELECTRON", `CONT MSG FROM GB: ${payload}`);
       switch (payload) {
