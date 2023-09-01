@@ -32,7 +32,12 @@ class WebService extends EventEmitter {
                 if (websocketData.console) {
                     logger.log("WEB_APP", websocketData.console);
                 }
-                
+                //!! ====================================================== //
+                //!! =================== Gumband Metrics ================== //
+                //!! ====================================================== //
+                if (websocketData.metrics) {
+                    this.emit("metrics", websocketData.metrics);
+                }
             });
         });
     }
