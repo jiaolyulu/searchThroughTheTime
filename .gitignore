@@ -19,6 +19,7 @@ node_modules
 Server/.firebase
 AE/static
 Server/firebase-debug.log
+.vscode
 #HTML/assets/uploads
 #HTML/assets/data/cms-snapshot-en-dev.json
 #HTML/assets/data/i18n
