@@ -1,4 +1,4 @@
-const { Gumband } = require("@deeplocal/gumband-node-sdk");
+// const { Gumband } = require("@deeplocal/gumband-node-sdk");
 
 const socket = new WebSocket("ws://localhost:8080/state");
 const consoleService = (...args) => {
