@@ -6,6 +6,7 @@ const { networkInterfaces } = require("os");
 const logger = require("hagen").default;
 const { WebService } = require("./services/webService");
 const { StateService } = require("./services/stateService");
+const { SystemService } = require("./services/systemService");
 // configuration
 const _port = process.env.PORT;
 
@@ -15,7 +16,6 @@ let _w = 720 + 3840;
 let _h = 1920;
 let _x = 0;
 let _y = 0;
-const gbSettings = ["attractScreenWaitDuration"];
 
 // ====================================================== //
 // ============= Config Electron Window Size ============ //
@@ -71,6 +71,8 @@ const makeFullScreen = () => {
     _win.setSize(_w, _h);
 };
 
+
+
 app.whenReady().then(async () => {
     logger.log("ELECTRON", `PIZZA APP.getPath(): ${app.getPath("appData")}`);
     // set up local json db
@@ -80,11 +82,16 @@ app.whenReady().then(async () => {
     const stateService = new StateService();
     // set up gb
     const gbService = new GumbandService();
-
+    const systemService = new SystemService();
+    Promise.all([systemService.start()])
     setScreenDimensions();
     createWindow();
     makeFullScreen();
     
+
+    setInterval(() => {
+        systemService.report();
+    }, 10 * 1000);
     //!! ====================================================== //
     //!! ================== Gumband Metrics =================== //
     //!! ====================================================== //
@@ -113,7 +120,10 @@ app.whenReady().then(async () => {
             });
         });
         gbService.setStatus("serverIP", ips?.[0]);
-
+        systemService.on('MEMORY', (memory) => {
+            logger.log('memory', memory);
+            gbService.log('debug', `exhibit memory ${memory} MB used`)
+        });
         // ====================================================== //
         // ============== APP RESET & KILL EXHIBIT ============== //
         // ====================================================== //

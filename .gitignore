@@ -20,6 +20,7 @@ Server/.firebase
 AE/static
 Server/firebase-debug.log
 .vscode
+ecosystem.test.config.js
 #HTML/assets/uploads
 #HTML/assets/data/cms-snapshot-en-dev.json
 #HTML/assets/data/i18n
